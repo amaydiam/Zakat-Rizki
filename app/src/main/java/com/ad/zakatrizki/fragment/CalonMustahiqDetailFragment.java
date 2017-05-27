@@ -248,11 +248,14 @@ public class CalonMustahiqDetailFragment extends Fragment implements ManageCalon
                 String id_calon_mustahiq = jsDetail.getString(Zakat.id_calon_mustahiq);
                 String nama_calon_mustahiq = jsDetail.getString(Zakat.nama_calon_mustahiq);
                 String alamat_calon_mustahiq = jsDetail.getString(Zakat.alamat_calon_mustahiq);
+                String latitude_calon_mustahiq = jsDetail.getString(Zakat.latitude_calon_mustahiq);
+                String longitude_calon_mustahiq = jsDetail.getString(Zakat.longitude_calon_mustahiq);
                 String no_identitas_calon_mustahiq = jsDetail.getString(Zakat.no_identitas_calon_mustahiq);
                 String no_telp_calon_mustahiq = jsDetail.getString(Zakat.no_telp_calon_mustahiq);
+                String nama_perekomendasi_calon_mustahiq = jsDetail.getString(Zakat.nama_perekomendasi_calon_mustahiq);
                 String status_calon_mustahiq = jsDetail.getString(Zakat.status_calon_mustahiq);
 
-                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, status_calon_mustahiq);
+                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,latitude_calon_mustahiq,longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq,nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
 
                 if (Boolean.parseBoolean(isSuccess))
                     onDownloadSuccessful();

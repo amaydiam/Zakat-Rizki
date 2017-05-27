@@ -3,9 +3,11 @@ package com.ad.zakatrizki.fragment;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,6 +24,7 @@ import android.widget.RadioGroup;
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
 import com.ad.zakatrizki.model.CalonMustahiq;
+import com.ad.zakatrizki.model.PickLocation;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
 import com.ad.zakatrizki.utils.Menus;
@@ -31,8 +34,17 @@ import com.ad.zakatrizki.widget.RobotoRegularEditText;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.Iconify;
+import com.joanzapata.iconify.fonts.EntypoModule;
+import com.joanzapata.iconify.fonts.FontAwesomeModule;
+import com.joanzapata.iconify.fonts.MaterialCommunityModule;
 import com.joanzapata.iconify.fonts.MaterialIcons;
+import com.joanzapata.iconify.fonts.MaterialModule;
+import com.schibstedspain.leku.LocationPickerActivity;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -40,6 +52,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class ManageCalonMustahiqFragment extends DialogFragment implements CustomVolley.OnCallbackResponse {
@@ -65,6 +78,21 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
     RadioGroup statusCalonMustahiq;
     @BindView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
+
+    @OnClick(R.id.pick_location)
+    void pickLocation(){
+        Intent intent = new LocationPickerActivity.Builder()
+               // .withLocation(41.4036299, 2.1743558)
+                .withSearchZone("in_IN")
+                .shouldReturnOkOnBackPressed()
+                .withStreetHidden()
+                .withCityHidden()
+                .withZipCodeHidden()
+                .withSatelliteViewHidden()
+                .build(getActivity());
+
+        getActivity().startActivityForResult(intent, 1);
+    }
 
     private SnackBar snackbar;
     private CustomVolley customVolley;
@@ -216,11 +244,15 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                     String id_calon_mustahiq = obj.getString(Zakat.id_calon_mustahiq);
                     String nama_calon_mustahiq = obj.getString(Zakat.nama_calon_mustahiq);
                     String alamat_calon_mustahiq = obj.getString(Zakat.alamat_calon_mustahiq);
+                    String latitude_calon_mustahiq = obj.getString(Zakat.latitude_calon_mustahiq);
+                    String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
                     String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
                     String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                    String nama_perekomendasi_calon_mustahiq = obj
+                            .getString(Zakat.nama_perekomendasi_calon_mustahiq);
                     String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
 
-                    calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, status_calon_mustahiq);
+                    calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq,  alamat_calon_mustahiq,latitude_calon_mustahiq,longitude_calon_mustahiq,no_identitas_calon_mustahiq, no_telp_calon_mustahiq,nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
                     if (TAG.equals(TAG_ADD)) {
                         callback.onFinishAddCalonMustahiq(calonMustahiq);
                     } else if (TAG.equals(TAG_EDIT)) {
@@ -247,6 +279,11 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Iconify
+                .with(new FontAwesomeModule())
+                .with(new EntypoModule())
+                .with(new MaterialModule())
+                .with(new MaterialCommunityModule());
         super.onCreate(savedInstanceState);
 
         try {
@@ -363,6 +400,28 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
         void onFinishAddCalonMustahiq(CalonMustahiq calon_mustahiq);
 
         void onFinishDeleteCalonMustahiq(CalonMustahiq calon_mustahiq);
+    }
+
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onPickLocation(PickLocation cp) {
+        alamatCalonMustahiq.setTag(cp.getAddress());
+
+        PickLocation stickyEvent = EventBus.getDefault().getStickyEvent(PickLocation.class);
+        if (stickyEvent != null) {
+            EventBus.getDefault().removeStickyEvent(stickyEvent);
+        }
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
 

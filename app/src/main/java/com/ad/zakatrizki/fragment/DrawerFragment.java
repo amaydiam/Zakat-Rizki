@@ -181,7 +181,7 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
         switch (view_type) {
             case Zakat.VIEW_TYPE_DONASI:
                 id = Menus.DRAWER_DONASI;
-                fragment = new DonasiListFragment();
+                fragment = new DonasiMapFragment();
                 break;
             case Zakat.VIEW_TYPE_LAPORAN_DONASI:
                 id = Menus.DRAWER_LAPORAN_DONASI;

@@ -18,19 +18,27 @@ public class CalonMustahiq implements Parcelable {
     // Attributes
     public String id_calon_mustahiq;
     public String nama_calon_mustahiq;
+    public String latitude_calon_mustahiq;
     public String alamat_calon_mustahiq;
+    public String longitude_calon_mustahiq;
     public String no_identitas_calon_mustahiq;
     public String no_telp_calon_mustahiq;
+    public String nama_perekomendasi_calon_mustahiq;
     public String status_calon_mustahiq;
 
     // Constructor
-    public CalonMustahiq(String id_calon_mustahiq, String nama_calon_mustahiq, String alamat_calon_mustahiq, String no_identitas_calon_mustahiq, String no_telp_calon_mustahiq
+    public CalonMustahiq(String id_calon_mustahiq, String nama_calon_mustahiq, String alamat_calon_mustahiq,String latitude_calon_mustahiq,String longitude_calon_mustahiq, String no_identitas_calon_mustahiq,
+                         String no_telp_calon_mustahiq,
+                         String nama_perekomendasi_calon_mustahiq
             , String status_calon_mustahiq) {
         this.id_calon_mustahiq = id_calon_mustahiq;
         this.nama_calon_mustahiq = nama_calon_mustahiq;
         this.alamat_calon_mustahiq = alamat_calon_mustahiq;
+        this.latitude_calon_mustahiq = latitude_calon_mustahiq;
+        this.longitude_calon_mustahiq = longitude_calon_mustahiq;
         this.no_identitas_calon_mustahiq = no_identitas_calon_mustahiq;
         this.no_telp_calon_mustahiq = no_telp_calon_mustahiq;
+        this.nama_perekomendasi_calon_mustahiq = nama_perekomendasi_calon_mustahiq;
         this.status_calon_mustahiq = status_calon_mustahiq;
     }
 
@@ -38,8 +46,11 @@ public class CalonMustahiq implements Parcelable {
         this.id_calon_mustahiq = in.readString();
         this.nama_calon_mustahiq = in.readString();
         this.alamat_calon_mustahiq = in.readString();
+        this.latitude_calon_mustahiq = in.readString();
+        this.longitude_calon_mustahiq = in.readString();
         this.no_identitas_calon_mustahiq = in.readString();
         this.no_telp_calon_mustahiq = in.readString();
+        this.nama_perekomendasi_calon_mustahiq = in.readString();
         this.status_calon_mustahiq = in.readString();
     }
 
@@ -49,8 +60,11 @@ public class CalonMustahiq implements Parcelable {
         out.writeString(id_calon_mustahiq);
         out.writeString(nama_calon_mustahiq);
         out.writeString(alamat_calon_mustahiq);
+        out.writeString(latitude_calon_mustahiq);
+        out.writeString(longitude_calon_mustahiq);
         out.writeString(no_identitas_calon_mustahiq);
         out.writeString(no_telp_calon_mustahiq);
+        out.writeString(nama_perekomendasi_calon_mustahiq);
         out.writeString(status_calon_mustahiq);
     }
 

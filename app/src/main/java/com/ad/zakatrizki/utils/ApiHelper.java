@@ -71,6 +71,10 @@ public class ApiHelper {
         return getApiUrl(context) + "mustahiq/donasi/" + page + (!TextUtils.isNullOrEmpty(keyword) ? ("/" + keyword) : "");
     }
 
+ public static String getDonasiByLocationLink(Context context, String lat, String Long) {
+        return getApiUrl(context) + "mustahiq/donasi_by_location/" + lat + "/" + Long;
+    }
+
     public static String getTesUrl(Context context, String val_url) {
         return "http://" + val_url + "/" + context.getString(R.string.base_url) + "/index.php/tes_url";
     }

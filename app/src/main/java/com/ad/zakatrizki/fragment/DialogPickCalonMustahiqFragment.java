@@ -414,17 +414,21 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
         String id_calon_mustahiq = obj.getString(Zakat.id_calon_mustahiq);
         String nama_calon_mustahiq = obj.getString(Zakat.nama_calon_mustahiq);
         String alamat_calon_mustahiq = obj.getString(Zakat.alamat_calon_mustahiq);
+        String latitude_calon_mustahiq = obj.getString(Zakat.latitude_calon_mustahiq);
+        String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+        String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
         String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
         //set map object
         AddAndSetMapData(
                 position,
                 id_calon_mustahiq,
                 nama_calon_mustahiq,
-                alamat_calon_mustahiq,
+                alamat_calon_mustahiq,latitude_calon_mustahiq,longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                nama_perekomendasi_calon_mustahiq,
                 status_calon_mustahiq
         );
 
@@ -434,17 +438,21 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
             String position,
             String id_calon_mustahiq,
             String nama_calon_mustahiq,
-            String alamat_calon_mustahiq,
+           String alamat_calon_mustahiq,String latitude_calon_mustahiq,String longitude_calon_mustahiq,
             String no_identitas_calon_mustahiq,
             String no_telp_calon_mustahiq,
+            String nama_perekomendasi_calon_mustahiq,
             String status_calon_mustahiq) {
 
         CalonMustahiq calon_mustahiq = new CalonMustahiq(
                 id_calon_mustahiq,
                 nama_calon_mustahiq,
                 alamat_calon_mustahiq,
+                latitude_calon_mustahiq,
+                longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                nama_perekomendasi_calon_mustahiq,
                 status_calon_mustahiq);
 
 
