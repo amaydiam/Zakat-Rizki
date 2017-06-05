@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,10 +19,13 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ad.zakatrizki.R;
@@ -64,13 +69,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindBool;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 
@@ -94,6 +102,27 @@ public class DonasiMapFragment extends Fragment implements OnMapReadyCallback,
 
     @BindView(R.id.indicator_identify_address)
     AVLoadingIndicatorView indicatorIdentifyAddress;
+
+    @OnClick(R.id.btn_search)
+    void Search() {
+        String val_search = search.getText().toString().trim();
+        if (!TextUtils.isNullOrEmpty(val_search)) {
+
+            List<Address> addressList = null;
+
+            Geocoder geocoder = new Geocoder(getActivity());
+            try {
+                addressList = geocoder.getFromLocationName(val_search, 1);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Address address = addressList.get(0);
+            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+        }
+    }
 
     private CustomVolley customVolley;
     private RequestQueue queue;
@@ -160,7 +189,17 @@ public class DonasiMapFragment extends Fragment implements OnMapReadyCallback,
                 new IconDrawable(getActivity(), MaterialIcons.md_my_location)
                         .colorRes(R.color.primary)
                         .actionBarSize());
-
+        search.setHint("Lokasi, ex: Monas");
+        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    Search();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         new TedPermission(getActivity())
                 .setPermissionListener(permissionMapsListener)
@@ -171,12 +210,6 @@ public class DonasiMapFragment extends Fragment implements OnMapReadyCallback,
         return rootView;
     }
 
-    private void Search() {
-        String val_search = search.getText().toString().trim();
-        if (!TextUtils.isNullOrEmpty(val_search)) {
-
-        }
-    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
