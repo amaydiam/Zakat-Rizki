@@ -437,7 +437,8 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
         String no_identitas_muzaki = obj.getString(Zakat.no_identitas_muzaki);
         String no_telp_muzaki = obj.getString(Zakat.no_telp_muzaki);
         String status_muzaki = obj.getString(Zakat.status_muzaki);
-        String id_mustahiq = obj.getString(Zakat.id_calon_mustahiq);
+        String id_mustahiq = obj.getString(Zakat.id_mustahiq);
+        String id_calon_mustahiq = obj.getString(Zakat.id_calon_mustahiq);
         String nama_calon_mustahiq = obj.getString(Zakat.nama_calon_mustahiq);
         String alamat_calon_mustahiq = obj.getString(Zakat.alamat_calon_mustahiq);
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
@@ -457,6 +458,7 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
                 no_telp_muzaki,
                 status_muzaki,
                 id_mustahiq,
+                id_calon_mustahiq,
                 nama_calon_mustahiq,
                 alamat_calon_mustahiq,
                 no_identitas_calon_mustahiq,
@@ -468,12 +470,26 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
 
     }
 
-    private void AddAndSetMapData(String position, String id_donasi, String jumlah_donasi, String id_muzaki, String nama_muzaki, String alamat_muzaki, String no_identitas_muzaki, String no_telp_muzaki, String status_muzaki, String id_mustahiq, String nama_calon_mustahiq, String alamat_calon_mustahiq, String no_identitas_calon_mustahiq, String no_telp_calon_mustahiq, String status_calon_mustahiq, String id_amil_zakat, String nama_amil_zakat) {
+    private void AddAndSetMapData(String position, String id_donasi, String jumlah_donasi, String id_muzaki, String nama_muzaki, String alamat_muzaki, String no_identitas_muzaki, String no_telp_muzaki, String status_muzaki, String id_mustahiq,String id_calon_mustahiq, String nama_calon_mustahiq, String alamat_calon_mustahiq, String no_identitas_calon_mustahiq, String no_telp_calon_mustahiq, String status_calon_mustahiq, String id_amil_zakat, String nama_amil_zakat) {
 
-        LaporanDonasi donasi = new LaporanDonasi(id_donasi, jumlah_donasi, id_muzaki, nama_muzaki, alamat_muzaki, no_identitas_muzaki, no_telp_muzaki,
+        LaporanDonasi donasi = new LaporanDonasi(
+                id_donasi,
+                jumlah_donasi,
+                id_muzaki,
+                nama_muzaki,
+                alamat_muzaki,
+                no_identitas_muzaki,
+                no_telp_muzaki,
                 status_muzaki,
-                id_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq,
-                status_calon_mustahiq, status_calon_mustahiq, id_amil_zakat, nama_amil_zakat
+                id_mustahiq,
+                id_calon_mustahiq,
+                nama_calon_mustahiq,
+                alamat_calon_mustahiq,
+                no_identitas_calon_mustahiq,
+                no_telp_calon_mustahiq,
+                status_calon_mustahiq,
+                id_amil_zakat,
+                nama_amil_zakat
 
         );
 

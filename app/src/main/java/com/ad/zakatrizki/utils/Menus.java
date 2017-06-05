@@ -13,5 +13,6 @@ public class Menus {
     public static final int DRAWER_MUSTAHIQ = R.id.drawer_mustahiq;
     public static final int DRAWER_DONASI = R.id.drawer_donasi;
     public static final int DRAWER_LAPORAN_DONASI = R.id.drawer_laporan_donasi;
+    public static final int DRAWER_LOGOUT_LOGIN = R.id.drawer_logout_login;
 }
 

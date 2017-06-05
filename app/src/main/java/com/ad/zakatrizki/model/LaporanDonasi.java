@@ -35,15 +35,24 @@ public class LaporanDonasi implements Parcelable {
     public String id_amil_zakat;
     public String nama_amil_zakat;
 
-
     // Constructor
-    public LaporanDonasi(String id_donasi, String jumlah_donasi, String id_muzaki, String nama_muzaki, String alamat_muzaki, String no_identitas_muzaki, String no_telp_muzaki,
+    public LaporanDonasi(String id_donasi,
+                         String jumlah_donasi,
+                         String id_muzaki,
+                         String nama_muzaki,
+                         String alamat_muzaki,
+                         String no_identitas_muzaki,
+                         String no_telp_muzaki,
                          String status_muzaki,
                          String id_mustahiq,
                          String id_calon_mustahiq,
-                         String nama_calon_mustahiq, String alamat_calon_mustahiq, String no_identitas_calon_mustahiq, String no_telp_calon_mustahiq,
+                         String nama_calon_mustahiq,
+                         String alamat_calon_mustahiq,
+                         String no_identitas_calon_mustahiq,
+                         String no_telp_calon_mustahiq,
                          String status_calon_mustahiq,
-                         String id_amil_zakat, String nama_amil_zakat) {
+                         String id_amil_zakat,
+                         String nama_amil_zakat) {
 
         this.id_donasi = id_donasi;
         this.jumlah_donasi = jumlah_donasi;

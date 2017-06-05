@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:maxLines="1"
+
         android:text="Keterangan Muzaki (Pemberi Donasi)"
         android:textColor="@color/accent"
         android:textSize="@dimen/text_large" />
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
+
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
             tools:text="nama_muzaki" />
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
+
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
             tools:text="alamat_muzaki" />
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
+
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
             tools:text="no_identitas_muzaki" />
@@ -69,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
+
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
             tools:text="no_telp_muzaki" />
@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
+
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
             tools:text="status_muzaki" />
@@ -91,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ellipsize="end"
-        android:maxLines="1"
+
         android:text="Keterangan Mutahiq (Penerima Donasi)"
         android:textColor="@color/accent"
         android:textSize="@dimen/text_large" />
@@ -118,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
+
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
             tools:text="nama_calon_mustahiq" />
@@ -128,7 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
+
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
             tools:text="alamat_calon_mustahiq" />
@@ -138,7 +138,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
+
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
             tools:text="no_identitas_calon_mustahiq" />
@@ -148,7 +148,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
+
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
             tools:text="no_telp_calon_mustahiq" />
@@ -158,7 +158,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:maxLines="1"
+
         android:textColor="@color/text_primary"
         android:textSize="@dimen/text_large"
         tools:text="nama_amil_zakat" />
@@ -169,7 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
+
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
             tools:text="status_calon_mustahiq" />
@@ -178,7 +178,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="1"
+
             android:textColor="@color/text_primary"
             android:textSize="@dimen/text_large"
             tools:text="waktu_terakhir_donasi" />
@@ -189,7 +189,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ellipsize="end"
-        android:maxLines="1"
+
         android:text="Jumlah Donasi"
         android:textColor="@color/accent"
         android:textSize="@dimen/text_large" />
@@ -203,7 +203,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:ellipsize="end"
-        android:maxLines="1"
+
         android:textColor="@color/text_primary"
         android:textSize="@dimen/text_large"
         tools:text="jumlah_donasi" />

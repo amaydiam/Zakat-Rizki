@@ -8,10 +8,10 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <android.support.v4.widget.NestedScrollView
+        android:fillViewport="true"
         android:id="@+id/movie_detail_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/dist_medium"
         android:clipToPadding="false"
         android:visibility="gone"
         app:layout_scrollFlags="scroll"
@@ -19,7 +19,7 @@
 
         <LinearLayout android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <include layout="@layout/layout_detail_mustahiq" />
 

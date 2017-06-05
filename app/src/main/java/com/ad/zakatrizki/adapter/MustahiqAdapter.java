@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.media.AudioManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -15,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.model.Mustahiq;
@@ -120,9 +122,26 @@ public class MustahiqAdapter extends RecyclerView.Adapter<MustahiqAdapter.ViewHo
                 mustahiq.alamat_calon_mustahiq.replaceAll("(?i)" + keyword_alamat, "<font color='" + ContextCompat.getColor(activity, R.color.accent) + "'>" + keyword_alamat + "</font>") : mustahiq.alamat_calon_mustahiq)));
         holder.noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(mustahiq.no_identitas_calon_mustahiq) ? "-" : mustahiq.no_identitas_calon_mustahiq));
         holder.noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(mustahiq.no_telp_calon_mustahiq) ? "-" : mustahiq.no_telp_calon_mustahiq));
+        holder.namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi: " + (TextUtils.isNullOrEmpty(mustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : mustahiq.nama_perekomendasi_calon_mustahiq));
         holder.statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (mustahiq.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
         holder.namaAmilZakat.setText("Nama Amil Zakat : " + mustahiq.nama_amil_zakat);
         holder.waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(mustahiq.waktu_terakhir_donasi) ? "-" : mustahiq.waktu_terakhir_donasi));
+
+        holder.layoutRating.setVisibility(View.VISIBLE);
+        int jr = Integer.parseInt(mustahiq.jumlah_rekomendasi);
+        int rt = 0;
+        if (jr <= 2) {
+            rt = 1;
+        } else if (jr == 3 || jr == 4) {
+            rt = 2;
+        }else if (jr == 5 || jr == 6) {
+            rt = 3;
+        }else if (jr == 73 || jr == 8) {
+            rt = 4;
+        }else if (jr >9) {
+            rt = 5;
+        }
+        holder.rating.setRating(rt);
 
         if (isTablet) {
             if (selected == position)
@@ -201,6 +220,8 @@ public class MustahiqAdapter extends RecyclerView.Adapter<MustahiqAdapter.ViewHo
         RobotoLightTextView noIdentitasCalonMustahiq;
         @BindView(R.id.no_telp_calon_mustahiq)
         RobotoLightTextView noTelpCalonMustahiq;
+        @BindView(R.id.nama_perekomendasi_calon_mustahiq)
+        RobotoLightTextView namaPerekomendasiCalonMustahiq;
         @BindView(R.id.status_calon_mustahiq)
         RobotoLightTextView statusCalonMustahiq;
         @BindView(R.id.status_mustahiq)
@@ -209,6 +230,13 @@ public class MustahiqAdapter extends RecyclerView.Adapter<MustahiqAdapter.ViewHo
         RobotoLightTextView namaAmilZakat;
         @BindView(R.id.waktu_terakhir_donasi)
         RobotoLightTextView waktuTerakhirDonasi;
+
+        @BindView(R.id.layout_rating)
+        LinearLayout layoutRating;
+
+        @BindView(R.id.rating)
+        AppCompatRatingBar rating;
+
         @BindView(R.id.btn_action)
         IconButton btnAction;
         @BindView(R.id.root_parent)

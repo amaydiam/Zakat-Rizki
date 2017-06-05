@@ -18,8 +18,8 @@ public class CalonMustahiq implements Parcelable {
     // Attributes
     public String id_calon_mustahiq;
     public String nama_calon_mustahiq;
-    public String latitude_calon_mustahiq;
     public String alamat_calon_mustahiq;
+    public String latitude_calon_mustahiq;
     public String longitude_calon_mustahiq;
     public String no_identitas_calon_mustahiq;
     public String no_telp_calon_mustahiq;

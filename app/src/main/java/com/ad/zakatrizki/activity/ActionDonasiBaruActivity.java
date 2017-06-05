@@ -30,8 +30,8 @@ import android.widget.Toast;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
-import com.ad.zakatrizki.fragment.Step1AddJadwalFragment;
-import com.ad.zakatrizki.fragment.Step2AddJadwalFragment;
+import com.ad.zakatrizki.fragment.Step1AddInfoMuzakiFragment;
+import com.ad.zakatrizki.fragment.Step2AddBuktiPembayaranFragment;
 import com.ad.zakatrizki.model.LaporanDonasi;
 import com.ad.zakatrizki.model.Mustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
@@ -155,16 +155,16 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
 
     public void SubmitData1(int position) {
         Fragment fragment = mAdapter.getFragment(0);
-        if (fragment instanceof Step1AddJadwalFragment) {
-            Step1AddJadwalFragment step1Fragment = (Step1AddJadwalFragment) fragment;
+        if (fragment instanceof Step1AddInfoMuzakiFragment) {
+            Step1AddInfoMuzakiFragment step1Fragment = (Step1AddInfoMuzakiFragment) fragment;
             step1Fragment.SubmitData1(false, position);
         }
     }
 
     public void SubmitDataDanSave() {
         Fragment fragment = mAdapter.getFragment(0);
-        if (fragment instanceof Step1AddJadwalFragment) {
-            Step1AddJadwalFragment step1Fragment = (Step1AddJadwalFragment) fragment;
+        if (fragment instanceof Step1AddInfoMuzakiFragment) {
+            Step1AddInfoMuzakiFragment step1Fragment = (Step1AddInfoMuzakiFragment) fragment;
             step1Fragment.SubmitData1(false, 0);
         }
     }
@@ -192,8 +192,8 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
             Fragment fragment0 = mAdapter.getFragment(0);
             Fragment fragment1 = mAdapter.getFragment(1);
 
-            if (fragment0 instanceof Step1AddJadwalFragment) {
-                Step1AddJadwalFragment step1Fragment = (Step1AddJadwalFragment) fragment0;
+            if (fragment0 instanceof Step1AddInfoMuzakiFragment) {
+                Step1AddInfoMuzakiFragment step1Fragment = (Step1AddInfoMuzakiFragment) fragment0;
                 step1Fragment.getData();
                 jsonParams.put(Zakat.nama_muzaki,
                         step1Fragment.s_nama_muzaki);
@@ -207,8 +207,8 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
                         step1Fragment.s_jumlah_donasi);
             }
 
-            if (fragment1 instanceof Step2AddJadwalFragment) {
-                Step2AddJadwalFragment step2Fragment = (Step2AddJadwalFragment) fragment1;
+            if (fragment1 instanceof Step2AddBuktiPembayaranFragment) {
+                Step2AddBuktiPembayaranFragment step2Fragment = (Step2AddBuktiPembayaranFragment) fragment1;
                 if (step2Fragment.s_foto_bukti_pembayaran != null) {
                     // process only post has valid image
                     Bitmap newsBitmap = BitmapFactory.decodeFile(step2Fragment.s_foto_bukti_pembayaran);
@@ -340,8 +340,8 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
                 Log.v("foto", "ada foto");
 
                 Fragment fragment1 = mAdapter.getFragment(1);
-                if (fragment1 instanceof Step2AddJadwalFragment) {
-                    Step2AddJadwalFragment step2Fragment = (Step2AddJadwalFragment) fragment1;
+                if (fragment1 instanceof Step2AddBuktiPembayaranFragment) {
+                    Step2AddBuktiPembayaranFragment step2Fragment = (Step2AddBuktiPembayaranFragment) fragment1;
                     step2Fragment.setFotoBuktiPembayaran(imageFile);
                 }
 
@@ -367,8 +367,8 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
         {
 
             Fragment fragment = mAdapter.getFragment(0);
-            if (fragment instanceof Step1AddJadwalFragment) {
-                Step1AddJadwalFragment step1Fragment = (Step1AddJadwalFragment) fragment;
+            if (fragment instanceof Step1AddInfoMuzakiFragment) {
+                Step1AddInfoMuzakiFragment step1Fragment = (Step1AddInfoMuzakiFragment) fragment;
                 step1Fragment.getData();
 
                 if (!step1Fragment.s_nama_muzaki.equals("")
@@ -379,7 +379,7 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
                         || step1Fragment.errorForm
                         ) {
                     AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);
-                    alt_bld.setMessage("Apakah anda akan membatal donasi?")
+                    alt_bld.setMessage("Apakah anda akan membatalkan donasi?")
                             .setCancelable(false)
                             .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
@@ -423,12 +423,12 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    Step1AddJadwalFragment Step1 = new Step1AddJadwalFragment();
+                    Step1AddInfoMuzakiFragment Step1 = new Step1AddInfoMuzakiFragment();
                     mPager.setObjectForPosition(Step1, position);
                     mPageReferenceMap.put(position, Step1);
                     return Step1;
                 case 1:
-                    Step2AddJadwalFragment Step2 = new Step2AddJadwalFragment();
+                    Step2AddBuktiPembayaranFragment Step2 = new Step2AddBuktiPembayaranFragment();
                     mPager.setObjectForPosition(Step2, position);
                     mPageReferenceMap.put(position, Step2);
                     return Step2;

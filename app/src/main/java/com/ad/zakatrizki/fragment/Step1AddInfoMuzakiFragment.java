@@ -21,6 +21,7 @@ import com.ad.zakatrizki.utils.TextUtils;
 import com.ad.zakatrizki.widget.RobotoBoldTextView;
 import com.ad.zakatrizki.widget.RobotoLightTextView;
 import com.ad.zakatrizki.widget.RobotoRegularEditText;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import agency.tango.android.avatarview.loader.PicassoLoader;
 import agency.tango.android.avatarview.views.AvatarView;
@@ -29,7 +30,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class Step1AddJadwalFragment extends Fragment {
+public class Step1AddInfoMuzakiFragment extends Fragment {
 
 
     public String s_nama_muzaki;
@@ -58,6 +59,8 @@ public class Step1AddJadwalFragment extends Fragment {
     RobotoLightTextView noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoLightTextView noTelpCalonMustahiq;
+    @BindView(R.id.nama_perekomendasi_calon_mustahiq)
+    RobotoLightTextView namaPerekomendasiCalonMustahiq;
     @BindView(R.id.nama_amil_zakat)
     RobotoLightTextView namaAmilZakat;
     @BindView(R.id.status_mustahiq)
@@ -96,6 +99,12 @@ public class Step1AddJadwalFragment extends Fragment {
 
     void displayView() {
 
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map);
+        View mapView = mapFragment.getView();
+        mapView.setVisibility(View.GONE);
+
         setupUI(parentLayout);
 
         errorForm = false;
@@ -121,6 +130,7 @@ public class Step1AddJadwalFragment extends Fragment {
             alamatCalonMustahiq.setText("Alamat : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.alamat_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.alamat_calon_mustahiq));
             noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.no_identitas_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.no_identitas_calon_mustahiq));
             noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.no_telp_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.no_telp_calon_mustahiq));
+            namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.nama_perekomendasi_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.nama_perekomendasi_calon_mustahiq));
             statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (activity.mustahiqPrepareDonasi.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
             namaAmilZakat.setText("Nama Amil Zakat : " + activity.mustahiqPrepareDonasi.nama_amil_zakat);
             waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.waktu_terakhir_donasi) ? "-" : activity.mustahiqPrepareDonasi.waktu_terakhir_donasi));

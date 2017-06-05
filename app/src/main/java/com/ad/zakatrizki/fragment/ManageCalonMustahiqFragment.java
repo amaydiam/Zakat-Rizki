@@ -33,6 +33,9 @@ import com.ad.zakatrizki.utils.Utils;
 import com.ad.zakatrizki.widget.RobotoRegularEditText;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
@@ -64,34 +67,27 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
     Toolbar toolbar;
     @BindView(R.id.nama_calon_mustahiq)
     RobotoRegularEditText namaCalonMustahiq;
+    @BindView(R.id.nama_perekomendasi_calon_mustahiq)
+    RobotoRegularEditText namaPerekomendasiCalonMustahiq;
     @BindView(R.id.alamat_calon_mustahiq)
     RobotoRegularEditText alamatCalonMustahiq;
     @BindView(R.id.no_identitas_calon_mustahiq)
     RobotoRegularEditText noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoRegularEditText noTelpCalonMustahiq;
-    @BindView(R.id.aktif)
-    RadioButton aktif;
-    @BindView(R.id.tidak_aktif)
-    RadioButton tidakAktif;
-    @BindView(R.id.status_calon_mustahiq)
-    RadioGroup statusCalonMustahiq;
     @BindView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
 
     @OnClick(R.id.pick_location)
-    void pickLocation(){
-        Intent intent = new LocationPickerActivity.Builder()
-               // .withLocation(41.4036299, 2.1743558)
-                .withSearchZone("in_IN")
-                .shouldReturnOkOnBackPressed()
-                .withStreetHidden()
-                .withCityHidden()
-                .withZipCodeHidden()
-                .withSatelliteViewHidden()
-                .build(getActivity());
-
-        getActivity().startActivityForResult(intent, 1);
+    void pickLocation() {
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+        try {
+            getActivity().startActivityForResult(builder.build(getActivity()), Zakat.PLACE_PICKER_REQUEST);
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
     }
 
     private SnackBar snackbar;
@@ -105,7 +101,9 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
     private String val_alamat_calon_mustahiq = "";
     private String val_no_identitas_calon_mustahiq = "";
     private String val_no_telp_calon_mustahiq = "";
-    private String val_status_calon_mustahiq = "";
+    private String val_nama_perekomendasi_calon_mustahiq = "";
+    private Double val_latitude_calon_mustahiq;
+    private Double val_longitude_calon_mustahiq;
 
 
     private CalonMustahiq calonMustahiq;
@@ -122,6 +120,7 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
         Utils.HideKeyboard(getActivity(), alamatCalonMustahiq);
         Utils.HideKeyboard(getActivity(), noIdentitasCalonMustahiq);
         Utils.HideKeyboard(getActivity(), noTelpCalonMustahiq);
+        Utils.HideKeyboard(getActivity(), namaPerekomendasiCalonMustahiq);
         switch (id) {
 
             case Menus.SEND:
@@ -131,7 +130,12 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                         || val_alamat_calon_mustahiq.length() == 0
                         || val_no_identitas_calon_mustahiq.length() == 0
                         || val_no_telp_calon_mustahiq.length() == 0
-                        || val_status_calon_mustahiq.length() == 0) {
+                        || val_nama_perekomendasi_calon_mustahiq.length() == 0) {
+                    snackbar.show("Harap isi semua form...");
+                    return;
+                }
+                if (val_latitude_calon_mustahiq == null
+                        || val_longitude_calon_mustahiq == null) {
                     snackbar.show("Harap isi semua form...");
                     return;
                 }
@@ -142,12 +146,16 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                         val_nama_calon_mustahiq);
                 jsonParams.put(Zakat.alamat_calon_mustahiq,
                         val_alamat_calon_mustahiq);
+                jsonParams.put(Zakat.latitude_calon_mustahiq,
+                        String.valueOf(val_latitude_calon_mustahiq));
+                jsonParams.put(Zakat.longitude_calon_mustahiq,
+                        String.valueOf(val_longitude_calon_mustahiq));
                 jsonParams.put(Zakat.no_identitas_calon_mustahiq,
                         val_no_identitas_calon_mustahiq);
                 jsonParams.put(Zakat.no_telp_calon_mustahiq,
                         val_no_telp_calon_mustahiq);
-                jsonParams.put(Zakat.status_calon_mustahiq,
-                        val_status_calon_mustahiq);
+                jsonParams.put(Zakat.nama_perekomendasi_calon_mustahiq,
+                        val_nama_perekomendasi_calon_mustahiq);
 
                 String TAG = null;
                 if (action.equals("add")) {
@@ -175,11 +183,7 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
         val_alamat_calon_mustahiq = alamatCalonMustahiq.getText().toString().trim();
         val_no_identitas_calon_mustahiq = noIdentitasCalonMustahiq.getText().toString().trim();
         val_no_telp_calon_mustahiq = noTelpCalonMustahiq.getText().toString().trim();
-
-        if (statusCalonMustahiq.getCheckedRadioButtonId() == R.id.aktif)
-            val_status_calon_mustahiq = "Aktif";
-        else
-            val_status_calon_mustahiq = "Tidak Aktif";
+        val_nama_perekomendasi_calon_mustahiq = namaPerekomendasiCalonMustahiq.getText().toString().trim();
 
 
     }
@@ -252,7 +256,7 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                             .getString(Zakat.nama_perekomendasi_calon_mustahiq);
                     String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
 
-                    calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq,  alamat_calon_mustahiq,latitude_calon_mustahiq,longitude_calon_mustahiq,no_identitas_calon_mustahiq, no_telp_calon_mustahiq,nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
+                    calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
                     if (TAG.equals(TAG_ADD)) {
                         callback.onFinishAddCalonMustahiq(calonMustahiq);
                     } else if (TAG.equals(TAG_EDIT)) {
@@ -357,17 +361,14 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
             val_alamat_calon_mustahiq = calonMustahiq.alamat_calon_mustahiq;
             val_no_identitas_calon_mustahiq = calonMustahiq.no_identitas_calon_mustahiq;
             val_no_telp_calon_mustahiq = calonMustahiq.no_telp_calon_mustahiq;
-            val_status_calon_mustahiq = calonMustahiq.status_calon_mustahiq;
+            val_nama_perekomendasi_calon_mustahiq = calonMustahiq.nama_perekomendasi_calon_mustahiq;
 
             namaCalonMustahiq.setText(val_nama_calon_mustahiq);
             alamatCalonMustahiq.setText(val_alamat_calon_mustahiq);
             noIdentitasCalonMustahiq.setText(val_no_identitas_calon_mustahiq);
             noTelpCalonMustahiq.setText(val_no_telp_calon_mustahiq);
+            namaPerekomendasiCalonMustahiq.setText(val_nama_perekomendasi_calon_mustahiq);
 
-            if (val_status_calon_mustahiq.equalsIgnoreCase("Aktif"))
-                aktif.setChecked(true);
-            else
-                tidakAktif.setChecked(true);
 
         } else {
             toolbar.setSubtitle("Tambah");
@@ -405,13 +406,16 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onPickLocation(PickLocation cp) {
-        alamatCalonMustahiq.setTag(cp.getAddress());
+        alamatCalonMustahiq.setText(cp.getAddress());
+        val_latitude_calon_mustahiq = cp.getLatitude();
+        val_longitude_calon_mustahiq = cp.getLongitude();
 
         PickLocation stickyEvent = EventBus.getDefault().getStickyEvent(PickLocation.class);
         if (stickyEvent != null) {
             EventBus.getDefault().removeStickyEvent(stickyEvent);
         }
     }
+
     @Override
     public void onStart() {
         super.onStart();

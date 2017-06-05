@@ -1,17 +1,28 @@
 package com.ad.zakatrizki.fragment;
 
+import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.media.RatingCompat;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
@@ -25,10 +36,20 @@ import com.ad.zakatrizki.widget.RobotoLightTextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.github.clans.fab.FloatingActionButton;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 
 import org.json.JSONObject;
+
+import java.util.Locale;
 
 import agency.tango.android.avatarview.loader.PicassoLoader;
 import agency.tango.android.avatarview.views.AvatarView;
@@ -38,9 +59,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class DonasiDetailFragment extends Fragment implements ManageDonasiFragment.AddEditDonasiListener, CustomVolley.OnCallbackResponse {
+public class DonasiDetailFragment extends Fragment implements ManageDonasiFragment.AddEditDonasiListener, CustomVolley.OnCallbackResponse, OnMapReadyCallback {
 
     private static final String TAG_DETAIL = "TAG_DETAIL";
+    private static final String TAG_REKOMENDASI = "TAG_REKOMENDASI";
     @BindBool(R.bool.is_tablet)
     boolean isTablet;
     // Toolbar
@@ -63,6 +85,10 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     RobotoBoldTextView tryAgain;
     @BindView(R.id.movie_detail_holder)
     NestedScrollView movieHolder;
+    @BindView(R.id.fab_navigasi)
+    FloatingActionButton fabNavigasi;
+    @BindView(R.id.fab_rekomendasi)
+    FloatingActionButton fabRekomendasi;
     @BindView(R.id.fab_action)
     FloatingActionButton fabAction;
     // Basic info
@@ -76,18 +102,77 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     RobotoLightTextView noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoLightTextView noTelpCalonMustahiq;
+    @BindView(R.id.nama_perekomendasi_calon_mustahiq)
+    RobotoLightTextView namaPerekomendasiCalonMustahiq;
     @BindView(R.id.nama_amil_zakat)
     RobotoLightTextView namaAmilZakat;
     @BindView(R.id.status_mustahiq)
     RobotoLightTextView statusMustahiq;
     @BindView(R.id.waktu_terakhir_donasi)
     RobotoLightTextView waktuTerakhirDonasi;
+    @BindView(R.id.layout_rating)
+    LinearLayout layoutRating;
+
+
+    @BindView(R.id.rating)
+    AppCompatRatingBar rating;
+
     private Unbinder unbinder;
-    private String id;
+    private String id_msthq;
     private Mustahiq mustahiq;
     private PicassoLoader imageLoader;
     private CustomVolley customVolley;
     private RequestQueue queue;
+    private View mapView;
+    private GoogleMap mMap;
+    private ProgressDialog dialogProgress;
+
+    @OnClick(R.id.fab_rekomendasi)
+    void RekomendasiMuzaki() {
+        AlertDialog.Builder alt_bld = new AlertDialog.Builder(getActivity());
+        alt_bld.setMessage("Apakah anda akan merekomendasikan Muzaki ini?")
+                .setCancelable(false)
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        String urlToDownload = ApiHelper.getAddRekomendasiMustahiqLink(getActivity(), id_msthq);
+                        queue = customVolley.Rest(Request.Method.GET, urlToDownload, null, TAG_REKOMENDASI);
+                    }
+                })
+                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+
+                    }
+                });
+        AlertDialog alert = alt_bld.create();
+        alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        alert.show();
+    }
+
+    @OnClick(R.id.fab_navigasi)
+    void NavigasiMuzaki() {
+        {
+            String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f(%s)", Double.valueOf(mustahiq.latitude_calon_mustahiq), Double.valueOf(mustahiq.longitude_calon_mustahiq), mustahiq.nama_calon_mustahiq) + "'s Location";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+            intent.setPackage("com.google.android.apps.maps");
+            try {
+                startActivity(intent);
+
+
+            } catch (ActivityNotFoundException ex) {
+                try {
+                    Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                    startActivity(unrestrictedIntent);
+
+
+                } catch (ActivityNotFoundException innerEx) {
+                    Toast.makeText(getActivity(), "Please install a maps application", Toast.LENGTH_LONG).show();
+                }
+            }
+
+        }
+    }
 
     @OnClick(R.id.fab_action)
     void DonasiMustahiq() {
@@ -118,6 +203,14 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         }
 
         //setup fab
+        fabNavigasi.setImageDrawable(
+                new IconDrawable(getActivity(), MaterialIcons.md_navigation)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
+        fabRekomendasi.setImageDrawable(
+                new IconDrawable(getActivity(), MaterialIcons.md_star)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
         fabAction.setImageDrawable(
                 new IconDrawable(getActivity(), MaterialIcons.md_attach_money)
                         .colorRes(R.color.white)
@@ -126,16 +219,16 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         // Download calon_mustahiq details if new instance, else restore from saved instance
         if (savedInstanceState == null || !(savedInstanceState.containsKey(Zakat.CALON_MUSTAHIQ_ID)
                 && savedInstanceState.containsKey(Zakat.CALON_MUSTAHIQ_OBJECT))) {
-            id = getArguments().getString(Zakat.CALON_MUSTAHIQ_ID);
-            if (TextUtils.isNullOrEmpty(id)) {
+            id_msthq = getArguments().getString(Zakat.CALON_MUSTAHIQ_ID);
+            if (TextUtils.isNullOrEmpty(id_msthq)) {
                 progressCircle.setVisibility(View.GONE);
                 toolbarTextHolder.setVisibility(View.GONE);
                 toolbar.setTitle("");
             } else {
-                downloadLokasiDetails(id);
+                downloadLokasiDetails(id_msthq);
             }
         } else {
-            id = savedInstanceState.getString(Zakat.CALON_MUSTAHIQ_ID);
+            id_msthq = savedInstanceState.getString(Zakat.CALON_MUSTAHIQ_ID);
             mustahiq = savedInstanceState.getParcelable(Zakat.CALON_MUSTAHIQ_OBJECT);
             onDownloadSuccessful();
         }
@@ -152,8 +245,8 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (mustahiq != null && id != null) {
-            outState.putString(Zakat.CALON_MUSTAHIQ_ID, id);
+        if (mustahiq != null && id_msthq != null) {
+            outState.putString(Zakat.CALON_MUSTAHIQ_ID, id_msthq);
             outState.putParcelable(Zakat.CALON_MUSTAHIQ_OBJECT, mustahiq);
         }
     }
@@ -164,6 +257,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         unbinder.unbind();
         if (queue != null) {
             queue.cancelAll(TAG_DETAIL);
+            queue.cancelAll(TAG_REKOMENDASI);
         }
 
     }
@@ -181,6 +275,8 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         progressCircle.setVisibility(View.GONE);
         errorMessage.setVisibility(View.GONE);
         movieHolder.setVisibility(View.VISIBLE);
+        fabNavigasi.setVisibility(View.VISIBLE);
+        fabRekomendasi.setVisibility(View.VISIBLE);
         fabAction.setVisibility(View.VISIBLE);
 
         toolbar.setTitle(mustahiq.nama_calon_mustahiq);
@@ -191,10 +287,33 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         alamatCalonMustahiq.setText("Alamat : " + (TextUtils.isNullOrEmpty(mustahiq.alamat_calon_mustahiq) ? "-" : mustahiq.alamat_calon_mustahiq));
         noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(mustahiq.no_identitas_calon_mustahiq) ? "-" : mustahiq.no_identitas_calon_mustahiq));
         noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(mustahiq.no_telp_calon_mustahiq) ? "-" : mustahiq.no_telp_calon_mustahiq));
+        namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(mustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : mustahiq.nama_perekomendasi_calon_mustahiq));
+
         statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (mustahiq.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
         namaAmilZakat.setText("Nama Amil Zakat : " + mustahiq.nama_amil_zakat);
         waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(mustahiq.waktu_terakhir_donasi) ? "-" : mustahiq.waktu_terakhir_donasi));
 
+        layoutRating.setVisibility(View.VISIBLE);
+        int jr = Integer.parseInt(mustahiq.jumlah_rekomendasi);
+        int rt = 0;
+        if (jr <= 2) {
+            rt = 1;
+        } else if (jr == 3 || jr == 4) {
+            rt = 2;
+        }else if (jr == 5 || jr == 6) {
+            rt = 3;
+        }else if (jr == 73 || jr == 8) {
+            rt = 4;
+        }else if (jr >9) {
+            rt = 5;
+        }
+        rating.setRating(rt);
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map);
+        mapView = mapFragment.getView();
+        mapFragment.getMapAsync(DonasiDetailFragment.this);
 
     }
 
@@ -212,6 +331,8 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         tryAgain.setVisibility(View.GONE);
         progressCircle.setVisibility(View.GONE);
         movieHolder.setVisibility(View.GONE);
+        fabNavigasi.setVisibility(View.GONE);
+        fabRekomendasi.setVisibility(View.GONE);
         fabAction.setVisibility(View.GONE);
         toolbarTextHolder.setVisibility(View.GONE);
         toolbar.setTitle("");
@@ -221,18 +342,22 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     public void onTryAgainClicked() {
         errorMessage.setVisibility(View.GONE);
         progressCircle.setVisibility(View.VISIBLE);
-        downloadLokasiDetails(id);
+        downloadLokasiDetails(id_msthq);
     }
 
 
     @Override
     public void onVolleyStart(String TAG) {
-
+        if (TAG.equalsIgnoreCase(TAG_REKOMENDASI)) {
+            progress(true);
+        }
     }
 
     @Override
     public void onVolleyEnd(String TAG) {
-
+        if (TAG.equalsIgnoreCase(TAG_REKOMENDASI)) {
+            progress(false);
+        }
     }
 
     @Override
@@ -242,31 +367,66 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
             String isSuccess = jsonObject.getString(Zakat.isSuccess);
             String message = jsonObject.getString(Zakat.message);
 
-            JSONObject obj = new JSONObject(jsonObject.getString(Zakat.mustahiq));
-            String id_mustahiq = obj.getString(Zakat.id_mustahiq);
-            String id_calon_mustahiq = obj.getString(Zakat.id_calon_mustahiq);
-            String nama_calon_mustahiq = obj.getString(Zakat.nama_calon_mustahiq);
-            String alamat_calon_mustahiq = obj.getString(Zakat.alamat_calon_mustahiq);
-            String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
-            String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
-            String status_mustahiq = obj.getString(Zakat.status_mustahiq);
-            String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
-            String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
-            String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
+            if (Boolean.valueOf(isSuccess)) {
+                if (!TAG.equals(TAG_REKOMENDASI)) {
 
-            mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, status_mustahiq, id_amil_zakat, nama_amil_zakat, waktu_terakhir_donasi);
+                    JSONObject obj = new JSONObject(jsonObject.getString(Zakat.mustahiq));
+                    String id_mustahiq = obj.getString(Zakat.id_mustahiq);
+                    String id_calon_mustahiq = obj.getString(Zakat.id_calon_mustahiq);
+                    String nama_calon_mustahiq = obj.getString(Zakat.nama_calon_mustahiq);
+                    String alamat_calon_mustahiq = obj.getString(Zakat.alamat_calon_mustahiq);
+                    String latitude_calon_mustahiq = obj.getString(Zakat.latitude_calon_mustahiq);
+                    String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
+                    String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
+                    String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                    String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
+                    String status_mustahiq = obj.getString(Zakat.status_mustahiq);
+                    String jumlah_rekomendasi = obj.getString(Zakat.jumlah_rekomendasi);
+                    String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
+                    String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
+                    String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
-            if (Boolean.parseBoolean(isSuccess))
-                onDownloadSuccessful();
-            else
-                onNotAvailable(message);
+                    mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
+                            latitude_calon_mustahiq,
+                            longitude_calon_mustahiq,
+                            no_identitas_calon_mustahiq,
+                            no_telp_calon_mustahiq,
+                            nama_perekomendasi_calon_mustahiq, status_mustahiq, jumlah_rekomendasi, id_amil_zakat, nama_amil_zakat, waktu_terakhir_donasi);
+
+                    if (Boolean.parseBoolean(isSuccess))
+                        onDownloadSuccessful();
+                    else
+                        onNotAvailable(message);
+                } else {
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+
+                    downloadLokasiDetails(id_msthq);
+                }
+            }
 
         } catch (Exception ex) {
             // Parsing error
-            onDownloadFailed();
+            if (!TAG.equals(TAG_REKOMENDASI)) {
+                onDownloadFailed();
+            } else {
+                Toast.makeText(getActivity(), "Ada kesalahan parsing", Toast.LENGTH_SHORT).show();
+            }
             Log.d("Parse Error", ex.getMessage(), ex);
         }
+
     }
+
+    private void progress(boolean status) {
+        if (status) {
+            dialogProgress = ProgressDialog.show(getActivity(), "Submit",
+                    "Harap menunggu...", true);
+        } else {
+
+            if (dialogProgress.isShowing())
+                dialogProgress.dismiss();
+        }
+    }
+
 
     @Override
     public void onVolleyErrorResponse(String TAG, String response) {
@@ -289,6 +449,22 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     public void onFinishDeleteDonasi(Mustahiq mustahiq) {
 
         onNotAvailable("Donasi ini tidak ada/dihapus");
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+
+        LatLng Posisi = new LatLng(Double.parseDouble(mustahiq.latitude_calon_mustahiq.equalsIgnoreCase("null") ? "0.0" : mustahiq.latitude_calon_mustahiq), Double.parseDouble(mustahiq.longitude_calon_mustahiq.equalsIgnoreCase("null") ? "0.0" : mustahiq.longitude_calon_mustahiq));
+        MarkerOptions marker = new MarkerOptions()
+                .position(Posisi)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_mustahiq));
+
+        Marker m = mMap.addMarker(marker);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Posisi, 14));
+
+
     }
 
 

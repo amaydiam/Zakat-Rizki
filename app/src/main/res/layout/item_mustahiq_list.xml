@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="1"
+
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/text_large"
                     tools:text="nama_calon_mustahiq" />
@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="1"
+
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/text_large"
                     tools:text="alamat_calon_mustahiq" />
@@ -69,7 +69,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="1"
+
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/text_large"
                     tools:text="no_identitas_calon_mustahiq" />
@@ -78,16 +78,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="1"
+
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/text_large"
                     tools:text="no_telp_calon_mustahiq" />
+
+                <com.ad.zakatrizki.widget.RobotoLightTextView
+                    android:id="@+id/nama_perekomendasi_calon_mustahiq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_large"
+                    tools:text="nama_perekomendasi_calon_mustahiq" />
+
                 <com.ad.zakatrizki.widget.RobotoLightTextView
                 android:id="@+id/nama_amil_zakat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:maxLines="1"
+
                 android:textColor="@color/text_primary"
                 android:textSize="@dimen/text_large"
                 tools:text="nama_amil_zakat" />
@@ -96,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="1"
+
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/text_large"
                     tools:text="status_calon_mustahiq" />
@@ -105,7 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="1"
+
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/text_large"
                     tools:text="status_mustahiq"/>
@@ -118,6 +129,31 @@
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/text_large"
                     tools:text="waktu_terakhir_donasi" />
+                <LinearLayout
+                    android:id="@+id/layout_rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <com.ad.zakatrizki.widget.RobotoLightTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:textColor="@color/text_primary"
+                        android:textSize="@dimen/text_large"
+                        android:text="Rating : " />
+
+                    <android.support.v7.widget.AppCompatRatingBar
+                        android:id="@+id/rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:stepSize="1"
+                        android:isIndicator="true"
+                        style="?android:attr/ratingBarStyleSmall"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 

@@ -408,13 +408,18 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
 
     private void setDataObject(String position, JSONObject obj) throws JSONException {
         //parse object
+        //parse object
         String id_mustahiq = obj.getString(Zakat.id_mustahiq);
         String id_calon_mustahiq = obj.getString(Zakat.id_calon_mustahiq);
         String nama_calon_mustahiq = obj.getString(Zakat.nama_calon_mustahiq);
         String alamat_calon_mustahiq = obj.getString(Zakat.alamat_calon_mustahiq);
+        String latitude_calon_mustahiq = obj.getString(Zakat.latitude_calon_mustahiq);
+        String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+        String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
         String status_mustahiq = obj.getString(Zakat.status_mustahiq);
+        String jumlah_rekomendasi = obj.getString(Zakat.jumlah_rekomendasi);
         String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
         String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
         String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
@@ -424,10 +429,14 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 id_mustahiq,
                 id_calon_mustahiq,
                 nama_calon_mustahiq,
+                latitude_calon_mustahiq,
+                longitude_calon_mustahiq,
                 alamat_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                nama_perekomendasi_calon_mustahiq,
                 status_mustahiq,
+                jumlah_rekomendasi,
                 id_amil_zakat,
                 nama_amil_zakat,
                 waktu_terakhir_donasi
@@ -441,9 +450,13 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
             String id_calon_mustahiq,
             String nama_calon_mustahiq,
             String alamat_calon_mustahiq,
+            String latitude_calon_mustahiq,
+            String longitude_calon_mustahiq,
             String no_identitas_calon_mustahiq,
             String no_telp_calon_mustahiq,
+            String nama_perekomendasi_calon_mustahiq,
             String status_mustahiq,
+            String jumlah_rekomendasi,
             String id_amil_zakat,
             String nama_amil_zakat,
             String waktu_terakhir_donasi) {
@@ -453,13 +466,16 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 id_calon_mustahiq,
                 nama_calon_mustahiq,
                 alamat_calon_mustahiq,
+                latitude_calon_mustahiq,
+                longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                nama_perekomendasi_calon_mustahiq,
                 status_mustahiq,
+                jumlah_rekomendasi,
                 id_amil_zakat,
                 nama_amil_zakat,
                 waktu_terakhir_donasi);
-
 
         if (position.equals(TAG_BAWAH)) {
             dataMustahiqs.add(mustahiq);

@@ -15,6 +15,7 @@ public class Zakat extends Application {
     public static final int VIEW_TYPE_MUSTAHIQ = 2;
     public static final int VIEW_TYPE_DONASI = 3;
     public static final int VIEW_TYPE_LAPORAN_DONASI = 4;
+    public static final int VIEW_LOGOUT_LOGIN = 5;
 
     public static final int MY_SOCKET_TIMEOUT_MS = 60000;
     public static final int JPEG_OUTPUT_QUALITY = 70;
@@ -70,10 +71,15 @@ public class Zakat extends Application {
     public static final String nama_amil_zakat = "nama_amil_zakat";
     public static final String amil_zakat = "amil_zakat";
     public static final String waktu_terakhir_donasi = "waktu_terakhir_donasi";
+    public static final String LOGIN = "login";
 
     public static String mustahiq = "mustahiq";
     public static String id_mustahiq = "id_mustahiq";
     public static String status_mustahiq = "status_mustahiq";
+    public static String jumlah_rekomendasi = "jumlah_rekomendasi";
+    public static int PLACE_PICKER_REQUEST=22;
+    public static String username="username";
+    public static String password="password";
 
     @Override
     protected void attachBaseContext(Context base) {

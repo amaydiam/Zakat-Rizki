@@ -13,6 +13,7 @@
         tools:ignore="ContentDescription" />
 
     <ImageView
+        android:id="@+id/ic"
         android:layout_width="@dimen/drawer_icon_size"
         android:layout_height="@dimen/drawer_icon_size"
         android:layout_alignParentBottom="true"
@@ -23,5 +24,18 @@
         android:layout_marginStart="@dimen/dist_large"
         android:src="@mipmap/ic_launcher"
         tools:ignore="contentDescription" />
+
+    <com.ad.zakatrizki.widget.RobotoBoldTextView
+        android:id="@+id/ket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Keterangan"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/ic"
+        android:layout_toRightOf="@+id/ic"
+        android:layout_toEndOf="@+id/ic" />
 
 </RelativeLayout>

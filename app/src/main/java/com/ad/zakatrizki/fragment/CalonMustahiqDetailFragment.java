@@ -1,7 +1,12 @@
 package com.ad.zakatrizki.fragment;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -13,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
@@ -25,11 +31,28 @@ import com.ad.zakatrizki.widget.RobotoLightTextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.github.clans.fab.FloatingActionButton;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Locale;
 
 import agency.tango.android.avatarview.loader.PicassoLoader;
 import agency.tango.android.avatarview.views.AvatarView;
@@ -39,7 +62,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class CalonMustahiqDetailFragment extends Fragment implements ManageCalonMustahiqFragment.AddEditCalonMustahiqListener, CustomVolley.OnCallbackResponse {
+public class CalonMustahiqDetailFragment extends Fragment
+        implements ManageCalonMustahiqFragment.AddEditCalonMustahiqListener, OnMapReadyCallback,
+        CustomVolley.OnCallbackResponse {
 
     private static final String TAG_DETAIL = "TAG_DETAIL";
     @BindBool(R.bool.is_tablet)
@@ -76,8 +101,8 @@ public class CalonMustahiqDetailFragment extends Fragment implements ManageCalon
     RobotoLightTextView noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoLightTextView noTelpCalonMustahiq;
-    @BindView(R.id.status_calon_mustahiq)
-    RobotoLightTextView statusCalonMustahiq;
+    @BindView(R.id.nama_perekomendasi_calon_mustahiq)
+    RobotoLightTextView namaPerekomendasiCalonMustahiq;
     private ProgressDialog dialogProgress;
     private Unbinder unbinder;
     private String id;
@@ -85,6 +110,7 @@ public class CalonMustahiqDetailFragment extends Fragment implements ManageCalon
     private PicassoLoader imageLoader;
     private CustomVolley customVolley;
     private RequestQueue queue;
+    private GoogleMap mMap;
 
     @OnClick(R.id.fab_action)
     void EditMustahiq() {
@@ -194,9 +220,19 @@ public class CalonMustahiqDetailFragment extends Fragment implements ManageCalon
         alamatCalonMustahiq.setText("Alamat : " + (TextUtils.isNullOrEmpty(calonMustahiq.alamat_calon_mustahiq) ? "-" : calonMustahiq.alamat_calon_mustahiq));
         noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(calonMustahiq.no_identitas_calon_mustahiq) ? "-" : calonMustahiq.no_identitas_calon_mustahiq));
         noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(calonMustahiq.no_telp_calon_mustahiq) ? "-" : calonMustahiq.no_telp_calon_mustahiq));
-        statusCalonMustahiq.setText(Html.fromHtml("Status Aktif : " + (calonMustahiq.status_calon_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
+        namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(calonMustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : calonMustahiq.nama_perekomendasi_calon_mustahiq));
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map);
+        mapView = mapFragment.getView();
+        mapFragment.getMapAsync(CalonMustahiqDetailFragment.this);
 
     }
+
+
+    private View mapView;
+
 
     private void onDownloadFailed() {
         errorMessage.setVisibility(View.VISIBLE);
@@ -295,5 +331,23 @@ public class CalonMustahiqDetailFragment extends Fragment implements ManageCalon
         onNotAvailable("Mustahiq ini tidak ada/dihapus");
     }
 
+
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+
+        LatLng Posisi = new LatLng(Double.parseDouble(calonMustahiq.latitude_calon_mustahiq.equalsIgnoreCase("null")?"0.0":calonMustahiq.latitude_calon_mustahiq), Double.parseDouble(calonMustahiq.longitude_calon_mustahiq.equalsIgnoreCase("null")?"0.0":calonMustahiq.longitude_calon_mustahiq));
+        MarkerOptions marker = new MarkerOptions()
+                .position(Posisi)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_mustahiq));
+        mMap.clear();
+        Marker m = mMap.addMarker(marker);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Posisi, 14));
+
+
+    }
 
 }

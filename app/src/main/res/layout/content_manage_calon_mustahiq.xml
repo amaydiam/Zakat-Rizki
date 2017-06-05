@@ -50,7 +50,7 @@
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:inputType="textPersonName|textNoSuggestions"
-                            android:maxLines="1" />
+                             />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                             android:digits="0123456789"
                             android:ems="10"
                             android:inputType="number|textNoSuggestions"
-                            android:maxLines="1" />
+                             />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -112,34 +112,21 @@
                             android:digits="0123456789"
                             android:ems="10"
                             android:inputType="number|textNoSuggestions"
-                            android:maxLines="1" />
-
-
+                             />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Status Calon Mustahiq"
+                            android:text="Nama Perekomendasi Calon Mustahiq"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                        <RadioGroup
-                            android:id="@+id/status_calon_mustahiq"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                        <com.ad.zakatrizki.widget.RobotoRegularEditText
+                            android:id="@+id/nama_perekomendasi_calon_mustahiq"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="textPersonName|textNoSuggestions"
+                             />
 
-                            <RadioButton
-                                android:id="@+id/aktif"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="true"
-                                android:text="Aktif" />
-
-                            <RadioButton
-                                android:id="@+id/tidak_aktif"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Tidak Aktif" />
-                        </RadioGroup>
 
                     </LinearLayout>
 

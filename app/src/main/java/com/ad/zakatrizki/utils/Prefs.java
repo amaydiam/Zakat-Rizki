@@ -49,4 +49,14 @@ public final class Prefs {
     public static void putLastSelected(final Context context, int view_type) {
         Prefs.putPref(context, Zakat.LAST_SELECTED, String.valueOf(view_type));
     }
+
+    // last selected
+    public static boolean getLogin(final Context context) {
+        String e = Prefs.getPref(context, Zakat.LOGIN, "false");
+        return Boolean.parseBoolean(e);
+    }
+
+    public static void putLogin(final Context context, boolean login) {
+        Prefs.putPref(context, Zakat.LOGIN, String.valueOf(login));
+    }
 }

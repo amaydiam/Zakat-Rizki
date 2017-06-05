@@ -21,21 +21,39 @@ public class Mustahiq implements Parcelable {
     public String id_calon_mustahiq;
     public String nama_calon_mustahiq;
     public String alamat_calon_mustahiq;
+    public String latitude_calon_mustahiq;
+    public String longitude_calon_mustahiq;
     public String no_identitas_calon_mustahiq;
     public String no_telp_calon_mustahiq;
+    public String nama_perekomendasi_calon_mustahiq;
     public String status_mustahiq;
+    public String jumlah_rekomendasi;
     public String id_amil_zakat;
     public String nama_amil_zakat;
     public String waktu_terakhir_donasi;
 
-    public Mustahiq(String id_mustahiq, String id_calon_mustahiq, String nama_calon_mustahiq, String alamat_calon_mustahiq, String no_identitas_calon_mustahiq, String no_telp_calon_mustahiq, String status_mustahiq, String id_amil_zakat, String nama_amil_zakat, String waktu_terakhir_donasi) {
+    public Mustahiq(String id_mustahiq, String id_calon_mustahiq, String nama_calon_mustahiq,
+                    String alamat_calon_mustahiq,
+                    String latitude_calon_mustahiq,
+                    String longitude_calon_mustahiq,
+                    String no_identitas_calon_mustahiq,
+                    String no_telp_calon_mustahiq,
+                    String nama_perekomendasi_calon_mustahiq,
+                    String status_mustahiq,
+                    String jumlah_rekomendasi,
+                    String id_amil_zakat,
+                    String nama_amil_zakat, String waktu_terakhir_donasi) {
         this.id_mustahiq = id_mustahiq;
         this.id_calon_mustahiq = id_calon_mustahiq;
         this.nama_calon_mustahiq = nama_calon_mustahiq;
         this.alamat_calon_mustahiq = alamat_calon_mustahiq;
+        this.latitude_calon_mustahiq = latitude_calon_mustahiq;
+        this.longitude_calon_mustahiq = longitude_calon_mustahiq;
         this.no_identitas_calon_mustahiq = no_identitas_calon_mustahiq;
         this.no_telp_calon_mustahiq = no_telp_calon_mustahiq;
+        this.nama_perekomendasi_calon_mustahiq = nama_perekomendasi_calon_mustahiq;
         this.status_mustahiq = status_mustahiq;
+        this.jumlah_rekomendasi = jumlah_rekomendasi;
         this.id_amil_zakat = id_amil_zakat;
         this.nama_amil_zakat = nama_amil_zakat;
         this.waktu_terakhir_donasi = waktu_terakhir_donasi;
@@ -46,9 +64,13 @@ public class Mustahiq implements Parcelable {
         id_calon_mustahiq = in.readString();
         nama_calon_mustahiq = in.readString();
         alamat_calon_mustahiq = in.readString();
+        latitude_calon_mustahiq = in.readString();
+        longitude_calon_mustahiq = in.readString();
         no_identitas_calon_mustahiq = in.readString();
         no_telp_calon_mustahiq = in.readString();
+        nama_perekomendasi_calon_mustahiq = in.readString();
         status_mustahiq = in.readString();
+        jumlah_rekomendasi = in.readString();
         id_amil_zakat = in.readString();
         nama_amil_zakat = in.readString();
         waktu_terakhir_donasi = in.readString();
@@ -60,9 +82,13 @@ public class Mustahiq implements Parcelable {
         dest.writeString(id_calon_mustahiq);
         dest.writeString(nama_calon_mustahiq);
         dest.writeString(alamat_calon_mustahiq);
+        dest.writeString(latitude_calon_mustahiq);
+        dest.writeString(longitude_calon_mustahiq);
         dest.writeString(no_identitas_calon_mustahiq);
         dest.writeString(no_telp_calon_mustahiq);
+        dest.writeString(nama_perekomendasi_calon_mustahiq);
         dest.writeString(status_mustahiq);
+        dest.writeString(jumlah_rekomendasi);
         dest.writeString(id_amil_zakat);
         dest.writeString(nama_amil_zakat);
         dest.writeString(waktu_terakhir_donasi);

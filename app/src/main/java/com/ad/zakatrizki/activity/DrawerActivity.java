@@ -21,6 +21,8 @@ import com.ad.zakatrizki.fragment.LaporanDonasiDetailFragment;
 import com.ad.zakatrizki.fragment.MustahiqDetailFragment;
 import com.ad.zakatrizki.model.LaporanDonasi;
 import com.ad.zakatrizki.model.PickLocation;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
@@ -32,6 +34,8 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindBool;
 import butterknife.ButterKnife;
+
+import static java.security.AccessController.getContext;
 
 public class DrawerActivity extends AppCompatActivity {
 
@@ -148,13 +152,7 @@ public class DrawerActivity extends AppCompatActivity {
                     ft.add(dialogDetailDonasiFragment, null);
                     ft.commitAllowingStateLoss();
                 }
-                double latitude = data.getDoubleExtra(LocationPickerActivity.LATITUDE, 0);
-                double longitude = data.getDoubleExtra(LocationPickerActivity.LONGITUDE, 0);
-                String address = data.getStringExtra(LocationPickerActivity.ADDRESS);
 
-                if(address!=null) {
-                    EventBus.getDefault().postSticky(new PickLocation(latitude,longitude,address));
-                }
 
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -163,12 +161,24 @@ public class DrawerActivity extends AppCompatActivity {
         }
 
 
+        if (requestCode == Zakat.PLACE_PICKER_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+                double latitude = place.getLatLng().latitude;
+                double longitude = place.getLatLng().longitude;
+                String address = place.getAddress().toString();
+                EventBus.getDefault().postSticky(new PickLocation(latitude, longitude, address));
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
 
 
     }//onActivityResult
 
     public void hideSoftKeyboard() {
-        if(getCurrentFocus()!=null) {
+        if (getCurrentFocus() != null) {
             InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }

@@ -1,5 +1,6 @@
 package com.ad.zakatrizki.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -8,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.LayoutInflater;
@@ -15,23 +17,31 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
+import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.Menus;
 import com.ad.zakatrizki.utils.Prefs;
+import com.ad.zakatrizki.widget.RobotoBoldTextView;
+import com.ad.zakatrizki.widget.RobotoRegularTextView;
+import com.android.volley.Request;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.joanzapata.iconify.fonts.MaterialCommunityIcons;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 
+import agency.tango.android.avatarview.views.AvatarView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 import static android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
-public class DrawerFragment extends Fragment implements OnMenuItemClickListener, OnNavigationItemSelectedListener {
+public class DrawerFragment extends Fragment implements OnMenuItemClickListener, OnNavigationItemSelectedListener,LoginFragment.LoginListener {
 
     @BindView(R.id.drawer_layout)
     public
@@ -94,6 +104,10 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
 
     private void SetMenuDrawer() {
 
+
+        View header = navigationView.getHeaderView(0);
+        RobotoBoldTextView ket = (RobotoBoldTextView) header.findViewById(R.id.ket);
+
         // ============ list menu drawer ==============
         Menu menu = navigationView.getMenu();//donasi
         MenuItem drawer_donasi = menu.findItem(R.id.drawer_donasi);
@@ -109,6 +123,22 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
         //calon_mustahiq
         MenuItem drawer_calon_mustahiq = menu.findItem(R.id.drawer_calon_mustahiq);
         drawer_calon_mustahiq.setIcon(new IconDrawable(getActivity(), FontAwesomeIcons.fa_user).actionBarSize());
+
+        MenuItem drawer_logout_login = menu.findItem(R.id.drawer_logout_login);
+        if (Prefs.getLogin(getActivity())) {
+            drawer_donasi.setVisible(false);
+            drawer_mustahiq.setVisible(true);
+            drawer_logout_login.setTitle("Logout");
+            drawer_logout_login.setIcon(new IconDrawable(getActivity(), MaterialCommunityIcons.mdi_logout).actionBarSize());
+            ket.setText("Admin");
+        } else {
+            drawer_donasi.setVisible(true);
+            drawer_mustahiq.setVisible(false);
+            drawer_logout_login.setTitle("Login");
+            drawer_logout_login.setIcon(new IconDrawable(getActivity(), MaterialCommunityIcons.mdi_login).actionBarSize());
+            ket.setText("Guest");
+        }
+
 
     }
 
@@ -169,7 +199,39 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
                 return true;
             case Menus.DRAWER_CALON_MUSTAHIQ:
                 setSelectedDrawerItem(Zakat.VIEW_TYPE_CALON_MUSTAHIQ);
+                return true;
+            case Menus.DRAWER_LOGOUT_LOGIN:
+                if (prevMenuItem != null) {
+                    prevMenuItem.setChecked(true);
+                }
+                if (Prefs.getLogin(getActivity())) {
+                    AlertDialog.Builder alt_bld = new AlertDialog.Builder(getActivity());
+                    alt_bld.setMessage("Apakah anda akan keluar?")
+                            .setCancelable(false)
+                            .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Prefs.putLogin(getActivity(), false);
+                                    SetMenuDrawer();
+                                    setSelectedDrawerItem(Zakat.VIEW_TYPE_DONASI);
+                                }
+                            })
+                            .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss();
 
+                                }
+                            });
+                    AlertDialog alert = alt_bld.create();
+                    alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    alert.show();
+                } else {
+//ket Aktifity Login
+                    FragmentManager fragmentManager = getChildFragmentManager();
+                    LoginFragment Login = new LoginFragment();
+                    Login.setTargetFragment(this, 0);
+                    Login.show(fragmentManager, "Login");
+                }
+                return true;
             default:
                 return false;
         }
@@ -221,5 +283,12 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
         super.onResume();
         SetMenuDrawer();
 
+    }
+
+    @Override
+    public void onFinishLogin() {
+        Prefs.putLogin(getActivity(), true);
+        SetMenuDrawer();
+        setSelectedDrawerItem(Zakat.VIEW_TYPE_MUSTAHIQ);
     }
 }

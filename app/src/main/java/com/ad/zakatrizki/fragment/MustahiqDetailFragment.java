@@ -26,6 +26,14 @@ import com.ad.zakatrizki.widget.RobotoLightTextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.github.clans.fab.FloatingActionButton;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 import com.sdsmdg.tastytoast.TastyToast;
@@ -44,7 +52,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFragment.AddEditMustahiqListener, CustomVolley.OnCallbackResponse {
+public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFragment.AddEditMustahiqListener, CustomVolley.OnCallbackResponse, OnMapReadyCallback {
 
     private static final String TAG_DETAIL = "TAG_DETAIL";
     private static final String TAG_AMIL_ZAKAT = "TAG_AMIL_ZAKAT";
@@ -83,6 +91,8 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
     RobotoLightTextView noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoLightTextView noTelpCalonMustahiq;
+    @BindView(R.id.nama_perekomendasi_calon_mustahiq)
+    RobotoLightTextView namaPerekomendasiCalonMustahiq;
     @BindView(R.id.nama_amil_zakat)
     RobotoLightTextView namaAmilZakat;
     @BindView(R.id.status_mustahiq)
@@ -96,6 +106,8 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
     private PicassoLoader imageLoader;
     private CustomVolley customVolley;
     private RequestQueue queue;
+    private GoogleMap mMap;
+    private View mapView;
 
     @OnClick(R.id.fab_action)
     void EditMustahiq() {
@@ -199,10 +211,18 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
         alamatCalonMustahiq.setText("Alamat : " + (TextUtils.isNullOrEmpty(mustahiq.alamat_calon_mustahiq) ? "-" : mustahiq.alamat_calon_mustahiq));
         noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(mustahiq.no_identitas_calon_mustahiq) ? "-" : mustahiq.no_identitas_calon_mustahiq));
         noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(mustahiq.no_telp_calon_mustahiq) ? "-" : mustahiq.no_telp_calon_mustahiq));
+        namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(mustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : mustahiq.nama_perekomendasi_calon_mustahiq));
+
         statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (mustahiq.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
         namaAmilZakat.setText("Nama Amil Zakat : " + mustahiq.nama_amil_zakat);
         waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(mustahiq.waktu_terakhir_donasi) ? "-" : mustahiq.waktu_terakhir_donasi));
 
+
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map);
+        mapView = mapFragment.getView();
+        mapFragment.getMapAsync(MustahiqDetailFragment.this);
     }
 
     private void onDownloadFailed() {
@@ -334,14 +354,24 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
                 String id_calon_mustahiq = obj.getString(Zakat.id_calon_mustahiq);
                 String nama_calon_mustahiq = obj.getString(Zakat.nama_calon_mustahiq);
                 String alamat_calon_mustahiq = obj.getString(Zakat.alamat_calon_mustahiq);
+                String latitude_calon_mustahiq = obj.getString(Zakat.latitude_calon_mustahiq);
+                String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
                 String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
                 String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
                 String status_mustahiq = obj.getString(Zakat.status_mustahiq);
+                String jumlah_rekomendasi = obj.getString(Zakat.jumlah_rekomendasi);
                 String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
                 String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
                 String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
-                mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, status_mustahiq, id_amil_zakat, nama_amil_zakat, waktu_terakhir_donasi);
+                mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
+                        latitude_calon_mustahiq,
+                        longitude_calon_mustahiq,
+                        no_identitas_calon_mustahiq,
+                        no_telp_calon_mustahiq,
+                        nama_perekomendasi_calon_mustahiq, status_mustahiq,
+                        jumlah_rekomendasi,id_amil_zakat, nama_amil_zakat, waktu_terakhir_donasi);
 
                 if (Boolean.parseBoolean(isSuccess))
                     onDownloadSuccessful();
@@ -361,5 +391,21 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
         if (TAG.equals(TAG_AMIL_ZAKAT)) {
             TastyToast.makeText(getActivity(), "Error ..", TastyToast.LENGTH_LONG, TastyToast.ERROR);
         }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+
+        LatLng Posisi = new LatLng(Double.parseDouble(mustahiq.latitude_calon_mustahiq.equalsIgnoreCase("null")?"0.0":mustahiq.latitude_calon_mustahiq), Double.parseDouble(mustahiq.longitude_calon_mustahiq.equalsIgnoreCase("null")?"0.0":mustahiq.longitude_calon_mustahiq));
+        MarkerOptions marker = new MarkerOptions()
+                .position(Posisi)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_mustahiq));
+
+        Marker m = mMap.addMarker(marker);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Posisi, 14));
+
+
     }
 }

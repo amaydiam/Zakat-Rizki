@@ -4,6 +4,7 @@
 
     <!-- List For Navigation Drawer -->
     <string name="drawer_mustahiq">Mustahiq</string>
+    <string name="drawer_logout_login">Logout/Login</string>
 
     <!-- Toolbar actions -->
     <string name="action_set_url">Set Url</string>

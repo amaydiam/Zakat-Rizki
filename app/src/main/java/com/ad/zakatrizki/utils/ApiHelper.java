@@ -52,8 +52,13 @@ public class ApiHelper {
     public static String getMustahiqLink(Context context, int page) {
         return getApiUrl(context) + "mustahiq/mustahiq/" + page;
     }
+
     public static String getMustahiqDetailLink(Context context, String id) {
         return getApiUrl(context) + "mustahiq/detail_mustahiq/" + id;
+    }
+
+    public static String getAddRekomendasiMustahiqLink(Context context, String id) {
+        return getApiUrl(context) + "mustahiq/addrekomendasi/" + id;
     }
 
 
@@ -71,7 +76,7 @@ public class ApiHelper {
         return getApiUrl(context) + "mustahiq/donasi/" + page + (!TextUtils.isNullOrEmpty(keyword) ? ("/" + keyword) : "");
     }
 
- public static String getDonasiByLocationLink(Context context, String lat, String Long) {
+    public static String getDonasiByLocationLink(Context context, String lat, String Long) {
         return getApiUrl(context) + "mustahiq/donasi_by_location/" + lat + "/" + Long;
     }
 
@@ -82,6 +87,10 @@ public class ApiHelper {
     //donasi
     public static String getAmilZakatLink(Context context) {
         return getApiUrl(context) + "amil_zakat/all_amil_zakat";
+    }
+
+    public static String getLoginLink(Context context) {
+        return getApiUrl(context) + "admin/login";
     }
 
 

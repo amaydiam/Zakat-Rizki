@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.ad.zakatrizki.R; import com.ad.zakatrizki.R2;
+import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.activity.ActionDonasiBaruActivity;
 import com.bumptech.glide.Glide;
 import com.gun0912.tedpermission.PermissionListener;
@@ -29,7 +29,7 @@ import butterknife.Unbinder;
 import pl.aprilapps.easyphotopicker.EasyImage;
 
 
-public class Step2AddJadwalFragment extends Fragment {
+public class Step2AddBuktiPembayaranFragment extends Fragment {
 
 
     public  String s_foto_bukti_pembayaran;
@@ -63,7 +63,7 @@ public class Step2AddJadwalFragment extends Fragment {
     private ActionDonasiBaruActivity activity;
     private Unbinder butterknife;
 
-    public Step2AddJadwalFragment() {
+    public Step2AddBuktiPembayaranFragment() {
     }
 
 
@@ -79,8 +79,8 @@ public class Step2AddJadwalFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public  Step2AddJadwalFragment newInstance() {
-        return new Step2AddJadwalFragment();
+    public Step2AddBuktiPembayaranFragment newInstance() {
+        return new Step2AddBuktiPembayaranFragment();
     }
 
     @Override

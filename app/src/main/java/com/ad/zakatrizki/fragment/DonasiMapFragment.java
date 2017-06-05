@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
-import com.ad.zakatrizki.activity.CariMustahiqActivity;
 import com.ad.zakatrizki.activity.DonasiDetailActivity;
 import com.ad.zakatrizki.activity.DrawerActivity;
 import com.ad.zakatrizki.model.Mustahiq;
@@ -175,10 +174,7 @@ public class DonasiMapFragment extends Fragment implements OnMapReadyCallback,
     private void Search() {
         String val_search = search.getText().toString().trim();
         if (!TextUtils.isNullOrEmpty(val_search)) {
-            search.setText("");
-            Intent intent = new Intent(activity, CariMustahiqActivity.class);
-            intent.putExtra(Zakat.KEYWORD, val_search);
-            startActivity(intent);
+
         }
     }
 
@@ -234,7 +230,9 @@ public class DonasiMapFragment extends Fragment implements OnMapReadyCallback,
                         String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
                         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
                         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                        String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
                         String status_mustahiq = obj.getString(Zakat.status_mustahiq);
+                        String jumlah_rekomendasi = obj.getString(Zakat.jumlah_rekomendasi);
                         String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
                         String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
                         String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
@@ -244,9 +242,13 @@ public class DonasiMapFragment extends Fragment implements OnMapReadyCallback,
                                 id_calon_mustahiq,
                                 nama_calon_mustahiq,
                                 alamat_calon_mustahiq,
+                                latitude_calon_mustahiq,
+                                longitude_calon_mustahiq,
                                 no_identitas_calon_mustahiq,
                                 no_telp_calon_mustahiq,
+                                nama_perekomendasi_calon_mustahiq,
                                 status_mustahiq,
+                                jumlah_rekomendasi,
                                 id_amil_zakat,
                                 nama_amil_zakat,
                                 waktu_terakhir_donasi);
@@ -453,8 +455,6 @@ public class DonasiMapFragment extends Fragment implements OnMapReadyCallback,
         if (isTablet) {
             if (activity instanceof DrawerActivity) {
                 ((DrawerActivity) getActivity()).loadDetailDonasiFragmentWith(mustahiq.id_mustahiq);
-            } else if (activity instanceof CariMustahiqActivity) {
-                ((CariMustahiqActivity) getActivity()).loadDetailDonasiFragmentWith(mustahiq.id_mustahiq);
             }
         } else {
             Intent intent = new Intent(activity, DonasiDetailActivity.class);
