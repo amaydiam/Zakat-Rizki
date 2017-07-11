@@ -19,6 +19,7 @@ import com.ad.zakatrizki.fragment.DonasiDetailFragment;
 import com.ad.zakatrizki.fragment.DrawerFragment;
 import com.ad.zakatrizki.fragment.LaporanDonasiDetailFragment;
 import com.ad.zakatrizki.fragment.MustahiqDetailFragment;
+import com.ad.zakatrizki.model.ImageFile;
 import com.ad.zakatrizki.model.LaporanDonasi;
 import com.ad.zakatrizki.model.PickLocation;
 import com.google.android.gms.location.places.Place;
@@ -31,10 +32,12 @@ import com.joanzapata.iconify.fonts.MaterialModule;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.File;
+
 import butterknife.BindBool;
 import butterknife.ButterKnife;
-
-import static java.security.AccessController.getContext;
+import pl.aprilapps.easyphotopicker.DefaultCallback;
+import pl.aprilapps.easyphotopicker.EasyImage;
 
 public class DrawerActivity extends AppCompatActivity {
 
@@ -173,6 +176,29 @@ public class DrawerActivity extends AppCompatActivity {
             }
         }
 
+        EasyImage.handleActivityResult(requestCode, resultCode, data, this, new DefaultCallback() {
+            @Override
+            public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
+                //Some error handling
+            }
+
+            @Override
+            public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
+                //Handle the image
+                EventBus.getDefault().postSticky(new ImageFile(imageFile));
+
+            }
+
+            @Override
+            public void onCanceled(EasyImage.ImageSource source, int type) {
+                //Cancel handling, you might wanna remove taken photo if it was canceled
+                if (source == EasyImage.ImageSource.CAMERA) {
+                    File photoFile = EasyImage.lastlyTakenButCanceledPhoto(DrawerActivity.this);
+                    if (photoFile != null) photoFile.delete();
+                }
+            }
+        });
+
 
     }//onActivityResult
 
@@ -182,5 +208,7 @@ public class DrawerActivity extends AppCompatActivity {
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
+
+
 
 }

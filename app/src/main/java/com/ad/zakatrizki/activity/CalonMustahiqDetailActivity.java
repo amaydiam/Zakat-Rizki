@@ -12,6 +12,7 @@ import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
 import com.ad.zakatrizki.fragment.CalonMustahiqDetailFragment;
 import com.ad.zakatrizki.fragment.DialogDetailDonasiFragment;
+import com.ad.zakatrizki.model.ImageFile;
 import com.ad.zakatrizki.model.LaporanDonasi;
 import com.ad.zakatrizki.model.PickLocation;
 import com.ad.zakatrizki.utils.Prefs;
@@ -19,6 +20,11 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.io.File;
+
+import pl.aprilapps.easyphotopicker.DefaultCallback;
+import pl.aprilapps.easyphotopicker.EasyImage;
 
 public class CalonMustahiqDetailActivity extends AppCompatActivity {
 
@@ -69,7 +75,33 @@ public class CalonMustahiqDetailActivity extends AppCompatActivity {
             }
         }
 
+        EasyImage.handleActivityResult(requestCode, resultCode, data, this, new DefaultCallback() {
+            @Override
+            public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
+                //Some error handling
+            }
+
+            @Override
+            public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
+                //Handle the image
+                EventBus.getDefault().postSticky(new ImageFile(imageFile));
+
+            }
+
+            @Override
+            public void onCanceled(EasyImage.ImageSource source, int type) {
+                //Cancel handling, you might wanna remove taken photo if it was canceled
+                if (source == EasyImage.ImageSource.CAMERA) {
+                    File photoFile = EasyImage.lastlyTakenButCanceledPhoto(CalonMustahiqDetailActivity.this);
+                    if (photoFile != null) photoFile.delete();
+                }
+            }
+        });
+
 
     }//onActivityResult
+
+
+
 
 }

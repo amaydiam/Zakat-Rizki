@@ -53,8 +53,8 @@ public class Step2AddBuktiPembayaranFragment extends Fragment {
 
         new TedPermission(getActivity())
                 .setPermissionListener(permissionGetFotoListener)
-                .setDeniedMessage("Jika kamu menolak permission,kamu tidak dapat mengambil foto \nHarap hidupkan permission WRITE EXTERNAL STORAGE pada [Setting] > [Permission]")
-                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .setDeniedMessage("Jika kamu menolak permission,kamu tidak dapat mengambil foto \nHarap hidupkan permission WRITE EXTERNAL STORAGE dan CAMERA pada [Setting] > [Permission]")
+                .setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
                 .check();
     }
 

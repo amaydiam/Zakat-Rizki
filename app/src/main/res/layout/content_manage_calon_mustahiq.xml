@@ -134,6 +134,104 @@
                             android:text="Foto Calon Mustahiq (lampirkan 3 foto)"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
+                        <RelativeLayout
+                            android:id="@+id/foto_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/activity_half_vertical_margin">
+
+                            <ImageView
+                                android:id="@+id/img_foto_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/default_placeholder" />
+
+                            <com.joanzapata.iconify.widget.IconTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="{fa-pencil}"
+
+                                android:textColor="@color/accent" />
+
+                        </RelativeLayout>
+                        <com.ad.zakatrizki.widget.RobotoRegularEditText
+                            android:id="@+id/caption_img_foto_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="text|textNoSuggestions"
+                            android:minLines="1"
+                            android:hint="keterangan foto 1"
+                            />
+
+
+                        <RelativeLayout
+                            android:id="@+id/foto_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/activity_half_vertical_margin">
+
+                            <ImageView
+                                android:id="@+id/img_foto_2"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/default_placeholder" />
+
+                            <com.joanzapata.iconify.widget.IconTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="{fa-pencil}"
+
+                                android:textColor="@color/accent" />
+
+                        </RelativeLayout>
+                        <com.ad.zakatrizki.widget.RobotoRegularEditText
+                            android:id="@+id/caption_img_foto_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="text|textNoSuggestions"
+                            android:minLines="1"
+                            android:hint="keterangan foto 2"
+                            />
+                        <RelativeLayout
+                            android:id="@+id/foto_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="@dimen/activity_half_vertical_margin">
+
+                            <ImageView
+                                android:id="@+id/img_foto_3"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:adjustViewBounds="true"
+                                android:src="@drawable/default_placeholder" />
+
+                            <com.joanzapata.iconify.widget.IconTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="{fa-pencil}"
+
+                                android:textColor="@color/accent" />
+
+                        </RelativeLayout>
+                        <com.ad.zakatrizki.widget.RobotoRegularEditText
+                            android:id="@+id/caption_img_foto_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:inputType="text|textNoSuggestions"
+                            android:minLines="1"
+                            android:hint="keterangan foto 3"
+                            />
 
                     </LinearLayout>
 

@@ -420,18 +420,38 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
         String id_user_perekomendasi = obj.getString(Zakat.id_user_perekomendasi);
         String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
-        String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
+        String photo_1 = obj
+                .getString(Zakat.photo_1);
+        String photo_2 = obj
+                .getString(Zakat.photo_2);
+        String photo_3 = obj
+                .getString(Zakat.photo_3);
+        String caption_photo_1 = obj
+                .getString(Zakat.caption_photo_1);
+        String caption_photo_2 = obj
+                .getString(Zakat.caption_photo_2);
+        String caption_photo_3 = obj
+                .getString(Zakat.caption_photo_3);
+        String nama_perekomendasi_calon_mustahiq = obj
+                .getString(Zakat.nama_perekomendasi_calon_mustahiq);
         String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
+
         //set map object
         AddAndSetMapData(
                 position,
                 id_calon_mustahiq,
                 nama_calon_mustahiq,
-                alamat_calon_mustahiq,latitude_calon_mustahiq,longitude_calon_mustahiq,
+                alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
                 id_user_perekomendasi,
                 alasan_perekomendasi_calon_mustahiq,
+                photo_1,
+                photo_2,
+                photo_3,
+                caption_photo_1,
+                caption_photo_2,
+                caption_photo_3,
                 nama_perekomendasi_calon_mustahiq,
                 status_calon_mustahiq
         );
@@ -442,26 +462,25 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
             String position,
             String id_calon_mustahiq,
             String nama_calon_mustahiq,
-           String alamat_calon_mustahiq,String latitude_calon_mustahiq,String longitude_calon_mustahiq,
+            String alamat_calon_mustahiq,
+            String latitude_calon_mustahiq,
+            String longitude_calon_mustahiq,
             String no_identitas_calon_mustahiq,
             String no_telp_calon_mustahiq,
             String id_user_perekomendasi,
             String alasan_perekomendasi_calon_mustahiq,
+            String photo_1,
+            String photo_2,
+            String photo_3,
+            String caption_photo_1,
+            String caption_photo_2,
+            String caption_photo_3,
             String nama_perekomendasi_calon_mustahiq,
             String status_calon_mustahiq) {
 
-        CalonMustahiq calon_mustahiq = new CalonMustahiq(
-                id_calon_mustahiq,
-                nama_calon_mustahiq,
-                alamat_calon_mustahiq,
-                latitude_calon_mustahiq,
-                longitude_calon_mustahiq,
-                no_identitas_calon_mustahiq,
-                no_telp_calon_mustahiq,
-                id_user_perekomendasi,
-                alasan_perekomendasi_calon_mustahiq,
-                nama_perekomendasi_calon_mustahiq,
-                status_calon_mustahiq);
+        CalonMustahiq calon_mustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
+
+
 
 
         if (position.equals(TAG_BAWAH)) {

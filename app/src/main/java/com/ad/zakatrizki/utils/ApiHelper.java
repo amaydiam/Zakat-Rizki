@@ -7,7 +7,7 @@ import com.ad.zakatrizki.R;
 public class ApiHelper {
 
 
-    private static String getBaseUrl(Context context) {
+    public static String getBaseUrl(Context context) {
         return Prefs.getUrl(context) + "/" + context.getString(R.string.base_url);
     }
 

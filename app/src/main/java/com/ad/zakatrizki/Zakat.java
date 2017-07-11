@@ -78,6 +78,7 @@ public class Zakat extends Application {
     public static final String ALAMAT_USER = "alamat";
     public static final String NOMOR_IDENTITAS_USER = "no_identitas";
     public static final String NOMOR_TELP_USER = "no_telp";
+    public static final String PHOTO = "photo";
 
     public static String mustahiq = "mustahiq";
     public static String id_mustahiq = "id_mustahiq";
@@ -95,6 +96,12 @@ public class Zakat extends Application {
     public static String no_identitas="no_identitas";
     public static String id_user_perekomendasi="id_user_perekomendasi";
     public static String alasan_perekomendasi_calon_mustahiq="alasan_perekomendasi_calon_mustahiq";
+    public static String photo_1="photo_1";
+    public static String photo_2="photo_2";
+    public static String photo_3="photo_3";
+    public static String caption_photo_1="caption_photo_1";
+    public static String caption_photo_2="caption_photo_2";
+    public static String caption_photo_3="caption_photo_3";
 
     @Override
     protected void attachBaseContext(Context base) {

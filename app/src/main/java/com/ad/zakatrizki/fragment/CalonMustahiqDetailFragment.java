@@ -295,11 +295,25 @@ public class CalonMustahiqDetailFragment extends Fragment
                 String no_identitas_calon_mustahiq = jsDetail.getString(Zakat.no_identitas_calon_mustahiq);
                 String no_telp_calon_mustahiq = jsDetail.getString(Zakat.no_telp_calon_mustahiq);
                 String id_user_perekomendasi = jsDetail.getString(Zakat.id_user_perekomendasi);
-                String alasan_perekomendasi_calon_mustahiq = jsDetail.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
-                String nama_perekomendasi_calon_mustahiq = jsDetail.getString(Zakat.nama_perekomendasi_calon_mustahiq);
+                String alasan_perekomendasi_calon_mustahiq = jsDetail
+                        .getString(Zakat.alasan_perekomendasi_calon_mustahiq);
+                String photo_1 = jsDetail
+                        .getString(Zakat.photo_1);
+                String photo_2 = jsDetail
+                        .getString(Zakat.photo_2);
+                String photo_3 = jsDetail
+                        .getString(Zakat.photo_3);
+                String caption_photo_1 = jsDetail
+                        .getString(Zakat.caption_photo_1);
+                String caption_photo_2 = jsDetail
+                        .getString(Zakat.caption_photo_2);
+                String caption_photo_3 = jsDetail
+                        .getString(Zakat.caption_photo_3);
+                String nama_perekomendasi_calon_mustahiq = jsDetail
+                        .getString(Zakat.nama_perekomendasi_calon_mustahiq);
                 String status_calon_mustahiq = jsDetail.getString(Zakat.status_calon_mustahiq);
 
-                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,latitude_calon_mustahiq,longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq,id_user_perekomendasi,alasan_perekomendasi_calon_mustahiq,nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
+                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1,caption_photo_2,caption_photo_3,nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
 
                 if (Boolean.parseBoolean(isSuccess))
                     onDownloadSuccessful();
