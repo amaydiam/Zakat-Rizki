@@ -418,6 +418,8 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
         String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+        String id_user_perekomendasi = obj.getString(Zakat.id_user_perekomendasi);
+        String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
         String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
         String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
         //set map object
@@ -428,6 +430,8 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
                 alamat_calon_mustahiq,latitude_calon_mustahiq,longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                id_user_perekomendasi,
+                alasan_perekomendasi_calon_mustahiq,
                 nama_perekomendasi_calon_mustahiq,
                 status_calon_mustahiq
         );
@@ -441,6 +445,8 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
            String alamat_calon_mustahiq,String latitude_calon_mustahiq,String longitude_calon_mustahiq,
             String no_identitas_calon_mustahiq,
             String no_telp_calon_mustahiq,
+            String id_user_perekomendasi,
+            String alasan_perekomendasi_calon_mustahiq,
             String nama_perekomendasi_calon_mustahiq,
             String status_calon_mustahiq) {
 
@@ -452,6 +458,8 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
                 longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                id_user_perekomendasi,
+                alasan_perekomendasi_calon_mustahiq,
                 nama_perekomendasi_calon_mustahiq,
                 status_calon_mustahiq);
 

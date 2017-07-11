@@ -123,6 +123,7 @@ public class MustahiqAdapter extends RecyclerView.Adapter<MustahiqAdapter.ViewHo
         holder.noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(mustahiq.no_identitas_calon_mustahiq) ? "-" : mustahiq.no_identitas_calon_mustahiq));
         holder.noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(mustahiq.no_telp_calon_mustahiq) ? "-" : mustahiq.no_telp_calon_mustahiq));
         holder.namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi: " + (TextUtils.isNullOrEmpty(mustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : mustahiq.nama_perekomendasi_calon_mustahiq));
+        holder.alasanPerekomendasiCalonMustahiq.setText("Alasan Perekomendasian: " + (TextUtils.isNullOrEmpty(mustahiq.alasan_perekomendasi_calon_mustahiq) ? "-" : mustahiq.alasan_perekomendasi_calon_mustahiq));
         holder.statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (mustahiq.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
         holder.namaAmilZakat.setText("Nama Amil Zakat : " + mustahiq.nama_amil_zakat);
         holder.waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(mustahiq.waktu_terakhir_donasi) ? "-" : mustahiq.waktu_terakhir_donasi));
@@ -222,6 +223,8 @@ public class MustahiqAdapter extends RecyclerView.Adapter<MustahiqAdapter.ViewHo
         RobotoLightTextView noTelpCalonMustahiq;
         @BindView(R.id.nama_perekomendasi_calon_mustahiq)
         RobotoLightTextView namaPerekomendasiCalonMustahiq;
+        @BindView(R.id.alasan_perekomendasi_calon_mustahiq)
+        RobotoLightTextView alasanPerekomendasiCalonMustahiq;
         @BindView(R.id.status_calon_mustahiq)
         RobotoLightTextView statusCalonMustahiq;
         @BindView(R.id.status_mustahiq)

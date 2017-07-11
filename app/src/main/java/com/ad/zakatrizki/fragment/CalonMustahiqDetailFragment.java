@@ -25,6 +25,7 @@ import com.ad.zakatrizki.Zakat;
 import com.ad.zakatrizki.model.CalonMustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
+import com.ad.zakatrizki.utils.Prefs;
 import com.ad.zakatrizki.utils.TextUtils;
 import com.ad.zakatrizki.widget.RobotoBoldTextView;
 import com.ad.zakatrizki.widget.RobotoLightTextView;
@@ -146,6 +147,7 @@ public class CalonMustahiqDetailFragment extends Fragment
             });
         }
 
+
         //setup fab
         fabAction.setImageDrawable(
                 new IconDrawable(getActivity(), MaterialIcons.md_edit)
@@ -210,7 +212,9 @@ public class CalonMustahiqDetailFragment extends Fragment
         progressCircle.setVisibility(View.GONE);
         errorMessage.setVisibility(View.GONE);
         movieHolder.setVisibility(View.VISIBLE);
-        fabAction.setVisibility(View.VISIBLE);
+        if(calonMustahiq.id_user_perekomendasi.equalsIgnoreCase(Prefs.getIdUser(getActivity()))) {
+            fabAction.setVisibility(View.VISIBLE);
+        }
 
         toolbar.setTitle(calonMustahiq.nama_calon_mustahiq);
         toolbarTextHolder.setVisibility(View.GONE);
@@ -248,7 +252,9 @@ public class CalonMustahiqDetailFragment extends Fragment
         tryAgain.setVisibility(View.GONE);
         progressCircle.setVisibility(View.GONE);
         movieHolder.setVisibility(View.GONE);
-        fabAction.setVisibility(View.GONE);
+        if(calonMustahiq.id_user_perekomendasi.equalsIgnoreCase(Prefs.getIdUser(getActivity()))) {
+            fabAction.setVisibility(View.GONE);
+        }
         toolbarTextHolder.setVisibility(View.GONE);
         toolbar.setTitle("");
     }
@@ -288,10 +294,12 @@ public class CalonMustahiqDetailFragment extends Fragment
                 String longitude_calon_mustahiq = jsDetail.getString(Zakat.longitude_calon_mustahiq);
                 String no_identitas_calon_mustahiq = jsDetail.getString(Zakat.no_identitas_calon_mustahiq);
                 String no_telp_calon_mustahiq = jsDetail.getString(Zakat.no_telp_calon_mustahiq);
+                String id_user_perekomendasi = jsDetail.getString(Zakat.id_user_perekomendasi);
+                String alasan_perekomendasi_calon_mustahiq = jsDetail.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
                 String nama_perekomendasi_calon_mustahiq = jsDetail.getString(Zakat.nama_perekomendasi_calon_mustahiq);
                 String status_calon_mustahiq = jsDetail.getString(Zakat.status_calon_mustahiq);
 
-                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,latitude_calon_mustahiq,longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq,nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
+                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,latitude_calon_mustahiq,longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq,id_user_perekomendasi,alasan_perekomendasi_calon_mustahiq,nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
 
                 if (Boolean.parseBoolean(isSuccess))
                     onDownloadSuccessful();

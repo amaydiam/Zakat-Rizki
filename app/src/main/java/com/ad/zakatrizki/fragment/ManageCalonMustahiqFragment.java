@@ -28,6 +28,7 @@ import com.ad.zakatrizki.model.PickLocation;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
 import com.ad.zakatrizki.utils.Menus;
+import com.ad.zakatrizki.utils.Prefs;
 import com.ad.zakatrizki.utils.SnackBar;
 import com.ad.zakatrizki.utils.Utils;
 import com.ad.zakatrizki.widget.RobotoRegularEditText;
@@ -66,14 +67,14 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
     Toolbar toolbar;
     @BindView(R.id.nama_calon_mustahiq)
     RobotoRegularEditText namaCalonMustahiq;
-    @BindView(R.id.nama_perekomendasi_calon_mustahiq)
-    RobotoRegularEditText namaPerekomendasiCalonMustahiq;
     @BindView(R.id.alamat_calon_mustahiq)
     RobotoRegularEditText alamatCalonMustahiq;
     @BindView(R.id.no_identitas_calon_mustahiq)
     RobotoRegularEditText noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoRegularEditText noTelpCalonMustahiq;
+    @BindView(R.id.alasan_perekomendasi_calon_mustahiq)
+    RobotoRegularEditText alasanPerekomendasiCalonMustahiq;
     @BindView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
 
@@ -100,7 +101,7 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
     private String val_alamat_calon_mustahiq = "";
     private String val_no_identitas_calon_mustahiq = "";
     private String val_no_telp_calon_mustahiq = "";
-    private String val_nama_perekomendasi_calon_mustahiq = "";
+    private String val_alasan_perekomendasi_calon_mustahiq = "";
     private Double val_latitude_calon_mustahiq;
     private Double val_longitude_calon_mustahiq;
 
@@ -119,7 +120,7 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
         Utils.HideKeyboard(getActivity(), alamatCalonMustahiq);
         Utils.HideKeyboard(getActivity(), noIdentitasCalonMustahiq);
         Utils.HideKeyboard(getActivity(), noTelpCalonMustahiq);
-        Utils.HideKeyboard(getActivity(), namaPerekomendasiCalonMustahiq);
+        Utils.HideKeyboard(getActivity(), alasanPerekomendasiCalonMustahiq);
         switch (id) {
 
             case Menus.SEND:
@@ -129,16 +130,23 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                         || val_alamat_calon_mustahiq.length() == 0
                         || val_no_identitas_calon_mustahiq.length() == 0
                         || val_no_telp_calon_mustahiq.length() == 0
-                        || val_nama_perekomendasi_calon_mustahiq.length() == 0) {
+                        || val_alasan_perekomendasi_calon_mustahiq.length() == 0) {
                     snackbar.show("Harap isi semua form...");
                     return;
                 }
                 if (val_latitude_calon_mustahiq == null
                         || val_longitude_calon_mustahiq == null) {
-                    snackbar.show("Harap isi semua form...");
+                    snackbar.show("Harap masukan kordinat lokasi...");
                     return;
                 }
 
+            /*    if (val_foto_1== null
+                        || val_foto_2 == null
+                        || val_foto_3 == null) {
+                    snackbar.show("Harap lampirkan 3 foto calon mustahiq...");
+                    return;
+                }
+*/
                 Map<String, String> jsonParams = new HashMap<>();
 
                 jsonParams.put(Zakat.nama_calon_mustahiq,
@@ -153,8 +161,10 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                         val_no_identitas_calon_mustahiq);
                 jsonParams.put(Zakat.no_telp_calon_mustahiq,
                         val_no_telp_calon_mustahiq);
-                jsonParams.put(Zakat.nama_perekomendasi_calon_mustahiq,
-                        val_nama_perekomendasi_calon_mustahiq);
+                jsonParams.put(Zakat.alasan_perekomendasi_calon_mustahiq,
+                        val_alasan_perekomendasi_calon_mustahiq);
+                jsonParams.put(Zakat.id_user_perekomendasi,
+                        Prefs.getIdUser(getActivity()));
 
                 String TAG = null;
                 if (action.equals("add")) {
@@ -182,7 +192,7 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
         val_alamat_calon_mustahiq = alamatCalonMustahiq.getText().toString().trim();
         val_no_identitas_calon_mustahiq = noIdentitasCalonMustahiq.getText().toString().trim();
         val_no_telp_calon_mustahiq = noTelpCalonMustahiq.getText().toString().trim();
-        val_nama_perekomendasi_calon_mustahiq = namaPerekomendasiCalonMustahiq.getText().toString().trim();
+        val_alasan_perekomendasi_calon_mustahiq = alasanPerekomendasiCalonMustahiq.getText().toString().trim();
 
 
     }
@@ -251,11 +261,15 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                     String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
                     String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
                     String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                    String id_user_perekomendasi = obj
+                            .getString(Zakat.id_user_perekomendasi);
+                    String alasan_perekomendasi_calon_mustahiq = obj
+                            .getString(Zakat.alasan_perekomendasi_calon_mustahiq);
                     String nama_perekomendasi_calon_mustahiq = obj
                             .getString(Zakat.nama_perekomendasi_calon_mustahiq);
                     String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
 
-                    calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
+                    calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, alasan_perekomendasi_calon_mustahiq, nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
                     if (TAG.equals(TAG_ADD)) {
                         callback.onFinishAddCalonMustahiq(calonMustahiq);
                     } else if (TAG.equals(TAG_EDIT)) {
@@ -360,13 +374,13 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
             val_alamat_calon_mustahiq = calonMustahiq.alamat_calon_mustahiq;
             val_no_identitas_calon_mustahiq = calonMustahiq.no_identitas_calon_mustahiq;
             val_no_telp_calon_mustahiq = calonMustahiq.no_telp_calon_mustahiq;
-            val_nama_perekomendasi_calon_mustahiq = calonMustahiq.nama_perekomendasi_calon_mustahiq;
+            val_alasan_perekomendasi_calon_mustahiq = calonMustahiq.alasan_perekomendasi_calon_mustahiq;
 
             namaCalonMustahiq.setText(val_nama_calon_mustahiq);
             alamatCalonMustahiq.setText(val_alamat_calon_mustahiq);
             noIdentitasCalonMustahiq.setText(val_no_identitas_calon_mustahiq);
             noTelpCalonMustahiq.setText(val_no_telp_calon_mustahiq);
-            namaPerekomendasiCalonMustahiq.setText(val_nama_perekomendasi_calon_mustahiq);
+            alasanPerekomendasiCalonMustahiq.setText(val_alasan_perekomendasi_calon_mustahiq);
 
 
         } else {

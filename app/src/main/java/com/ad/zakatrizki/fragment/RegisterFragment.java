@@ -4,12 +4,9 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -20,7 +17,6 @@ import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
-import com.ad.zakatrizki.utils.Menus;
 import com.ad.zakatrizki.utils.SnackBar;
 import com.ad.zakatrizki.utils.Utils;
 import com.ad.zakatrizki.widget.RobotoRegularEditText;
@@ -44,16 +40,26 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class LoginFragment extends DialogFragment implements CustomVolley.OnCallbackResponse, RegisterFragment.RegisterListener {
-    private static final String TAG_LOGIN = "TAG_LOGIN";
+public class RegisterFragment extends DialogFragment implements CustomVolley.OnCallbackResponse {
+    private static final String TAG_REGISTER = "TAG_REGISTER";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.nama)
+    RobotoRegularEditText nama;
+    @BindView(R.id.alamat)
+    RobotoRegularEditText alamat;
+    @BindView(R.id.no_telp)
+    RobotoRegularEditText no_telp;
+    @BindView(R.id.no_identitas)
+    RobotoRegularEditText no_identitas;
+
     @BindView(R.id.username)
     RobotoRegularEditText username;
     @BindView(R.id.password)
     RobotoRegularEditText password;
-    @BindView(R.id.login)
-    Button login;
+    @BindView(R.id.register)
+    Button register;
     @BindView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
 
@@ -63,32 +69,36 @@ public class LoginFragment extends DialogFragment implements CustomVolley.OnCall
     private ProgressDialog dialogProgress;
     private Unbinder butterKnife;
 
+    private String val_nama = "";
+    private String val_alamat = "";
+    private String val_no_telp = "";
+    private String val_no_identitas = "";
+
     private String val_username = "";
     private String val_password = "";
 
 
-    private LoginListener callback;
+    private RegisterListener callback;
 
-    public LoginFragment() {
+    public RegisterFragment() {
 
     }
 
-
     @OnClick(R.id.register)
-    void register() {
-        FragmentManager fragmentManager = getChildFragmentManager();
-        RegisterFragment register = new RegisterFragment();
-        register.setTargetFragment(this, 0);
-        register.show(fragmentManager, "Register");
-        }
-
-    @OnClick(R.id.login)
-    void Login() {
+    void Register() {
+        Utils.HideKeyboard(getActivity(), nama);
+        Utils.HideKeyboard(getActivity(), alamat);
+        Utils.HideKeyboard(getActivity(), no_telp);
+        Utils.HideKeyboard(getActivity(), no_identitas);
         Utils.HideKeyboard(getActivity(), username);
         Utils.HideKeyboard(getActivity(), password);
         getData();
 
-        if (val_username.length() == 0
+        if (val_nama.length() == 0 ||
+        val_alamat.length() == 0||
+        val_no_telp.length() == 0||
+        val_no_identitas.length() == 0||
+        val_username.length() == 0
                 || val_password.length() == 0) {
             snackbar.show("Harap isi semua form...");
             return;
@@ -96,18 +106,30 @@ public class LoginFragment extends DialogFragment implements CustomVolley.OnCall
 
         Map<String, String> jsonParams = new HashMap<>();
 
+        jsonParams.put(Zakat.nama,
+                val_nama);
+        jsonParams.put(Zakat.alamat,
+                val_alamat);
+        jsonParams.put(Zakat.no_identitas,
+                val_no_identitas);
+        jsonParams.put(Zakat.no_telp,
+                val_no_telp);
         jsonParams.put(Zakat.username,
                 val_username);
         jsonParams.put(Zakat.password,
                 val_password);
 
-        queue = customVolley.Rest(Request.Method.POST, ApiHelper.getLoginLink(getActivity()), jsonParams, TAG_LOGIN);
+        queue = customVolley.Rest(Request.Method.POST, ApiHelper.getRegisterLink(getActivity()), jsonParams, TAG_REGISTER);
 
 
     }
 
     private void getData() {
 
+        val_nama = nama.getText().toString().trim();
+        val_alamat = alamat.getText().toString().trim();
+        val_no_telp= no_telp.getText().toString().trim();
+        val_no_identitas = no_identitas.getText().toString().trim();
         val_username = username.getText().toString().trim();
         val_password = password.getText().toString().trim();
 
@@ -119,7 +141,7 @@ public class LoginFragment extends DialogFragment implements CustomVolley.OnCall
         super.onDestroyView();
         butterKnife.unbind();
         if (queue != null) {
-            queue.cancelAll(TAG_LOGIN);
+            queue.cancelAll(TAG_REGISTER);
         }
 
     }
@@ -150,10 +172,11 @@ public class LoginFragment extends DialogFragment implements CustomVolley.OnCall
                 String alamat = jsUser.getString(Zakat.alamat);
                 String no_telp = jsUser.getString(Zakat.no_telp);
                 String no_identitas = jsUser.getString(Zakat.no_identitas);
-                callback.onFinishLogin(id_user,tipe_user,nama,alamat,no_telp,no_identitas);
+                callback.onFinishRegister(id_user,tipe_user,nama,alamat,no_telp,no_identitas);
                 dismiss();
                 snackbar.show(message);
             } else {
+                password.setText("");
                 snackbar.show(message);
             }
         } catch (Exception e) {
@@ -177,7 +200,7 @@ public class LoginFragment extends DialogFragment implements CustomVolley.OnCall
         super.onCreate(savedInstanceState);
 
         try {
-            callback = (LoginListener) getTargetFragment();
+            callback = (RegisterListener) getTargetFragment();
         } catch (Exception e) {
             throw new ClassCastException("Calling Fragment must implement KonfirmasiPendaftaranPesertaListener");
         }
@@ -187,13 +210,13 @@ public class LoginFragment extends DialogFragment implements CustomVolley.OnCall
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
 
         View view = inflater.inflate(
-                R.layout.content_login, container);
+                R.layout.content_register, container);
 
         butterKnife = ButterKnife.bind(this, view);
         customVolley = new CustomVolley(getActivity());
         customVolley.setOnCallbackResponse(this);
         snackbar = new SnackBar(getActivity(), coordinatorLayout);
-        toolbar.setTitle("Login");
+        toolbar.setTitle("Register");
         toolbar.setNavigationIcon(
                 new IconDrawable(getActivity(), MaterialIcons.md_close)
                         .colorRes(R.color.white)
@@ -224,17 +247,10 @@ public class LoginFragment extends DialogFragment implements CustomVolley.OnCall
         }
     }
 
-    @Override
-    public void onFinishRegister(String id_user, String tipe_user, String nama, String alamat, String no_telp, String no_identitas) {
 
-        callback.onFinishLogin(id_user,tipe_user,nama,alamat,no_telp,no_identitas);
-        dismiss();
-    }
+    public interface RegisterListener {
 
-
-    public interface LoginListener {
-
-        void onFinishLogin(String id_user, String tipe_user, String nama, String alamat, String no_telp, String no_identitas);
+        void onFinishRegister(String id_user, String tipe_user, String nama, String alamat, String no_telp, String no_identitas);
     }
 
 

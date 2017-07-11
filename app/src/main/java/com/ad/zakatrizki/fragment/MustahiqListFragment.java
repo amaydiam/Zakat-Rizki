@@ -418,6 +418,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
         String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
+        String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
         String status_mustahiq = obj.getString(Zakat.status_mustahiq);
         String jumlah_rekomendasi = obj.getString(Zakat.jumlah_rekomendasi);
         String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
@@ -435,6 +436,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
                 nama_perekomendasi_calon_mustahiq,
+                alasan_perekomendasi_calon_mustahiq,
                 status_mustahiq,
                 jumlah_rekomendasi,
                 id_amil_zakat,
@@ -455,6 +457,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
             String no_identitas_calon_mustahiq,
             String no_telp_calon_mustahiq,
             String nama_perekomendasi_calon_mustahiq,
+            String alasan_perekomendasi_calon_mustahiq,
             String status_mustahiq,
             String jumlah_rekomendasi,
             String id_amil_zakat,
@@ -471,6 +474,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
                 nama_perekomendasi_calon_mustahiq,
+                alasan_perekomendasi_calon_mustahiq,
                 status_mustahiq,
                 jumlah_rekomendasi,
                 id_amil_zakat,

@@ -72,6 +72,12 @@ public class Zakat extends Application {
     public static final String amil_zakat = "amil_zakat";
     public static final String waktu_terakhir_donasi = "waktu_terakhir_donasi";
     public static final String LOGIN = "login";
+    public static final String TIPE_USER = "tipe_user";
+    public static final String ID_USER = "id_user";
+    public static final String NAMA_USER = "nama";
+    public static final String ALAMAT_USER = "alamat";
+    public static final String NOMOR_IDENTITAS_USER = "no_identitas";
+    public static final String NOMOR_TELP_USER = "no_telp";
 
     public static String mustahiq = "mustahiq";
     public static String id_mustahiq = "id_mustahiq";
@@ -80,6 +86,15 @@ public class Zakat extends Application {
     public static int PLACE_PICKER_REQUEST=22;
     public static String username="username";
     public static String password="password";
+    public static String user="user";
+    public static String id_user="id_user";
+    public static String no_telp="no_telp";
+    public static String tipe_user="tipe_user";
+    public static String nama="nama";
+    public static String alamat="alamat";
+    public static String no_identitas="no_identitas";
+    public static String id_user_perekomendasi="id_user_perekomendasi";
+    public static String alasan_perekomendasi_calon_mustahiq="alasan_perekomendasi_calon_mustahiq";
 
     @Override
     protected void attachBaseContext(Context base) {

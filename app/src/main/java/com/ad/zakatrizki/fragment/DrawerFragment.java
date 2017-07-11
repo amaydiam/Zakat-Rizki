@@ -21,18 +21,14 @@ import android.view.Window;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
-import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.Menus;
 import com.ad.zakatrizki.utils.Prefs;
 import com.ad.zakatrizki.widget.RobotoBoldTextView;
-import com.ad.zakatrizki.widget.RobotoRegularTextView;
-import com.android.volley.Request;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.joanzapata.iconify.fonts.MaterialCommunityIcons;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 
-import agency.tango.android.avatarview.views.AvatarView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -41,7 +37,7 @@ import static android.support.design.widget.NavigationView.OnNavigationItemSelec
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class DrawerFragment extends Fragment implements OnMenuItemClickListener, OnNavigationItemSelectedListener,LoginFragment.LoginListener {
+public class DrawerFragment extends Fragment implements OnMenuItemClickListener, OnNavigationItemSelectedListener, LoginFragment.LoginListener {
 
     @BindView(R.id.drawer_layout)
     public
@@ -128,15 +124,30 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
         if (Prefs.getLogin(getActivity())) {
             drawer_donasi.setVisible(false);
             drawer_mustahiq.setVisible(true);
+            drawer_calon_mustahiq.setVisible(true);
             drawer_logout_login.setTitle("Logout");
             drawer_logout_login.setIcon(new IconDrawable(getActivity(), MaterialCommunityIcons.mdi_logout).actionBarSize());
-            ket.setText("Admin");
+            if (Prefs.getTipeUser(getActivity()).equalsIgnoreCase("1")) {
+                ket.setText("Admin");
+                ket.setVisibility(VISIBLE);
+            } else {
+                drawer_donasi.setVisible(true);
+                drawer_mustahiq.setVisible(false);
+                ket.setVisibility(GONE);
+            }
         } else {
+
+            drawer_calon_mustahiq.setVisible(true);
+            if (!Prefs.getTipeUser(getActivity()).equalsIgnoreCase("2")) {
+                drawer_calon_mustahiq.setVisible(false);
+            }
             drawer_donasi.setVisible(true);
             drawer_mustahiq.setVisible(false);
             drawer_logout_login.setTitle("Login");
             drawer_logout_login.setIcon(new IconDrawable(getActivity(), MaterialCommunityIcons.mdi_login).actionBarSize());
-            ket.setText("Guest");
+            ket.setText(getResources().getString(R.string.app_name));
+
+            ket.setVisibility(VISIBLE);
         }
 
 
@@ -286,9 +297,18 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
     }
 
     @Override
-    public void onFinishLogin() {
+    public void onFinishLogin(String id_user, String tipe_user, String nama, String alamat, String no_telp, String no_identitas) {
         Prefs.putLogin(getActivity(), true);
+        Prefs.putIdUser(getActivity(), id_user);
+        Prefs.putTipeUser(getActivity(), tipe_user);
+        Prefs.putNamaUser(getActivity(), nama);
+        Prefs.putAlamatUser(getActivity(), alamat);
+        Prefs.putNomorTelpUser(getActivity(), no_telp);
+        Prefs.putNomorIdentitasUser(getActivity(), no_identitas);
         SetMenuDrawer();
+        if(Prefs.getIdUser(getActivity()).equalsIgnoreCase("2"))
+            setSelectedDrawerItem(Zakat.VIEW_TYPE_DONASI);
+            else
         setSelectedDrawerItem(Zakat.VIEW_TYPE_MUSTAHIQ);
     }
 }

@@ -90,7 +90,11 @@ public class ApiHelper {
     }
 
     public static String getLoginLink(Context context) {
-        return getApiUrl(context) + "admin/login";
+        return getApiUrl(context) + "user/login";
+    }
+
+    public static String getRegisterLink(Context context) {
+        return getApiUrl(context) + "user/register";
     }
 
 

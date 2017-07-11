@@ -59,4 +59,56 @@ public final class Prefs {
     public static void putLogin(final Context context, boolean login) {
         Prefs.putPref(context, Zakat.LOGIN, String.valueOf(login));
     }
+
+    public static String getIdUser(final Context context) {
+        String e = Prefs.getPref(context, Zakat.ID_USER, null);
+        return e;
+    }
+
+    public static void putIdUser(final Context context, String id_user) {
+        Prefs.putPref(context, Zakat.ID_USER, id_user);
+    }
+
+    public static String getTipeUser(final Context context) {
+        String e = Prefs.getPref(context, Zakat.TIPE_USER, "3");
+        return e;
+    }
+
+    public static void putTipeUser(final Context context, String tipe_user) {
+        Prefs.putPref(context, Zakat.TIPE_USER, tipe_user);
+    }
+
+    public static String getNamaUser(final Context context) {
+        String e = Prefs.getPref(context, Zakat.NAMA_USER, null);
+        return e;
+    }
+
+    public static void putNamaUser(final Context context, String id_user) {
+        Prefs.putPref(context, Zakat.NAMA_USER, id_user);
+    }
+    public static String getAlamatUser(final Context context) {
+        String e = Prefs.getPref(context, Zakat.ALAMAT_USER, null);
+        return e;
+    }
+
+    public static void putAlamatUser(final Context context, String id_user) {
+        Prefs.putPref(context, Zakat.ALAMAT_USER, id_user);
+    }
+    public static String getNomorIdentitasUser(final Context context) {
+        String e = Prefs.getPref(context, Zakat.NOMOR_IDENTITAS_USER, null);
+        return e;
+    }
+
+    public static void putNomorIdentitasUser(final Context context, String id_user) {
+        Prefs.putPref(context, Zakat.NOMOR_IDENTITAS_USER, id_user);
+    }
+    public static String getNomorTelpUser(final Context context) {
+        String e = Prefs.getPref(context, Zakat.NOMOR_TELP_USER, null);
+        return e;
+    }
+
+    public static void putNomorTelpUser(final Context context, String id_user) {
+        Prefs.putPref(context, Zakat.NOMOR_TELP_USER, id_user);
+    }
+
 }

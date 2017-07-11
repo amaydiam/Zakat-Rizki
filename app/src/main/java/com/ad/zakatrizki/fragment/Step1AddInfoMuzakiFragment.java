@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.activity.ActionDonasiBaruActivity;
+import com.ad.zakatrizki.utils.Prefs;
 import com.ad.zakatrizki.utils.RupiahTextWatcher;
 import com.ad.zakatrizki.utils.TextUtils;
 import com.ad.zakatrizki.widget.RobotoBoldTextView;
@@ -122,6 +123,18 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
 
     private void SetData() {
         if (activity.mustahiqPrepareDonasi != null) {
+
+            if (Prefs.getLogin(getActivity())) {
+                namaMuzaki.setEnabled(false);
+                alamatMuzaki.setEnabled(false);
+                noIdentitasMuzaki.setEnabled(false);
+                noTelpMuzaki.setEnabled(false);
+
+                namaMuzaki.setText(Prefs.getNamaUser(getActivity()));
+                alamatMuzaki.setText(Prefs.getAlamatUser(getActivity()));
+                noIdentitasMuzaki.setText(Prefs.getNomorIdentitasUser(getActivity()));
+                noTelpMuzaki.setText(Prefs.getNomorTelpUser(getActivity()));
+            }
 
             idMustahiq.setText(activity.mustahiqPrepareDonasi.id_mustahiq);
 

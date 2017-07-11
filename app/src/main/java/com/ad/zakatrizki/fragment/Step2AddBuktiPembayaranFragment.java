@@ -42,6 +42,9 @@ public class Step2AddBuktiPembayaranFragment extends Fragment {
 
     @OnClick(R.id.btn_save)
     void Save() {
+        if(s_foto_bukti_pembayaran==null)
+            Toast.makeText(activity, "Harap lampirkan foto pembayaran", Toast.LENGTH_SHORT).show();
+        else
         activity.simpanData();
     }
 

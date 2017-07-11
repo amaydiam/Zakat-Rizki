@@ -121,6 +121,7 @@ public class CalonMustahiqAdapter extends RecyclerView.Adapter<CalonMustahiqAdap
         holder.noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(calon_mustahiq.no_identitas_calon_mustahiq) ? "-" : calon_mustahiq.no_identitas_calon_mustahiq));
         holder.noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(calon_mustahiq.no_telp_calon_mustahiq) ? "-" : calon_mustahiq.no_telp_calon_mustahiq));
         holder.namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi: " + (TextUtils.isNullOrEmpty(calon_mustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : calon_mustahiq.nama_perekomendasi_calon_mustahiq));
+        holder.alasanPerekomendasiCalonMustahiq.setText("Alasan Perekomendasian: " + (TextUtils.isNullOrEmpty(calon_mustahiq.alasan_perekomendasi_calon_mustahiq) ? "-" : calon_mustahiq.alasan_perekomendasi_calon_mustahiq));
         holder.statusCalonMustahiq.setText(Html.fromHtml("Status Validasi : " + (calon_mustahiq.status_calon_mustahiq.equalsIgnoreCase("ya") ? "<font color='#002800'>Valid</font>" : "<font color='red'>Belum/Tidak Valid</font>")));
         holder.statusCalonMustahiq.setText(Html.fromHtml("Status Aktif : " + (calon_mustahiq.status_calon_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
         holder.statusMustahiq.setVisibility(View.GONE);
@@ -206,6 +207,8 @@ public class CalonMustahiqAdapter extends RecyclerView.Adapter<CalonMustahiqAdap
         RobotoLightTextView noTelpCalonMustahiq;
         @BindView(R.id.nama_perekomendasi_calon_mustahiq)
         RobotoLightTextView namaPerekomendasiCalonMustahiq;
+        @BindView(R.id.alasan_perekomendasi_calon_mustahiq)
+        RobotoLightTextView alasanPerekomendasiCalonMustahiq;
         @BindView(R.id.status_calon_mustahiq)
         RobotoLightTextView statusCalonMustahiq;
         @BindView(R.id.status_mustahiq)

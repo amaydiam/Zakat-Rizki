@@ -31,6 +31,7 @@ import com.ad.zakatrizki.adapter.CalonMustahiqAdapter;
 import com.ad.zakatrizki.model.CalonMustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
+import com.ad.zakatrizki.utils.Prefs;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.joanzapata.iconify.IconDrawable;
@@ -217,21 +218,6 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
         }).start();
 
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int firstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();
-                if (firstVisibleItem > mPreviousVisibleItem) {
-                    fabAction.hide(true);
-                } else if (firstVisibleItem < mPreviousVisibleItem) {
-                    fabAction.show(true);
-                }
-                mPreviousVisibleItem = firstVisibleItem;
-            }
-        });
-
-
         //setup fab
         fabAction.setImageDrawable(
                 new IconDrawable(getActivity(), MaterialIcons.md_add)
@@ -241,8 +227,24 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
         fabScrollUp.setImageDrawable(
                 new IconDrawable(getActivity(), MaterialCommunityIcons.mdi_arrow_up)
                         .colorRes(R.color.primary));
+        if (Prefs.getTipeUser(getActivity()).equalsIgnoreCase("2")) {
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    int firstVisibleItem = mLayoutManager.findFirstVisibleItemPosition();
+                    if (firstVisibleItem > mPreviousVisibleItem) {
+                        fabAction.hide(true);
+                    } else if (firstVisibleItem < mPreviousVisibleItem) {
+                        fabAction.show(true);
+                    }
+                    mPreviousVisibleItem = firstVisibleItem;
+                }
+            });
 
-        fabAction.setVisibility(View.VISIBLE);
+
+            fabAction.setVisibility(View.VISIBLE);
+        }
 
         noData.setText(Html.fromHtml("<center><h1>{mdi-calendar}</h1></br> Tidak ada calon mustahiq ...</center>"));
         showNoData(false);
@@ -419,6 +421,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
         String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+        String id_user_perekomendasi = obj.getString(Zakat.id_user_perekomendasi);
+        String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
         String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
         String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
         //set map object
@@ -426,9 +430,11 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 position,
                 id_calon_mustahiq,
                 nama_calon_mustahiq,
-                alamat_calon_mustahiq,latitude_calon_mustahiq,longitude_calon_mustahiq,
+                alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                id_user_perekomendasi,
+                alasan_perekomendasi_calon_mustahiq,
                 nama_perekomendasi_calon_mustahiq,
                 status_calon_mustahiq
         );
@@ -439,11 +445,13 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
             String position,
             String id_calon_mustahiq,
             String nama_calon_mustahiq,
-           String alamat_calon_mustahiq,
+            String alamat_calon_mustahiq,
             String latitude_calon_mustahiq,
             String longitude_calon_mustahiq,
             String no_identitas_calon_mustahiq,
             String no_telp_calon_mustahiq,
+            String id_user_perekomendasi,
+            String alasan_perekomendasi_calon_mustahiq,
             String nama_perekomendasi_calon_mustahiq,
             String status_calon_mustahiq) {
 
@@ -455,6 +463,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                id_user_perekomendasi,
+                alasan_perekomendasi_calon_mustahiq,
                 nama_perekomendasi_calon_mustahiq,
                 status_calon_mustahiq);
 
