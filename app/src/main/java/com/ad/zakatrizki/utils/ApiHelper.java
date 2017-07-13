@@ -97,5 +97,10 @@ public class ApiHelper {
         return getApiUrl(context) + "user/register";
     }
 
+    public static String getAddRatingLink(Context context) {
+        return getApiUrl(context) + "rating_mustahiq/addrating";
+    }
+
+
 
 }

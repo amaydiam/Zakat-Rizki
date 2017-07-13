@@ -129,18 +129,11 @@ public class MustahiqAdapter extends RecyclerView.Adapter<MustahiqAdapter.ViewHo
         holder.waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(mustahiq.waktu_terakhir_donasi) ? "-" : mustahiq.waktu_terakhir_donasi));
 
         holder.layoutRating.setVisibility(View.VISIBLE);
-        int jr = Integer.parseInt(mustahiq.jumlah_rekomendasi);
-        int rt = 0;
-        if (jr <= 2) {
-            rt = 1;
-        } else if (jr == 3 || jr == 4) {
-            rt = 2;
-        }else if (jr == 5 || jr == 6) {
-            rt = 3;
-        }else if (jr == 73 || jr == 8) {
-            rt = 4;
-        }else if (jr >9) {
-            rt = 5;
+        float rt = 0;
+        try {
+
+            rt = Float.parseFloat(mustahiq.jumlah_rating);
+        } catch (Exception ignored) {
         }
         holder.rating.setRating(rt);
 

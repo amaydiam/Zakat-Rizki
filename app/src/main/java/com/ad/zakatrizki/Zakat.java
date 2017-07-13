@@ -83,7 +83,7 @@ public class Zakat extends Application {
     public static String mustahiq = "mustahiq";
     public static String id_mustahiq = "id_mustahiq";
     public static String status_mustahiq = "status_mustahiq";
-    public static String jumlah_rekomendasi = "jumlah_rekomendasi";
+    public static String jumlah_rating = "jumlah_rating";
     public static int PLACE_PICKER_REQUEST=22;
     public static String username="username";
     public static String password="password";
@@ -102,6 +102,7 @@ public class Zakat extends Application {
     public static String caption_photo_1="caption_photo_1";
     public static String caption_photo_2="caption_photo_2";
     public static String caption_photo_3="caption_photo_3";
+    public static String rating="rating";
 
     @Override
     protected void attachBaseContext(Context base) {

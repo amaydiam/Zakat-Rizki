@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.media.RatingCompat;
 import android.support.v4.widget.NestedScrollView;
@@ -59,7 +60,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class DonasiDetailFragment extends Fragment implements ManageDonasiFragment.AddEditDonasiListener, CustomVolley.OnCallbackResponse, OnMapReadyCallback {
+public class DonasiDetailFragment extends Fragment implements ManageDonasiFragment.AddEditDonasiListener, AddRatingFragment.RatingListener, CustomVolley.OnCallbackResponse, OnMapReadyCallback {
 
     private static final String TAG_DETAIL = "TAG_DETAIL";
     private static final String TAG_REKOMENDASI = "TAG_REKOMENDASI";
@@ -128,26 +129,12 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     private ProgressDialog dialogProgress;
 
     @OnClick(R.id.fab_rekomendasi)
-    void RekomendasiMuzaki() {
-        AlertDialog.Builder alt_bld = new AlertDialog.Builder(getActivity());
-        alt_bld.setMessage("Apakah anda akan merekomendasikan Muzaki ini?")
-                .setCancelable(false)
-                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        String urlToDownload = ApiHelper.getAddRekomendasiMustahiqLink(getActivity(), id_msthq);
-                        queue = customVolley.Rest(Request.Method.GET, urlToDownload, null, TAG_REKOMENDASI);
-                    }
-                })
-                .setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-
-                    }
-                });
-        AlertDialog alert = alt_bld.create();
-        alert.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        alert.show();
+    void AddRating() {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        AddRatingFragment add = new AddRatingFragment();
+        add.setTargetFragment(this, 0);
+        add.setData(mustahiq);
+        add.show(fragmentManager, "Add Rating");
     }
 
     @OnClick(R.id.fab_navigasi)
@@ -294,18 +281,11 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(mustahiq.waktu_terakhir_donasi) ? "-" : mustahiq.waktu_terakhir_donasi));
 
         layoutRating.setVisibility(View.VISIBLE);
-        int jr = Integer.parseInt(mustahiq.jumlah_rekomendasi);
-        int rt = 0;
-        if (jr <= 2) {
-            rt = 1;
-        } else if (jr == 3 || jr == 4) {
-            rt = 2;
-        }else if (jr == 5 || jr == 6) {
-            rt = 3;
-        }else if (jr == 73 || jr == 8) {
-            rt = 4;
-        }else if (jr >9) {
-            rt = 5;
+        float rt = 0;
+        try {
+
+            rt = Float.parseFloat(mustahiq.jumlah_rating);
+        } catch (Exception ignored) {
         }
         rating.setRating(rt);
 
@@ -382,7 +362,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
                     String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
                     String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
                     String status_mustahiq = obj.getString(Zakat.status_mustahiq);
-                    String jumlah_rekomendasi = obj.getString(Zakat.jumlah_rekomendasi);
+                    String jumlah_rating = obj.getString(Zakat.jumlah_rating);
                     String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
                     String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
                     String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
@@ -394,7 +374,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
                             no_telp_calon_mustahiq,
                             nama_perekomendasi_calon_mustahiq,
                             alasan_perekomendasi_calon_mustahiq,
-                            status_mustahiq, jumlah_rekomendasi, id_amil_zakat, nama_amil_zakat, waktu_terakhir_donasi);
+                            status_mustahiq, jumlah_rating, id_amil_zakat, nama_amil_zakat, waktu_terakhir_donasi);
 
                     if (Boolean.parseBoolean(isSuccess))
                         onDownloadSuccessful();
@@ -471,4 +451,9 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     }
 
 
+    @Override
+    public void onFinishRating(Mustahiq mustahiq) {
+        this.mustahiq = mustahiq;
+        onDownloadSuccessful();
+    }
 }

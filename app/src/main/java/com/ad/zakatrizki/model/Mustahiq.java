@@ -28,7 +28,7 @@ public class Mustahiq implements Parcelable {
     public String nama_perekomendasi_calon_mustahiq;
     public String alasan_perekomendasi_calon_mustahiq;
     public String status_mustahiq;
-    public String jumlah_rekomendasi;
+    public String jumlah_rating;
     public String id_amil_zakat;
     public String nama_amil_zakat;
     public String waktu_terakhir_donasi;
@@ -42,7 +42,7 @@ public class Mustahiq implements Parcelable {
                     String nama_perekomendasi_calon_mustahiq,
                     String alasan_perekomendasi_calon_mustahiq,
                     String status_mustahiq,
-                    String jumlah_rekomendasi,
+                    String jumlah_rating,
                     String id_amil_zakat,
                     String nama_amil_zakat, String waktu_terakhir_donasi) {
         this.id_mustahiq = id_mustahiq;
@@ -56,7 +56,7 @@ public class Mustahiq implements Parcelable {
         this.nama_perekomendasi_calon_mustahiq = nama_perekomendasi_calon_mustahiq;
         this.alasan_perekomendasi_calon_mustahiq = alasan_perekomendasi_calon_mustahiq;
         this.status_mustahiq = status_mustahiq;
-        this.jumlah_rekomendasi = jumlah_rekomendasi;
+        this.jumlah_rating = jumlah_rating;
         this.id_amil_zakat = id_amil_zakat;
         this.nama_amil_zakat = nama_amil_zakat;
         this.waktu_terakhir_donasi = waktu_terakhir_donasi;
@@ -74,7 +74,7 @@ public class Mustahiq implements Parcelable {
         nama_perekomendasi_calon_mustahiq = in.readString();
         alasan_perekomendasi_calon_mustahiq = in.readString();
         status_mustahiq = in.readString();
-        jumlah_rekomendasi = in.readString();
+        jumlah_rating = in.readString();
         id_amil_zakat = in.readString();
         nama_amil_zakat = in.readString();
         waktu_terakhir_donasi = in.readString();
@@ -93,7 +93,7 @@ public class Mustahiq implements Parcelable {
         dest.writeString(nama_perekomendasi_calon_mustahiq);
         dest.writeString(alasan_perekomendasi_calon_mustahiq);
         dest.writeString(status_mustahiq);
-        dest.writeString(jumlah_rekomendasi);
+        dest.writeString(jumlah_rating);
         dest.writeString(id_amil_zakat);
         dest.writeString(nama_amil_zakat);
         dest.writeString(waktu_terakhir_donasi);
