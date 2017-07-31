@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
-import com.ad.zakatrizki.model.AmilZakat;
 import com.ad.zakatrizki.model.Mustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
@@ -36,13 +35,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
-import com.sdsmdg.tastytoast.TastyToast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import agency.tango.android.avatarview.loader.PicassoLoader;
 import agency.tango.android.avatarview.views.AvatarView;
@@ -52,10 +46,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFragment.AddEditMustahiqListener, CustomVolley.OnCallbackResponse, OnMapReadyCallback {
+public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFragment.AddEditMustahiqListener, CustomVolley.OnCallbackResponse, OnMapReadyCallback, AddRekomendasiFragment.RekomendasiListener {
 
     private static final String TAG_DETAIL = "TAG_DETAIL";
-    private static final String TAG_AMIL_ZAKAT = "TAG_AMIL_ZAKAT";
     @BindBool(R.bool.is_tablet)
     boolean isTablet;
     // Toolbar
@@ -78,8 +71,13 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
     RobotoBoldTextView tryAgain;
     @BindView(R.id.movie_detail_holder)
     NestedScrollView movieHolder;
+
     @BindView(R.id.fab_action)
     FloatingActionButton fabAction;
+
+    @BindView(R.id.fab_rekomendasi)
+    FloatingActionButton fabRekomendasi;
+
     // Basic info
     @BindView(R.id.foto_profil)
     AvatarView fotoProfil;
@@ -93,7 +91,7 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
     RobotoLightTextView noTelpCalonMustahiq;
     @BindView(R.id.nama_perekomendasi_calon_mustahiq)
     RobotoLightTextView namaPerekomendasiCalonMustahiq;
-    @BindView(R.id.nama_amil_zakat)
+    @BindView(R.id.nama_validasi_amil_zakat)
     RobotoLightTextView namaAmilZakat;
     @BindView(R.id.status_mustahiq)
     RobotoLightTextView statusMustahiq;
@@ -111,8 +109,22 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
 
     @OnClick(R.id.fab_action)
     void EditMustahiq() {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        ManageMustahiqFragment manageMustahiq = new ManageMustahiqFragment();
+        manageMustahiq.setTargetFragment(this, 0);
+        manageMustahiq.setCancelable(false);
+        manageMustahiq.setDialogTitle("Mustahiq");
+        manageMustahiq.setAction("edit");
+        manageMustahiq.setData(mustahiq);
+        manageMustahiq.show(fragmentManager, "Manage Mustahiq");  }
 
-        queue = customVolley.Rest(Request.Method.GET, ApiHelper.getAmilZakatLink(getActivity()), null, TAG_AMIL_ZAKAT);
+    @OnClick(R.id.fab_rekomendasi)
+    void AddRekomendasi() {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        AddRekomendasiFragment add = new AddRekomendasiFragment();
+        add.setTargetFragment(this, 0);
+        add.setData(mustahiq);
+        add.show(fragmentManager, "Add Rekomendasi");
     }
 
     // Fragment lifecycle
@@ -139,6 +151,11 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
         //setup fab
         fabAction.setImageDrawable(
                 new IconDrawable(getActivity(), MaterialIcons.md_edit)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
+
+        fabRekomendasi.setImageDrawable(
+                new IconDrawable(getActivity(), MaterialIcons.md_check)
                         .colorRes(R.color.white)
                         .actionBarSize());
 
@@ -183,7 +200,6 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
         unbinder.unbind();
         if (queue != null) {
             queue.cancelAll(TAG_DETAIL);
-            queue.cancelAll(TAG_AMIL_ZAKAT);
         }
 
     }
@@ -203,6 +219,8 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
         movieHolder.setVisibility(View.VISIBLE);
         fabAction.setVisibility(View.VISIBLE);
 
+        fabRekomendasi.setVisibility(View.VISIBLE);
+
         toolbar.setTitle(mustahiq.nama_calon_mustahiq);
         toolbarTextHolder.setVisibility(View.GONE);
 
@@ -214,7 +232,7 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
         namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(mustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : mustahiq.nama_perekomendasi_calon_mustahiq));
 
         statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (mustahiq.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
-        namaAmilZakat.setText("Nama Amil Zakat : " + mustahiq.nama_amil_zakat);
+        namaAmilZakat.setText("Validasi Amil Zakat Zakat : " + mustahiq.nama_validasi_amil_zakat);
         waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(mustahiq.waktu_terakhir_donasi) ? "-" : mustahiq.waktu_terakhir_donasi));
 
 
@@ -240,6 +258,7 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
         progressCircle.setVisibility(View.GONE);
         movieHolder.setVisibility(View.GONE);
         fabAction.setVisibility(View.GONE);
+        fabRekomendasi.setVisibility(View.GONE);
         toolbarTextHolder.setVisibility(View.GONE);
         toolbar.setTitle("");
     }
@@ -269,81 +288,16 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
         onNotAvailable("Mustahiq ini tidak ada/dihapus");
     }
 
-    private void startProgress(String TAG) {
-        if (TAG.equals(TAG_AMIL_ZAKAT)) {
-            TAG = "Prepare";
-        }
-        dialogProgress = ProgressDialog.show(getActivity(), TAG,
-                "Please wait...", true);
-    }
-
-    private void stopProgress(String TAG) {
-        if (dialogProgress != null)
-            dialogProgress.dismiss();
-    }
-
     @Override
     public void onVolleyStart(String TAG) {
-        if (TAG.equals(TAG_AMIL_ZAKAT)) {
-            startProgress(TAG_AMIL_ZAKAT);
-        }
     }
 
     @Override
     public void onVolleyEnd(String TAG) {
-        if (TAG.equals(TAG_AMIL_ZAKAT)) {
-            stopProgress(TAG_AMIL_ZAKAT);
-        }
     }
 
     @Override
     public void onVolleySuccessResponse(String TAG, String response) {
-        if (TAG.equals(TAG_AMIL_ZAKAT)) {
-            try {
-
-                JSONObject json = new JSONObject(response);
-                Boolean isSuccess = Boolean.parseBoolean(json.getString(Zakat.isSuccess));
-                String message = json.getString(Zakat.message);
-                if (isSuccess) {
-                    JSONArray items_obj = json.getJSONArray(Zakat.amil_zakat);
-                    int jumlah_list_data = items_obj.length();
-                    if (jumlah_list_data > 0) {
-
-                        ArrayList<AmilZakat> dataAmilZakat = new ArrayList<>();
-                        for (int i = 0; i < jumlah_list_data; i++) {
-                            JSONObject obj = items_obj.getJSONObject(i);
-                            String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
-                            String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
-
-                            dataAmilZakat.add(new AmilZakat(id_amil_zakat, nama_amil_zakat));
-                        }
-
-                        FragmentManager fragmentManager = getChildFragmentManager();
-                        ManageMustahiqFragment manageMustahiq = new ManageMustahiqFragment();
-                        manageMustahiq.setTargetFragment(this, 0);
-                        manageMustahiq.setCancelable(false);
-                        manageMustahiq.setDialogTitle("Mustahiq");
-                        manageMustahiq.setAction("edit");
-                        manageMustahiq.setData(mustahiq);
-                        manageMustahiq.setAmilZakat(dataAmilZakat);
-                        manageMustahiq.show(fragmentManager, "Manage Mustahiq");
-
-                    } else {
-                        TastyToast.makeText(getActivity(), "tidak ada data...", TastyToast.LENGTH_LONG, TastyToast.INFO);
-                    }
-                } else {
-                    TastyToast.makeText(getActivity(), message, TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-                }
-
-            } catch (JSONException e)
-
-            {
-                e.printStackTrace();
-                TastyToast.makeText(getActivity(), "Parsing data error ...", TastyToast.LENGTH_LONG, TastyToast.ERROR);
-            }
-
-
-        } else {
             try {
                 JSONObject jsonObject = new JSONObject(response);
                 String isSuccess = jsonObject.getString(Zakat.isSuccess);
@@ -362,8 +316,7 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
                 String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
                 String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                 String jumlah_rating = obj.getString(Zakat.jumlah_rating);
-                String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
-                String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
+                String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
                 String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
                 mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
@@ -374,7 +327,7 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
                         nama_perekomendasi_calon_mustahiq,
                         alasan_perekomendasi_calon_mustahiq,
                         status_mustahiq,
-                        jumlah_rating,id_amil_zakat, nama_amil_zakat, waktu_terakhir_donasi);
+                        jumlah_rating,  nama_validasi_amil_zakat, waktu_terakhir_donasi);
 
                 if (Boolean.parseBoolean(isSuccess))
                     onDownloadSuccessful();
@@ -386,14 +339,10 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
                 onDownloadFailed();
                 Log.d("Parse Error", ex.getMessage(), ex);
             }
-        }
     }
 
     @Override
     public void onVolleyErrorResponse(String TAG, String response) {
-        if (TAG.equals(TAG_AMIL_ZAKAT)) {
-            TastyToast.makeText(getActivity(), "Error ..", TastyToast.LENGTH_LONG, TastyToast.ERROR);
-        }
     }
 
     @Override
@@ -401,7 +350,7 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
         mMap = googleMap;
         mMap.getUiSettings().setMapToolbarEnabled(false);
 
-        LatLng Posisi = new LatLng(Double.parseDouble(mustahiq.latitude_calon_mustahiq.equalsIgnoreCase("null")?"0.0":mustahiq.latitude_calon_mustahiq), Double.parseDouble(mustahiq.longitude_calon_mustahiq.equalsIgnoreCase("null")?"0.0":mustahiq.longitude_calon_mustahiq));
+        LatLng Posisi = new LatLng(Double.parseDouble(mustahiq.latitude_calon_mustahiq.equalsIgnoreCase("null") ? "0.0" : mustahiq.latitude_calon_mustahiq), Double.parseDouble(mustahiq.longitude_calon_mustahiq.equalsIgnoreCase("null") ? "0.0" : mustahiq.longitude_calon_mustahiq));
         MarkerOptions marker = new MarkerOptions()
                 .position(Posisi)
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_mustahiq));
@@ -409,6 +358,13 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
         Marker m = mMap.addMarker(marker);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Posisi, 14));
 
+
+    }
+
+    @Override
+    public void onFinishRekomendasi(Mustahiq mustahiq) {
+        this.mustahiq = mustahiq;
+        onDownloadSuccessful();
 
     }
 }

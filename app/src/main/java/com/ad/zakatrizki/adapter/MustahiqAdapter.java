@@ -125,7 +125,7 @@ public class MustahiqAdapter extends RecyclerView.Adapter<MustahiqAdapter.ViewHo
         holder.namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi: " + (TextUtils.isNullOrEmpty(mustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : mustahiq.nama_perekomendasi_calon_mustahiq));
         holder.alasanPerekomendasiCalonMustahiq.setText("Alasan Perekomendasian: " + (TextUtils.isNullOrEmpty(mustahiq.alasan_perekomendasi_calon_mustahiq) ? "-" : mustahiq.alasan_perekomendasi_calon_mustahiq));
         holder.statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (mustahiq.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
-        holder.namaAmilZakat.setText("Nama Amil Zakat : " + mustahiq.nama_amil_zakat);
+        holder.namaAmilZakat.setText("Validasi Amil Zakat Zakat : " + mustahiq.nama_validasi_amil_zakat);
         holder.waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(mustahiq.waktu_terakhir_donasi) ? "-" : mustahiq.waktu_terakhir_donasi));
 
         holder.layoutRating.setVisibility(View.VISIBLE);
@@ -222,7 +222,7 @@ public class MustahiqAdapter extends RecyclerView.Adapter<MustahiqAdapter.ViewHo
         RobotoLightTextView statusCalonMustahiq;
         @BindView(R.id.status_mustahiq)
         RobotoLightTextView statusMustahiq;
-        @BindView(R.id.nama_amil_zakat)
+        @BindView(R.id.nama_validasi_amil_zakat)
         RobotoLightTextView namaAmilZakat;
         @BindView(R.id.waktu_terakhir_donasi)
         RobotoLightTextView waktuTerakhirDonasi;

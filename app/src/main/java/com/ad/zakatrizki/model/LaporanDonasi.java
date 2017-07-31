@@ -33,7 +33,7 @@ public class LaporanDonasi implements Parcelable {
     public String no_telp_calon_mustahiq;
     public String status_calon_mustahiq;
     public String id_amil_zakat;
-    public String nama_amil_zakat;
+    public String nama_validasi_amil_zakat;
 
     // Constructor
     public LaporanDonasi(String id_donasi,
@@ -52,7 +52,7 @@ public class LaporanDonasi implements Parcelable {
                          String no_telp_calon_mustahiq,
                          String status_calon_mustahiq,
                          String id_amil_zakat,
-                         String nama_amil_zakat) {
+                         String nama_validasi_amil_zakat) {
 
         this.id_donasi = id_donasi;
         this.jumlah_donasi = jumlah_donasi;
@@ -71,7 +71,7 @@ public class LaporanDonasi implements Parcelable {
         this.no_telp_calon_mustahiq = no_telp_calon_mustahiq;
         this.status_calon_mustahiq = status_calon_mustahiq;
         this.id_amil_zakat = id_amil_zakat;
-        this.nama_amil_zakat =nama_amil_zakat;
+        this.nama_validasi_amil_zakat =nama_validasi_amil_zakat;
     }
 
     protected LaporanDonasi(Parcel in) {
@@ -91,7 +91,7 @@ public class LaporanDonasi implements Parcelable {
         no_telp_calon_mustahiq = in.readString();
         status_calon_mustahiq = in.readString();
         id_amil_zakat = in.readString();
-        nama_amil_zakat = in.readString();
+        nama_validasi_amil_zakat = in.readString();
     }
 
     @Override
@@ -112,7 +112,7 @@ public class LaporanDonasi implements Parcelable {
         dest.writeString(no_telp_calon_mustahiq);
         dest.writeString(status_calon_mustahiq);
         dest.writeString(id_amil_zakat);
-        dest.writeString(nama_amil_zakat);
+        dest.writeString(nama_validasi_amil_zakat);
     }
 
     @Override

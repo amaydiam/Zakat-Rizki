@@ -56,7 +56,7 @@ public class DialogDetailDonasiFragment extends DialogFragment {
     RobotoLightTextView noTelpMustahiq;
     @BindView(R.id.status_calon_mustahiq)
     RobotoLightTextView statusMustahiq;
-    @BindView(R.id.nama_amil_zakat)
+    @BindView(R.id.nama_validasi_amil_zakat)
     RobotoLightTextView namaAmilZakat;
     @BindView(R.id.jumlah_donasi)
     RobotoLightTextView jumlahDonasi;
@@ -152,7 +152,7 @@ public class DialogDetailDonasiFragment extends DialogFragment {
         noIdentitasMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(laporanDonasi.no_identitas_calon_mustahiq) ? "-" : laporanDonasi.no_identitas_calon_mustahiq));
         noTelpMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(laporanDonasi.no_telp_calon_mustahiq) ? "-" : laporanDonasi.no_telp_calon_mustahiq));
         statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (laporanDonasi.status_calon_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
-        namaAmilZakat.setText("Nama Amil Zakat : " + laporanDonasi.nama_amil_zakat);
+        namaAmilZakat.setText("Validasi Amil Zakat Zakat : " + laporanDonasi.nama_validasi_amil_zakat);
 
 
         getDialog().getWindow().setSoftInputMode(

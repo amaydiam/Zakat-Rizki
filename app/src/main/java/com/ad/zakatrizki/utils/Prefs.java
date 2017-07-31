@@ -107,6 +107,31 @@ public final class Prefs {
         return e;
     }
 
+    public static void getIdAmilZakat(final Context context, String id_amil_zakat) {
+        Prefs.putPref(context, Zakat.ID_AMIL_ZAKAT, id_amil_zakat);
+    }
+
+    public static void putIdAmilZakat(final Context context, String id_amil_zakat) {
+        Prefs.putPref(context, Zakat.ID_AMIL_ZAKAT, id_amil_zakat);
+    }
+
+    public static void getIdBadanAmilZakat(final Context context, String id_badan_amil_zakat) {
+        Prefs.putPref(context, Zakat.ID_BADAN_AMIL_ZAKAT, id_badan_amil_zakat);
+    }
+
+    public static void putIdBadanAmilZakat(final Context context, String id_badan_amil_zakat) {
+        Prefs.putPref(context, Zakat.ID_BADAN_AMIL_ZAKAT, id_badan_amil_zakat);
+    }
+
+    public static void getNamaAmilZakat(final Context context, String id_badan_amil_zakat) {
+        Prefs.putPref(context, Zakat.NAMA_BADAN_AMIL_ZAKAT, id_badan_amil_zakat);
+    }
+
+    public static void putNamaAmilZakat(final Context context, String id_badan_amil_zakat) {
+        Prefs.putPref(context, Zakat.NAMA_BADAN_AMIL_ZAKAT, id_badan_amil_zakat);
+    }
+
+
     public static void putNomorTelpUser(final Context context, String id_user) {
         Prefs.putPref(context, Zakat.NOMOR_TELP_USER, id_user);
     }

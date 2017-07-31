@@ -8,8 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -20,7 +18,6 @@ import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
-import com.ad.zakatrizki.utils.Menus;
 import com.ad.zakatrizki.utils.SnackBar;
 import com.ad.zakatrizki.utils.Utils;
 import com.ad.zakatrizki.widget.RobotoRegularEditText;
@@ -150,7 +147,10 @@ public class LoginFragment extends DialogFragment implements CustomVolley.OnCall
                 String alamat = jsUser.getString(Zakat.alamat);
                 String no_telp = jsUser.getString(Zakat.no_telp);
                 String no_identitas = jsUser.getString(Zakat.no_identitas);
-                callback.onFinishLogin(id_user,tipe_user,nama,alamat,no_telp,no_identitas);
+                String id_amil_zakat = jsUser.getString(Zakat.id_amil_zakat);
+                String id_badan_amil_zakat = jsUser.getString(Zakat.id_badan_amil_zakat);
+                String nama_badan_amil_zakat = jsUser.getString(Zakat.nama_badan_amil_zakat);
+                callback.onFinishLogin(id_user,tipe_user,nama,alamat,no_telp,no_identitas,id_amil_zakat,id_badan_amil_zakat,nama_badan_amil_zakat);
                 dismiss();
                 snackbar.show(message);
             } else {
@@ -225,16 +225,16 @@ public class LoginFragment extends DialogFragment implements CustomVolley.OnCall
     }
 
     @Override
-    public void onFinishRegister(String id_user, String tipe_user, String nama, String alamat, String no_telp, String no_identitas) {
+    public void onFinishRegister(String id_user, String tipe_user, String nama, String alamat, String no_telp, String no_identitas, String id_amil_zakat, String id_badan_amil_zakat, String nama_badan_amil_zakat) {
 
-        callback.onFinishLogin(id_user,tipe_user,nama,alamat,no_telp,no_identitas);
+        callback.onFinishLogin(id_user,tipe_user,nama,alamat,no_telp,no_identitas, id_amil_zakat, id_badan_amil_zakat, nama_badan_amil_zakat);
         dismiss();
     }
 
 
     public interface LoginListener {
 
-        void onFinishLogin(String id_user, String tipe_user, String nama, String alamat, String no_telp, String no_identitas);
+        void onFinishLogin(String id_user, String tipe_user, String nama, String alamat, String no_telp, String no_identitas, String id_amil_zakat, String id_badan_amil_zakat, String nama_badan_amil_zakat);
     }
 
 

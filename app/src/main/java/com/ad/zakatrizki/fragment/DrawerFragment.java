@@ -297,7 +297,7 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
     }
 
     @Override
-    public void onFinishLogin(String id_user, String tipe_user, String nama, String alamat, String no_telp, String no_identitas) {
+    public void onFinishLogin(String id_user, String tipe_user, String nama, String alamat, String no_telp, String no_identitas, String id_amil_zakat, String id_badan_amil_zakat, String nama_badan_amil_zakat) {
         Prefs.putLogin(getActivity(), true);
         Prefs.putIdUser(getActivity(), id_user);
         Prefs.putTipeUser(getActivity(), tipe_user);
@@ -305,6 +305,9 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
         Prefs.putAlamatUser(getActivity(), alamat);
         Prefs.putNomorTelpUser(getActivity(), no_telp);
         Prefs.putNomorIdentitasUser(getActivity(), no_identitas);
+        Prefs.putIdAmilZakat(getActivity(), id_amil_zakat);
+        Prefs.putIdBadanAmilZakat(getActivity(), id_badan_amil_zakat);
+        Prefs.putNamaAmilZakat(getActivity(), nama_badan_amil_zakat);
         SetMenuDrawer();
         if(Prefs.getIdUser(getActivity()).equalsIgnoreCase("2"))
             setSelectedDrawerItem(Zakat.VIEW_TYPE_DONASI);

@@ -51,7 +51,7 @@ public class SpinnerAmilZakatAdapter extends ArrayAdapter<AmilZakat> {
         label.setTextColor(Color.BLACK);
         // Then you can get the current item using the values array (AmilZakats array) and the current position
         // You can NOW reference each method you has created in your bean object (AmilZakat class)
-        label.setText(values.get(position).nama_amil_zakat);
+        label.setText(values.get(position).nama_validasi_amil_zakat);
 
         // And finally return your dynamic (or custom) view for each spinner item
         return label;
@@ -64,7 +64,7 @@ public class SpinnerAmilZakatAdapter extends ArrayAdapter<AmilZakat> {
                                 ViewGroup parent) {
         TextView label = new TextView(context);
         label.setTextColor(Color.BLACK);
-        label.setText(values.get(position).nama_amil_zakat);
+        label.setText(values.get(position).nama_validasi_amil_zakat);
 
         return label;
     }

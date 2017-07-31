@@ -62,7 +62,7 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
     RobotoLightTextView noTelpCalonMustahiq;
     @BindView(R.id.nama_perekomendasi_calon_mustahiq)
     RobotoLightTextView namaPerekomendasiCalonMustahiq;
-    @BindView(R.id.nama_amil_zakat)
+    @BindView(R.id.nama_validasi_amil_zakat)
     RobotoLightTextView namaAmilZakat;
     @BindView(R.id.status_mustahiq)
     RobotoLightTextView statusMustahiq;
@@ -145,7 +145,7 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
             noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.no_telp_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.no_telp_calon_mustahiq));
             namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.nama_perekomendasi_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.nama_perekomendasi_calon_mustahiq));
             statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (activity.mustahiqPrepareDonasi.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
-            namaAmilZakat.setText("Nama Amil Zakat : " + activity.mustahiqPrepareDonasi.nama_amil_zakat);
+            namaAmilZakat.setText("Validasi Amil Zakat Zakat : " + activity.mustahiqPrepareDonasi.nama_validasi_amil_zakat);
             waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.waktu_terakhir_donasi) ? "-" : activity.mustahiqPrepareDonasi.waktu_terakhir_donasi));
             waktuTerakhirDonasi.setVisibility(View.GONE);
             statusMustahiq.setVisibility(View.GONE);

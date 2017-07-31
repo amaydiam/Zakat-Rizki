@@ -1,9 +1,12 @@
 package com.ad.zakatrizki.fragment;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,14 +15,15 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
+import com.ad.zakatrizki.model.Mustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
+import com.ad.zakatrizki.utils.Prefs;
 import com.ad.zakatrizki.utils.SnackBar;
-import com.ad.zakatrizki.utils.Utils;
-import com.ad.zakatrizki.widget.RobotoRegularEditText;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.joanzapata.iconify.IconDrawable;
@@ -40,26 +44,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class RegisterFragment extends DialogFragment implements CustomVolley.OnCallbackResponse {
-    private static final String TAG_REGISTER = "TAG_REGISTER";
+public class AddRekomendasiFragment extends DialogFragment implements CustomVolley.OnCallbackResponse {
+    private static final String TAG_RATING = "TAG_RATING";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
-    @BindView(R.id.nama)
-    RobotoRegularEditText nama;
-    @BindView(R.id.alamat)
-    RobotoRegularEditText alamat;
-    @BindView(R.id.no_telp)
-    RobotoRegularEditText no_telp;
-    @BindView(R.id.no_identitas)
-    RobotoRegularEditText no_identitas;
-
-    @BindView(R.id.username)
-    RobotoRegularEditText username;
-    @BindView(R.id.password)
-    RobotoRegularEditText password;
-    @BindView(R.id.register)
-    Button register;
+    @BindView(R.id.rekomendasi)
+    Button rekomendasi;
     @BindView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
 
@@ -69,69 +59,49 @@ public class RegisterFragment extends DialogFragment implements CustomVolley.OnC
     private ProgressDialog dialogProgress;
     private Unbinder butterKnife;
 
-    private String val_nama = "";
-    private String val_alamat = "";
-    private String val_no_telp = "";
-    private String val_no_identitas = "";
 
-    private String val_username = "";
-    private String val_password = "";
+    private RekomendasiListener callback;
+    private Mustahiq mustahiq;
+    private Dialog alertDialog;
 
-
-    private RegisterListener callback;
-
-    public RegisterFragment() {
+    public AddRekomendasiFragment() {
 
     }
 
-    @OnClick(R.id.register)
-    void Register() {
-        Utils.HideKeyboard(getActivity(), nama);
-        Utils.HideKeyboard(getActivity(), alamat);
-        Utils.HideKeyboard(getActivity(), no_telp);
-        Utils.HideKeyboard(getActivity(), no_identitas);
-        Utils.HideKeyboard(getActivity(), username);
-        Utils.HideKeyboard(getActivity(), password);
-        getData();
-
-        if (val_nama.length() == 0 ||
-        val_alamat.length() == 0||
-        val_no_telp.length() == 0||
-        val_no_identitas.length() == 0||
-        val_username.length() == 0
-                || val_password.length() == 0) {
-            snackbar.show("Harap isi semua form...");
-            return;
-        }
-
-        Map<String, String> jsonParams = new HashMap<>();
-
-        jsonParams.put(Zakat.nama,
-                val_nama);
-        jsonParams.put(Zakat.alamat,
-                val_alamat);
-        jsonParams.put(Zakat.no_identitas,
-                val_no_identitas);
-        jsonParams.put(Zakat.no_telp,
-                val_no_telp);
-        jsonParams.put(Zakat.username,
-                val_username);
-        jsonParams.put(Zakat.password,
-                val_password);
-
-        queue = customVolley.Rest(Request.Method.POST, ApiHelper.getRegisterLink(getActivity()), jsonParams, TAG_REGISTER);
-
-
+    public void setData(Mustahiq mustahiq) {
+        this.mustahiq = mustahiq;
     }
 
-    private void getData() {
 
-        val_nama = nama.getText().toString().trim();
-        val_alamat = alamat.getText().toString().trim();
-        val_no_telp= no_telp.getText().toString().trim();
-        val_no_identitas = no_identitas.getText().toString().trim();
-        val_username = username.getText().toString().trim();
-        val_password = password.getText().toString().trim();
+    @OnClick(R.id.rekomendasi)
+    void Rekomendasi() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setMessage("Anda yakin akan memberikan rekomendasi pada mustahiq ini?");
+
+        alertDialogBuilder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                Map<String, String> jsonParams = new HashMap<>();
+                jsonParams.put(Zakat.id_mustahiq,
+                        String.valueOf(mustahiq.id_mustahiq));
+                jsonParams.put(Zakat.id_user,
+                        String.valueOf(Prefs.getIdUser(getActivity())));
+
+                queue = customVolley.Rest(Request.Method.POST, ApiHelper.getAddRekomendasiLink(getActivity()), jsonParams, TAG_RATING);
+
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                alertDialog.dismiss();
+            }
+        });
+
+        alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
 
     }
 
@@ -141,7 +111,7 @@ public class RegisterFragment extends DialogFragment implements CustomVolley.OnC
         super.onDestroyView();
         butterKnife.unbind();
         if (queue != null) {
-            queue.cancelAll(TAG_REGISTER);
+            queue.cancelAll(TAG_RATING);
         }
 
     }
@@ -165,22 +135,36 @@ public class RegisterFragment extends DialogFragment implements CustomVolley.OnC
             String res = json.getString(Zakat.isSuccess);
             String message = json.getString(Zakat.message);
             if (Boolean.valueOf(res)) {
-                JSONObject jsUser = new JSONObject(json.getString(Zakat.user));
-                String id_user = jsUser.getString(Zakat.id_user);
-                String tipe_user = jsUser.getString(Zakat.tipe_user);
-                String nama = jsUser.getString(Zakat.nama);
-                String alamat = jsUser.getString(Zakat.alamat);
-                String no_telp = jsUser.getString(Zakat.no_telp);
-                String no_identitas = jsUser.getString(Zakat.no_identitas);
-                String id_amil_zakat = jsUser.getString(Zakat.id_amil_zakat);
-                String id_badan_amil_zakat = jsUser.getString(Zakat.id_badan_amil_zakat);
-                String nama_badan_amil_zakat = jsUser.getString(Zakat.nama_badan_amil_zakat);
-                callback.onFinishRegister(id_user,tipe_user,nama,alamat,no_telp,no_identitas,id_amil_zakat,id_badan_amil_zakat,nama_badan_amil_zakat);
 
+                JSONObject obj = new JSONObject(json.getString(Zakat.mustahiq));
+                String id_mustahiq = obj.getString(Zakat.id_mustahiq);
+                String id_calon_mustahiq = obj.getString(Zakat.id_calon_mustahiq);
+                String nama_calon_mustahiq = obj.getString(Zakat.nama_calon_mustahiq);
+                String alamat_calon_mustahiq = obj.getString(Zakat.alamat_calon_mustahiq);
+                String latitude_calon_mustahiq = obj.getString(Zakat.latitude_calon_mustahiq);
+                String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
+                String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
+                String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
+                String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
+                String status_mustahiq = obj.getString(Zakat.status_mustahiq);
+                String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+                String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
+                String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
+
+                mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
+                        latitude_calon_mustahiq,
+                        longitude_calon_mustahiq,
+                        no_identitas_calon_mustahiq,
+                        no_telp_calon_mustahiq,
+                        nama_perekomendasi_calon_mustahiq,
+                        alasan_perekomendasi_calon_mustahiq,
+                        status_mustahiq,
+                        jumlah_rating, nama_validasi_amil_zakat, waktu_terakhir_donasi);
+                callback.onFinishRekomendasi(mustahiq);
                 dismiss();
-                snackbar.show(message);
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             } else {
-                password.setText("");
                 snackbar.show(message);
             }
         } catch (Exception e) {
@@ -204,7 +188,7 @@ public class RegisterFragment extends DialogFragment implements CustomVolley.OnC
         super.onCreate(savedInstanceState);
 
         try {
-            callback = (RegisterListener) getTargetFragment();
+            callback = (RekomendasiListener) getTargetFragment();
         } catch (Exception e) {
             throw new ClassCastException("Calling Fragment must implement KonfirmasiPendaftaranPesertaListener");
         }
@@ -214,13 +198,13 @@ public class RegisterFragment extends DialogFragment implements CustomVolley.OnC
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
 
         View view = inflater.inflate(
-                R.layout.content_register, container);
+                R.layout.content_rekomendasi, container);
 
         butterKnife = ButterKnife.bind(this, view);
         customVolley = new CustomVolley(getActivity());
         customVolley.setOnCallbackResponse(this);
         snackbar = new SnackBar(getActivity(), coordinatorLayout);
-        toolbar.setTitle("Register");
+        toolbar.setTitle("Rekomendasi");
         toolbar.setNavigationIcon(
                 new IconDrawable(getActivity(), MaterialIcons.md_close)
                         .colorRes(R.color.white)
@@ -252,9 +236,9 @@ public class RegisterFragment extends DialogFragment implements CustomVolley.OnC
     }
 
 
-    public interface RegisterListener {
+    public interface RekomendasiListener {
 
-        void onFinishRegister(String id_user, String tipe_user, String nama, String alamat, String no_telp, String no_identitas, String id_amil_zakat, String id_badan_amil_zakat, String nama_badan_amil_zakat);
+        void onFinishRekomendasi(Mustahiq mustahiq);
     }
 
 

@@ -267,8 +267,7 @@ public class DonasiMapFragment extends Fragment implements OnMapReadyCallback,
                         String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
                         String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                         String jumlah_rating = obj.getString(Zakat.jumlah_rating);
-                        String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
-                        String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
+                        String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
                         String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
                         Mustahiq mustahiq = new Mustahiq(
@@ -284,8 +283,7 @@ public class DonasiMapFragment extends Fragment implements OnMapReadyCallback,
                                 alasan_perekomendasi_calon_mustahiq,
                                 status_mustahiq,
                                 jumlah_rating,
-                                id_amil_zakat,
-                                nama_amil_zakat,
+                                nama_validasi_amil_zakat,
                                 waktu_terakhir_donasi);
                         double Lat = Double.parseDouble(latitude_calon_mustahiq);
                         double Long = Double.parseDouble(longitude_calon_mustahiq);

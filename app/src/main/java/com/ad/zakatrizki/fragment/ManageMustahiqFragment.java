@@ -72,8 +72,6 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
     RobotoRegularTextView noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoRegularTextView noTelpCalonMustahiq;
-    @BindView(R.id.id_amil_zakat)
-    Spinner idAmilZakat;
     @BindView(R.id.aktif)
     RadioButton aktif;
     @BindView(R.id.tidak_aktif)
@@ -94,12 +92,9 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
     private String val_no_identitas_calon_mustahiq = "";
     private String val_no_telp_calon_mustahiq = "";
     private String val_status_mustahiq = "";
-    private String val_id_amil_zakat = "";
     private Mustahiq mustahiq;
     private Dialog alertDialog;
     private AddEditMustahiqListener callback;
-    private ArrayList<AmilZakat> amilZakatList = new ArrayList<>();
-    private SpinnerAmilZakatAdapter adapter;
     private String action;
 
     public ManageMustahiqFragment() {
@@ -128,7 +123,6 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                         || val_alamat_calon_mustahiq.length() == 0
                         || val_no_identitas_calon_mustahiq.length() == 0
                         || val_no_telp_calon_mustahiq.length() == 0
-                        || val_id_amil_zakat.length() == 0
                         || val_status_mustahiq.length() == 0) {
                     snackbar.show("Harap isi semua form...");
                     return;
@@ -140,8 +134,6 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                         val_id_calon_mustahiq);
                 jsonParams.put(Zakat.status_mustahiq,
                         val_status_mustahiq);
-                jsonParams.put(Zakat.id_amil_zakat,
-                        val_id_amil_zakat);
 
                 String TAG = null;
                 if (action.equals("add")) {
@@ -168,7 +160,6 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
         else
             val_status_mustahiq = "Tidak Aktif";
 
-        val_id_amil_zakat = amilZakatList.get(idAmilZakat.getSelectedItemPosition()).id_amil_zakat;
 
 
     }
@@ -242,8 +233,7 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                     String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
                     String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
-                    String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
-                    String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
+                    String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
                     String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
                     mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
@@ -254,7 +244,7 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                             nama_perekomendasi_calon_mustahiq,
                             alasan_perekomendasi_calon_mustahiq,
                             status_mustahiq,
-                            jumlah_rating,id_amil_zakat, nama_amil_zakat, waktu_terakhir_donasi);
+                            jumlah_rating, nama_validasi_amil_zakat, waktu_terakhir_donasi);
                     if (TAG.equals(TAG_ADD)) {
                         callback.onFinishAddMustahiq(mustahiq);
                     } else if (TAG.equals(TAG_EDIT)) {
@@ -279,11 +269,6 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
         snackbar.show(response);
     }
 
-    public void setAmilZakat(ArrayList<AmilZakat> dataAmilZakat) {
-        this.amilZakatList = dataAmilZakat;
-        AmilZakat amilZakat = new AmilZakat("", "-Pilih Amil-");
-        amilZakatList.add(0, amilZakat);
-    }
 
     @Override
     public void onFinishPickCalonMustahiqL(CalonMustahiq calon_Mustahiq) {
@@ -376,27 +361,6 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                         .actionBarSize());
 
         // Spinner adapterMustahiq
-        adapter = new SpinnerAmilZakatAdapter(getActivity(),
-                android.R.layout.simple_spinner_item,
-                amilZakatList);
-
-        idAmilZakat.setAdapter(adapter);
-
-        // Spinner on item click listener
-        idAmilZakat
-                .setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                    @Override
-                    public void onItemSelected(AdapterView<?> arg0,
-                                               View arg1, int position, long arg3) {
-
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> arg0) {
-                        // TODO Auto-generated method stub
-                    }
-                });
 
         if (action.equals("edit")) {
             toolbar.setSubtitle("Ubah");
@@ -410,7 +374,6 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
             val_no_identitas_calon_mustahiq = mustahiq.no_identitas_calon_mustahiq;
             val_no_telp_calon_mustahiq = mustahiq.no_telp_calon_mustahiq;
             val_status_mustahiq = mustahiq.status_mustahiq;
-            val_id_amil_zakat = mustahiq.id_amil_zakat;
 
             LayoutInflater inflaterView = LayoutInflater.from(getActivity());
             LinearLayout IF = (LinearLayout) inflaterView.inflate(R.layout.item_add_mustahiq, null, false);
@@ -434,11 +397,6 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
             else
                 tidakAktif.setChecked(true);
 
-            for (int i = 0; i < amilZakatList.size(); i++) {
-                if (amilZakatList.get(i).id_amil_zakat.equals(val_id_amil_zakat)) {
-                    idAmilZakat.setSelection(i);
-                }
-            }
 
         } else {
             toolbar.setSubtitle("Tambah");

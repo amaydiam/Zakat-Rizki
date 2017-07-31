@@ -213,7 +213,7 @@ public class CalonMustahiqAdapter extends RecyclerView.Adapter<CalonMustahiqAdap
         RobotoLightTextView statusCalonMustahiq;
         @BindView(R.id.status_mustahiq)
         RobotoLightTextView statusMustahiq;
-        @BindView(R.id.nama_amil_zakat)
+        @BindView(R.id.nama_validasi_amil_zakat)
         RobotoLightTextView namaAmilZakat;
         @BindView(R.id.waktu_terakhir_donasi)
         RobotoLightTextView waktuTerakhirDonasi;

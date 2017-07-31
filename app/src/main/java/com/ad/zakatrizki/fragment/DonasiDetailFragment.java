@@ -2,16 +2,13 @@ package com.ad.zakatrizki.fragment;
 
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.media.RatingCompat;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -19,9 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.LinearLayout;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,12 +81,17 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     RobotoBoldTextView tryAgain;
     @BindView(R.id.movie_detail_holder)
     NestedScrollView movieHolder;
+
     @BindView(R.id.fab_navigasi)
     FloatingActionButton fabNavigasi;
-    @BindView(R.id.fab_rekomendasi)
-    FloatingActionButton fabRekomendasi;
+    @BindView(R.id.fab_rating)
+    FloatingActionButton fabRating;
     @BindView(R.id.fab_action)
     FloatingActionButton fabAction;
+    @BindView(R.id.fab_rekomendasi)
+    FloatingActionButton fabRekomendasi;
+
+
     // Basic info
     @BindView(R.id.foto_profil)
     AvatarView fotoProfil;
@@ -105,7 +105,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     RobotoLightTextView noTelpCalonMustahiq;
     @BindView(R.id.nama_perekomendasi_calon_mustahiq)
     RobotoLightTextView namaPerekomendasiCalonMustahiq;
-    @BindView(R.id.nama_amil_zakat)
+    @BindView(R.id.nama_validasi_amil_zakat)
     RobotoLightTextView namaAmilZakat;
     @BindView(R.id.status_mustahiq)
     RobotoLightTextView statusMustahiq;
@@ -128,7 +128,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     private GoogleMap mMap;
     private ProgressDialog dialogProgress;
 
-    @OnClick(R.id.fab_rekomendasi)
+    @OnClick(R.id.fab_rating)
     void AddRating() {
         FragmentManager fragmentManager = getChildFragmentManager();
         AddRatingFragment add = new AddRatingFragment();
@@ -194,8 +194,12 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
                 new IconDrawable(getActivity(), MaterialIcons.md_navigation)
                         .colorRes(R.color.white)
                         .actionBarSize());
-        fabRekomendasi.setImageDrawable(
+        fabRating.setImageDrawable(
                 new IconDrawable(getActivity(), MaterialIcons.md_star)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
+        fabRekomendasi.setImageDrawable(
+                new IconDrawable(getActivity(), MaterialIcons.md_check)
                         .colorRes(R.color.white)
                         .actionBarSize());
         fabAction.setImageDrawable(
@@ -263,8 +267,9 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         errorMessage.setVisibility(View.GONE);
         movieHolder.setVisibility(View.VISIBLE);
         fabNavigasi.setVisibility(View.VISIBLE);
-        fabRekomendasi.setVisibility(View.VISIBLE);
+        fabRating.setVisibility(View.VISIBLE);
         fabAction.setVisibility(View.VISIBLE);
+        fabRekomendasi.setVisibility(View.GONE);
 
         toolbar.setTitle(mustahiq.nama_calon_mustahiq);
         toolbarTextHolder.setVisibility(View.GONE);
@@ -277,7 +282,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(mustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : mustahiq.nama_perekomendasi_calon_mustahiq));
 
         statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (mustahiq.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
-        namaAmilZakat.setText("Nama Amil Zakat : " + mustahiq.nama_amil_zakat);
+        namaAmilZakat.setText("Validasi Amil Zakat Zakat : " + mustahiq.nama_validasi_amil_zakat);
         waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(mustahiq.waktu_terakhir_donasi) ? "-" : mustahiq.waktu_terakhir_donasi));
 
         layoutRating.setVisibility(View.VISIBLE);
@@ -312,6 +317,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         progressCircle.setVisibility(View.GONE);
         movieHolder.setVisibility(View.GONE);
         fabNavigasi.setVisibility(View.GONE);
+        fabRating.setVisibility(View.GONE);
         fabRekomendasi.setVisibility(View.GONE);
         fabAction.setVisibility(View.GONE);
         toolbarTextHolder.setVisibility(View.GONE);
@@ -363,8 +369,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
                     String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
                     String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
-                    String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
-                    String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
+                    String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
                     String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
                     mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
@@ -374,7 +379,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
                             no_telp_calon_mustahiq,
                             nama_perekomendasi_calon_mustahiq,
                             alasan_perekomendasi_calon_mustahiq,
-                            status_mustahiq, jumlah_rating, id_amil_zakat, nama_amil_zakat, waktu_terakhir_donasi);
+                            status_mustahiq, jumlah_rating, nama_validasi_amil_zakat, waktu_terakhir_donasi);
 
                     if (Boolean.parseBoolean(isSuccess))
                         onDownloadSuccessful();

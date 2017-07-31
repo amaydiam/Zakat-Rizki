@@ -276,7 +276,7 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
                     String no_telp_calon_mustahiq = jsDetail.getString(Zakat.no_telp_calon_mustahiq);
                     String status_calon_mustahiq = jsDetail.getString(Zakat.status_calon_mustahiq);
                     String id_amil_zakat = jsDetail.getString(Zakat.id_amil_zakat);
-                    String nama_amil_zakat = jsDetail.getString(Zakat.nama_amil_zakat);
+                    String nama_validasi_amil_zakat = jsDetail.getString(Zakat.nama_validasi_amil_zakat);
 
                     LaporanDonasi laporanDonasi = new LaporanDonasi(
                             id_donasi,
@@ -295,7 +295,7 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
                             no_telp_calon_mustahiq,
                             status_calon_mustahiq,
                             id_amil_zakat,
-                            nama_amil_zakat);
+                            nama_validasi_amil_zakat);
 
                     Intent intent = new Intent();
                     intent.putExtra(Zakat.LAPORAN_DONASI_OBJECT, laporanDonasi);

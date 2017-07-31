@@ -131,7 +131,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
     @OnClick(R.id.fab_action)
     void AddMustahiq() {
 
-        queue = customVolley.Rest(Request.Method.GET, ApiHelper.getAmilZakatLink(getActivity()), null, TAG_AMIL_ZAKAT);
+      //  queue = customVolley.Rest(Request.Method.GET, ApiHelper.getAmilZakatLink(getActivity()), null, TAG_AMIL_ZAKAT);
     }
 
     @OnClick(R.id.try_again)
@@ -213,7 +213,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
         }).start();
 
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -226,7 +226,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 mPreviousVisibleItem = firstVisibleItem;
             }
         });
-
+*/
 
         //setup fab
         fabAction.setImageDrawable(
@@ -238,7 +238,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 new IconDrawable(getActivity(), MaterialCommunityIcons.mdi_arrow_up)
                         .colorRes(R.color.primary));
 
-        fabAction.setVisibility(View.VISIBLE);
+       // fabAction.setVisibility(View.VISIBLE);
 
         noData.setText(Html.fromHtml("<center><h1>{mdi-calendar}</h1></br> Tidak ada mustahiq ...</center>"));
         showNoData(false);
@@ -421,8 +421,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
         String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
         String status_mustahiq = obj.getString(Zakat.status_mustahiq);
         String jumlah_rating = obj.getString(Zakat.jumlah_rating);
-        String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
-        String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
+        String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
         String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
         //set map object
         AddAndSetMapData(
@@ -439,8 +438,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 alasan_perekomendasi_calon_mustahiq,
                 status_mustahiq,
                 jumlah_rating,
-                id_amil_zakat,
-                nama_amil_zakat,
+                nama_validasi_amil_zakat,
                 waktu_terakhir_donasi
         );
 
@@ -461,7 +459,6 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
             String status_mustahiq,
             String jumlah_rating,
             String id_amil_zakat,
-            String nama_amil_zakat,
             String waktu_terakhir_donasi) {
 
         Mustahiq mustahiq = new Mustahiq(
@@ -478,7 +475,6 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 status_mustahiq,
                 jumlah_rating,
                 id_amil_zakat,
-                nama_amil_zakat,
                 waktu_terakhir_donasi);
 
         if (position.equals(TAG_BAWAH)) {
@@ -609,9 +605,9 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                     for (int i = 0; i < jumlah_list_data; i++) {
                         JSONObject obj = items_obj.getJSONObject(i);
                         String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
-                        String nama_amil_zakat = obj.getString(Zakat.nama_amil_zakat);
+                        String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
 
-                        dataAmilZakat.add(new AmilZakat(id_amil_zakat, nama_amil_zakat));
+                        dataAmilZakat.add(new AmilZakat(id_amil_zakat, nama_validasi_amil_zakat));
                     }
 
                     FragmentManager fragmentManager = getChildFragmentManager();
@@ -620,7 +616,6 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                     manageMustahiq.setCancelable(false);
                     manageMustahiq.setDialogTitle("Mustahiq");
                     manageMustahiq.setAction("add");
-                    manageMustahiq.setAmilZakat(dataAmilZakat);
                     manageMustahiq.show(fragmentManager, "Manage Mustahiq");
 
                 } else {

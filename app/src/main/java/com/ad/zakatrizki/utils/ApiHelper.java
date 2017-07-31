@@ -101,6 +101,12 @@ public class ApiHelper {
         return getApiUrl(context) + "rating_mustahiq/addrating";
     }
 
+    public static String getAddRekomendasiLink(Context context) {
+        return getApiUrl(context) + "rekomendasi_mustahiq/addrekomendasi/";
+    }
 
+    public static String getDeleteRekomendasiLink(Context context, String id_mustahiq) {
+        return getApiUrl(context) + "rekomendasi_mustahiq/deleterekomendasi/"+id_mustahiq;
+    }
 
 }

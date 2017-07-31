@@ -9,13 +9,11 @@ public class Zakat extends Application {
 
 
     public static final String LAST_SELECTED = "last_drawer_selection";
-    public static final String VIEW_TYPE = "view_type";
 
     public static final int VIEW_TYPE_CALON_MUSTAHIQ = 1;
     public static final int VIEW_TYPE_MUSTAHIQ = 2;
     public static final int VIEW_TYPE_DONASI = 3;
     public static final int VIEW_TYPE_LAPORAN_DONASI = 4;
-    public static final int VIEW_LOGOUT_LOGIN = 5;
 
     public static final int MY_SOCKET_TIMEOUT_MS = 60000;
     public static final int JPEG_OUTPUT_QUALITY = 70;
@@ -79,6 +77,10 @@ public class Zakat extends Application {
     public static final String NOMOR_IDENTITAS_USER = "no_identitas";
     public static final String NOMOR_TELP_USER = "no_telp";
     public static final String PHOTO = "photo";
+    public static final String ID_AMIL_ZAKAT = "id_amil_zakat";
+    public static final String ID_BADAN_AMIL_ZAKAT = "id_badan_amil_zakat";
+    public static final String NAMA_BADAN_AMIL_ZAKAT = "nama_badan_amil_zakat";
+    public static final String nama_validasi_amil_zakat = "nama_validasi_amil_zakat";
 
     public static String mustahiq = "mustahiq";
     public static String id_mustahiq = "id_mustahiq";
@@ -103,6 +105,8 @@ public class Zakat extends Application {
     public static String caption_photo_2="caption_photo_2";
     public static String caption_photo_3="caption_photo_3";
     public static String rating="rating";
+    public static String id_badan_amil_zakat = "id_badan_amil_zakat";
+    public static String nama_badan_amil_zakat = "nama_badan_amil_zakat";
 
     @Override
     protected void attachBaseContext(Context base) {
