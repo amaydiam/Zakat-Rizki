@@ -5,9 +5,11 @@ import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.media.AudioManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.model.CalonMustahiq;
@@ -129,6 +132,17 @@ public class CalonMustahiqAdapter extends RecyclerView.Adapter<CalonMustahiqAdap
         holder.waktuTerakhirDonasi.setVisibility(View.GONE);
         holder.statusCalonMustahiq.setVisibility(View.GONE);
 
+        holder.layoutRating.setVisibility(View.VISIBLE);
+
+        float rt = 0;
+        try {
+
+            rt = Float.parseFloat(calon_mustahiq.jumlah_rating);
+        } catch (Exception ignored) {
+        }
+        holder.rating.setRating(rt);
+
+
         if (isTablet) {
             if (selected == position)
                 holder.rootParent.setBackgroundColor(ContextCompat.getColor(activity, R.color.card_selected_background));
@@ -221,6 +235,11 @@ public class CalonMustahiqAdapter extends RecyclerView.Adapter<CalonMustahiqAdap
         IconButton btnAction;
         @BindView(R.id.root_parent)
         CardView rootParent;
+        @BindView(R.id.layout_rating)
+        LinearLayout layoutRating;
+
+        @BindView(R.id.rating)
+        AppCompatRatingBar rating;
 
         public ViewHolder(View vi) {
             super(vi);

@@ -30,8 +30,9 @@ public class ApiHelper {
     }
 
     //CalonMustahiq
-    public static String getCalonMustahiqLink(Context context, int page) {
-        return getApiUrl(context) + "calon_mustahiq/calon_mustahiq/" + page;
+    public static String getCalonMustahiqLink(Context context, int page, String keyword) {
+
+        return getApiUrl(context) + "calon_mustahiq/calon_mustahiq/" + page+ (!TextUtils.isNullOrEmpty(keyword) ? ("/" + keyword) : "");
     }
 
     public static String getCalonMustahiqDetailLink(Context context, String id) {
@@ -49,8 +50,8 @@ public class ApiHelper {
 
 
     //Mustahiq
-    public static String getMustahiqLink(Context context, int page) {
-        return getApiUrl(context) + "mustahiq/mustahiq/" + page;
+    public static String getMustahiqLink(Context context, int page,String keyword) {
+        return getApiUrl(context) + "mustahiq/mustahiq/" + page + (!TextUtils.isNullOrEmpty(keyword) ? ("/" + keyword) : "");
     }
 
     public static String getMustahiqDetailLink(Context context, String id) {
@@ -98,7 +99,7 @@ public class ApiHelper {
     }
 
     public static String getAddRatingLink(Context context) {
-        return getApiUrl(context) + "rating_mustahiq/addrating";
+        return getApiUrl(context) + "rating_calon_mustahiq/addrating";
     }
 
     public static String getAddRekomendasiLink(Context context) {

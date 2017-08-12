@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
 import com.ad.zakatrizki.activity.ActionDonasiBaruActivity;
+import com.ad.zakatrizki.model.CalonMustahiq;
 import com.ad.zakatrizki.model.Mustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
@@ -111,6 +112,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     RobotoLightTextView statusMustahiq;
     @BindView(R.id.waktu_terakhir_donasi)
     RobotoLightTextView waktuTerakhirDonasi;
+
     @BindView(R.id.layout_rating)
     LinearLayout layoutRating;
 
@@ -306,6 +308,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         errorMessage.setVisibility(View.VISIBLE);
         progressCircle.setVisibility(View.GONE);
         movieHolder.setVisibility(View.GONE);
+        fabRating.setVisibility(View.GONE);
         toolbarTextHolder.setVisibility(View.GONE);
         toolbar.setTitle("");
     }
@@ -460,5 +463,10 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     public void onFinishRating(Mustahiq mustahiq) {
         this.mustahiq = mustahiq;
         onDownloadSuccessful();
+    }
+
+    @Override
+    public void onFinishRating(CalonMustahiq calonMustahiq) {
+
     }
 }

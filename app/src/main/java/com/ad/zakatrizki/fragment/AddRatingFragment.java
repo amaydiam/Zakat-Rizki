@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
+import com.ad.zakatrizki.model.CalonMustahiq;
 import com.ad.zakatrizki.model.Mustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
@@ -66,12 +67,17 @@ public class AddRatingFragment extends DialogFragment implements CustomVolley.On
     private RatingListener callback;
     private Mustahiq mustahiq;
 
+    private CalonMustahiq calonMustahiq;
+
     public AddRatingFragment() {
 
     }
 
     public void setData(Mustahiq mustahiq) {
         this.mustahiq = mustahiq;
+    }
+    public void setData(CalonMustahiq calonMustahiq) {
+        this.calonMustahiq = calonMustahiq;
     }
 
 
@@ -85,8 +91,13 @@ public class AddRatingFragment extends DialogFragment implements CustomVolley.On
         }
 
         Map<String, String> jsonParams = new HashMap<>();
-        jsonParams.put(Zakat.id_mustahiq,
-                String.valueOf(mustahiq.id_mustahiq));
+        if(mustahiq!=null)
+        jsonParams.put(Zakat.id_calon_mustahiq,
+                String.valueOf(mustahiq.id_calon_mustahiq));
+        else
+            jsonParams.put(Zakat.id_calon_mustahiq,
+                    String.valueOf(calonMustahiq.id_calon_mustahiq));
+
         jsonParams.put(Zakat.rating,
                 String.valueOf(val_addrating));
         if(Prefs.getLogin(getActivity()))
@@ -135,32 +146,18 @@ public class AddRatingFragment extends DialogFragment implements CustomVolley.On
             String message = json.getString(Zakat.message);
             if (Boolean.valueOf(res)) {
 
-                JSONObject obj = new JSONObject(json.getString(Zakat.mustahiq));
-                String id_mustahiq = obj.getString(Zakat.id_mustahiq);
-                String id_calon_mustahiq = obj.getString(Zakat.id_calon_mustahiq);
-                String nama_calon_mustahiq = obj.getString(Zakat.nama_calon_mustahiq);
-                String alamat_calon_mustahiq = obj.getString(Zakat.alamat_calon_mustahiq);
-                String latitude_calon_mustahiq = obj.getString(Zakat.latitude_calon_mustahiq);
-                String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
-                String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
-                String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
-                String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
-                String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
-                String status_mustahiq = obj.getString(Zakat.status_mustahiq);
+                JSONObject obj = new JSONObject(json.getString(Zakat.calon_mustahiq));
                 String jumlah_rating = obj.getString(Zakat.jumlah_rating);
-                String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
-                String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
+                if(mustahiq!=null) {
+                    mustahiq.jumlah_rating = jumlah_rating;
+                    callback.onFinishRating(mustahiq);
+                }
+                else
+                if(calonMustahiq!=null) {
+                    calonMustahiq.jumlah_rating = jumlah_rating;
+                    callback.onFinishRating(calonMustahiq);
+                }
 
-                mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
-                        latitude_calon_mustahiq,
-                        longitude_calon_mustahiq,
-                        no_identitas_calon_mustahiq,
-                        no_telp_calon_mustahiq,
-                        nama_perekomendasi_calon_mustahiq,
-                        alasan_perekomendasi_calon_mustahiq,
-                        status_mustahiq,
-                        jumlah_rating, nama_validasi_amil_zakat, waktu_terakhir_donasi);
-                callback.onFinishRating(mustahiq);
                 dismiss();
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             } else {
@@ -240,6 +237,8 @@ public class AddRatingFragment extends DialogFragment implements CustomVolley.On
     public interface RatingListener {
 
         void onFinishRating(Mustahiq mustahiq);
+
+        void onFinishRating(CalonMustahiq calonMustahiq);
     }
 
 

@@ -11,18 +11,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
 import com.ad.zakatrizki.model.CalonMustahiq;
+import com.ad.zakatrizki.model.Mustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
 import com.ad.zakatrizki.utils.Prefs;
@@ -65,7 +68,7 @@ import butterknife.Unbinder;
 
 public class CalonMustahiqDetailFragment extends Fragment
         implements ManageCalonMustahiqFragment.AddEditCalonMustahiqListener, OnMapReadyCallback,
-        CustomVolley.OnCallbackResponse {
+        CustomVolley.OnCallbackResponse,AddRatingFragment.RatingListener {
 
     private static final String TAG_DETAIL = "TAG_DETAIL";
     @BindBool(R.bool.is_tablet)
@@ -90,8 +93,34 @@ public class CalonMustahiqDetailFragment extends Fragment
     RobotoBoldTextView tryAgain;
     @BindView(R.id.movie_detail_holder)
     NestedScrollView movieHolder;
+
+
+    @BindView(R.id.fab_navigasi)
+    FloatingActionButton fabNavigasi;
+    @BindView(R.id.fab_rating)
+    FloatingActionButton fabRating;
     @BindView(R.id.fab_action)
     FloatingActionButton fabAction;
+    @BindView(R.id.fab_rekomendasi)
+    FloatingActionButton fabRekomendasi;
+
+    @BindView(R.id.layout_rating)
+    LinearLayout layoutRating;
+
+
+    @BindView(R.id.rating)
+    AppCompatRatingBar rating;
+
+
+    @OnClick(R.id.fab_rating)
+    void AddRating() {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        AddRatingFragment add = new AddRatingFragment();
+        add.setTargetFragment(this, 0);
+        add.setData(calonMustahiq);
+        add.show(fragmentManager, "Add Rating");
+    }
+
     @BindView(R.id.foto_profil)
     AvatarView fotoProfil;
     @BindView(R.id.nama_calon_mustahiq)
@@ -153,6 +182,12 @@ public class CalonMustahiqDetailFragment extends Fragment
                 new IconDrawable(getActivity(), MaterialIcons.md_edit)
                         .colorRes(R.color.white)
                         .actionBarSize());
+        fabNavigasi.setVisibility(View.GONE);
+        fabRating.setImageDrawable(
+                new IconDrawable(getActivity(), MaterialIcons.md_star)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
+        fabRekomendasi.setVisibility(View.GONE);
 
         // Download calon_mustahiq details if new instance, else restore from saved instance
         if (savedInstanceState == null || !(savedInstanceState.containsKey(Zakat.CALON_MUSTAHIQ_ID)
@@ -216,6 +251,8 @@ public class CalonMustahiqDetailFragment extends Fragment
             fabAction.setVisibility(View.VISIBLE);
         }
 
+        fabRating.setVisibility(View.VISIBLE);
+
         toolbar.setTitle(calonMustahiq.nama_calon_mustahiq);
         toolbarTextHolder.setVisibility(View.GONE);
 
@@ -225,6 +262,16 @@ public class CalonMustahiqDetailFragment extends Fragment
         noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(calonMustahiq.no_identitas_calon_mustahiq) ? "-" : calonMustahiq.no_identitas_calon_mustahiq));
         noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(calonMustahiq.no_telp_calon_mustahiq) ? "-" : calonMustahiq.no_telp_calon_mustahiq));
         namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(calonMustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : calonMustahiq.nama_perekomendasi_calon_mustahiq));
+
+        layoutRating.setVisibility(View.VISIBLE);
+        Log.v("calonMustahiq.jumlah_rating",calonMustahiq.jumlah_rating+"");
+        float rt = 0;
+        try {
+
+            rt = Float.parseFloat(calonMustahiq.jumlah_rating);
+        } catch (Exception ignored) {
+        }
+        rating.setRating(rt);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
@@ -242,6 +289,7 @@ public class CalonMustahiqDetailFragment extends Fragment
         errorMessage.setVisibility(View.VISIBLE);
         progressCircle.setVisibility(View.GONE);
         movieHolder.setVisibility(View.GONE);
+        fabRating.setVisibility(View.GONE);
         toolbarTextHolder.setVisibility(View.GONE);
         toolbar.setTitle("");
     }
@@ -252,6 +300,7 @@ public class CalonMustahiqDetailFragment extends Fragment
         tryAgain.setVisibility(View.GONE);
         progressCircle.setVisibility(View.GONE);
         movieHolder.setVisibility(View.GONE);
+        fabRating.setVisibility(View.GONE);
         if(calonMustahiq.id_user_perekomendasi.equalsIgnoreCase(Prefs.getIdUser(getActivity()))) {
             fabAction.setVisibility(View.GONE);
         }
@@ -312,8 +361,9 @@ public class CalonMustahiqDetailFragment extends Fragment
                 String nama_perekomendasi_calon_mustahiq = jsDetail
                         .getString(Zakat.nama_perekomendasi_calon_mustahiq);
                 String status_calon_mustahiq = jsDetail.getString(Zakat.status_calon_mustahiq);
+                String jumlah_rating = jsDetail.getString(Zakat.jumlah_rating);
 
-                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1,caption_photo_2,caption_photo_3,nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
+                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1,caption_photo_2,caption_photo_3,nama_perekomendasi_calon_mustahiq, status_calon_mustahiq,jumlah_rating);
 
                 if (Boolean.parseBoolean(isSuccess))
                     onDownloadSuccessful();
@@ -372,4 +422,15 @@ public class CalonMustahiqDetailFragment extends Fragment
 
     }
 
+    @Override
+    public void onFinishRating(Mustahiq mustahiq) {
+
+    }
+
+    @Override
+    public void onFinishRating(CalonMustahiq calonMustahiq) {
+        this.calonMustahiq = calonMustahiq;
+        onDownloadSuccessful();
+
+    }
 }

@@ -15,23 +15,31 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.InputType;
+import android.text.method.DigitsKeyListener;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
 import com.ad.zakatrizki.activity.CalonMustahiqDetailActivity;
+import com.ad.zakatrizki.activity.CariCalonMustahiqActivity;
 import com.ad.zakatrizki.activity.DrawerActivity;
 import com.ad.zakatrizki.adapter.CalonMustahiqAdapter;
 import com.ad.zakatrizki.model.CalonMustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
 import com.ad.zakatrizki.utils.Prefs;
+import com.ad.zakatrizki.utils.TextUtils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.joanzapata.iconify.IconDrawable;
@@ -53,6 +61,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 public class CalonMustahiqListFragment extends Fragment implements CalonMustahiqAdapter.OnCalonMustahiqItemClickListener,
@@ -92,6 +102,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
     TextView textError;
     @BindView(R.id.try_again)
     TextView tryAgain;
+    @BindView(R.id.search)
+    EditText search;
     @BindView(R.id.parent_search)
     CardView parentSearch;
     private ArrayList<CalonMustahiq> dataCalonMustahiqs = new ArrayList<>();
@@ -144,6 +156,13 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
         RefreshData();
     }
 
+
+    @OnClick(R.id.btn_search)
+    void btn_search() {
+        Search();
+    }
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -153,6 +172,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
         activity = getActivity();
     }
 
+    private String keyword = null;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -160,6 +181,11 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
         butterknife = ButterKnife.bind(this, rootView);
         customVolley = new CustomVolley(activity);
         customVolley.setOnCallbackResponse(this);
+        try {
+            keyword = getArguments().getString(Zakat.KEYWORD);
+        } catch (Exception e) {
+
+        }
 
         // Configure the swipe refresh layout
         swipeContainer.setOnRefreshListener(this);
@@ -169,10 +195,24 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
         activity.getTheme().resolveAttribute(android.support.v7.appcompat.R.attr.actionBarSize, typed_value, true);
         swipeContainer.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value.resourceId));
 
+        //search
+        search.setHint("Cari Nama atau Alamat Calon Mustahiq...");
+        search.setInputType(InputType.TYPE_CLASS_TEXT);
+        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                Search();
+                return false;
+            }
+        });
 
-        parentSearch.setVisibility(View.GONE);
-        //inisial adapterCalonMustahiq
+        hideSoftKeyboard();
+
+        if (!TextUtils.isNullOrEmpty(keyword))
+            parentSearch.setVisibility(View.GONE);
+        //inisial adapterMustahiq
         adapterCalonMustahiq = new CalonMustahiqAdapter(activity, dataCalonMustahiqs, isTablet);
+        adapterCalonMustahiq.setValSearchAlamat(keyword);
         adapterCalonMustahiq.setOnCalonMustahiqItemClickListener(this);
 
         //recyclerView
@@ -324,7 +364,7 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
     }
 
     public String getUrlToDownload(int page) {
-        return ApiHelper.getCalonMustahiqLink(getActivity(), page);
+        return ApiHelper.getCalonMustahiqLink(getActivity(), page, keyword);
     }
 
 
@@ -440,6 +480,10 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 .getString(Zakat.nama_perekomendasi_calon_mustahiq);
         String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
 
+        String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+
+        Log.v("jumlah_rating",jumlah_rating+"");
+
         //set map object
         AddAndSetMapData(
                 position,
@@ -457,7 +501,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 caption_photo_2,
                 caption_photo_3,
                 nama_perekomendasi_calon_mustahiq,
-                status_calon_mustahiq
+                status_calon_mustahiq,
+                jumlah_rating
         );
 
     }
@@ -480,9 +525,27 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
             String caption_photo_2,
             String caption_photo_3,
             String nama_perekomendasi_calon_mustahiq,
-            String status_calon_mustahiq) {
+            String status_calon_mustahiq,
+            String jumlah_rating) {
 
-        CalonMustahiq calon_mustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
+        CalonMustahiq calon_mustahiq = new CalonMustahiq(
+                id_calon_mustahiq,
+                nama_calon_mustahiq,
+                alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq,
+                no_identitas_calon_mustahiq,
+                no_telp_calon_mustahiq,
+                id_user_perekomendasi,
+                alasan_perekomendasi_calon_mustahiq,
+                photo_1,
+                photo_2,
+                photo_3,
+                caption_photo_1,
+                caption_photo_2,
+                caption_photo_3,
+                nama_perekomendasi_calon_mustahiq,
+                status_calon_mustahiq,
+                jumlah_rating
+        );
 
 
         if (position.equals(TAG_BAWAH)) {
@@ -728,4 +791,22 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
     public void onFinishDeleteCalonMustahiq(CalonMustahiq calon_mustahiq) {
 
     }
+
+    private void Search() {
+        String val_search = search.getText().toString().trim();
+        if (!TextUtils.isNullOrEmpty(val_search)) {
+            search.setText("");
+            Intent intent = new Intent(activity, CariCalonMustahiqActivity.class);
+            intent.putExtra(Zakat.KEYWORD, val_search);
+            startActivity(intent);
+        }
+    }
+
+    public void hideSoftKeyboard() {
+        if(getActivity().getCurrentFocus()!=null) {
+            InputMethodManager inputMethodManager = (InputMethodManager)getActivity(). getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
+    }
+
 }

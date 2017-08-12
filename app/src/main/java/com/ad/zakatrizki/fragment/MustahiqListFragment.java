@@ -15,16 +15,21 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
+import com.ad.zakatrizki.activity.CariMustahiqActivity;
 import com.ad.zakatrizki.activity.DrawerActivity;
 import com.ad.zakatrizki.activity.MustahiqDetailActivity;
 import com.ad.zakatrizki.adapter.MustahiqAdapter;
@@ -32,6 +37,7 @@ import com.ad.zakatrizki.model.AmilZakat;
 import com.ad.zakatrizki.model.Mustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
+import com.ad.zakatrizki.utils.TextUtils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.joanzapata.iconify.IconDrawable;
@@ -53,6 +59,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 public class MustahiqListFragment extends Fragment implements MustahiqAdapter.OnMustahiqItemClickListener,
@@ -93,6 +101,8 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
     TextView textError;
     @BindView(R.id.try_again)
     TextView tryAgain;
+    @BindView(R.id.search)
+    EditText search;
     @BindView(R.id.parent_search)
     CardView parentSearch;
     private ArrayList<Mustahiq> dataMustahiqs = new ArrayList<>();
@@ -109,6 +119,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
     private CustomVolley customVolley;
     private RequestQueue queue;
     private int mPreviousVisibleItem;
+    private String keyword=null;
 
     public MustahiqListFragment() {
     }
@@ -139,6 +150,13 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
         RefreshData();
     }
 
+
+
+    @OnClick(R.id.btn_search)
+    void btn_search() {
+        Search();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -156,6 +174,13 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
         customVolley = new CustomVolley(activity);
         customVolley.setOnCallbackResponse(this);
 
+        try {
+            keyword = getArguments().getString(Zakat.KEYWORD);
+        } catch (Exception e) {
+
+        }
+
+
         // Configure the swipe refresh layout
         swipeContainer.setOnRefreshListener(this);
         swipeContainer.setColorSchemeResources(R.color.blue_light,
@@ -164,10 +189,25 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
         activity.getTheme().resolveAttribute(android.support.v7.appcompat.R.attr.actionBarSize, typed_value, true);
         swipeContainer.setProgressViewOffset(false, 0, getResources().getDimensionPixelSize(typed_value.resourceId));
 
+        //search
+        search.setHint("Cari Nama atau Alamat Mustahiq...");
+        search.setInputType(InputType.TYPE_CLASS_TEXT);
+        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                Search();
+                return false;
+            }
+        });
 
-        parentSearch.setVisibility(View.GONE);
+        hideSoftKeyboard();
+
+        if (!TextUtils.isNullOrEmpty(keyword))
+            parentSearch.setVisibility(View.GONE);
+
         //inisial adapterMustahiq
         adapterMustahiq = new MustahiqAdapter(activity, dataMustahiqs, isTablet);
+        adapterMustahiq.setValSearchAlamat(keyword);
         adapterMustahiq.setOnMustahiqItemClickListener(this);
 
         //recyclerView
@@ -318,7 +358,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
     }
 
     public String getUrlToDownload(int page) {
-        return ApiHelper.getMustahiqLink(getActivity(), page);
+        return ApiHelper.getMustahiqLink(getActivity(), page,keyword);
     }
 
 
@@ -777,5 +817,22 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
     @Override
     public void onFinishDeleteMustahiq(Mustahiq mustahiq) {
 
+    }
+
+    private void Search() {
+        String val_search = search.getText().toString().trim();
+        if (!TextUtils.isNullOrEmpty(val_search)) {
+            search.setText("");
+            Intent intent = new Intent(activity, CariMustahiqActivity.class);
+            intent.putExtra(Zakat.KEYWORD, val_search);
+            startActivity(intent);
+        }
+    }
+
+    public void hideSoftKeyboard() {
+        if(getActivity().getCurrentFocus()!=null) {
+            InputMethodManager inputMethodManager = (InputMethodManager)getActivity(). getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }

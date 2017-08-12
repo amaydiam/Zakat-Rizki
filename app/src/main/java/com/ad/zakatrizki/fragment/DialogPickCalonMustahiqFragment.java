@@ -323,7 +323,7 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
     }
 
     public String getUrlToDownload(int page) {
-        return ApiHelper.getCalonMustahiqLink(getActivity(), page);
+        return ApiHelper.getCalonMustahiqLink(getActivity(), page,null);
     }
 
     protected void DrawDataAllData(String position, String tag, String response) {
@@ -435,6 +435,7 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
         String nama_perekomendasi_calon_mustahiq = obj
                 .getString(Zakat.nama_perekomendasi_calon_mustahiq);
         String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
+        String jumlah_rating = obj.getString(Zakat.jumlah_rating);
 
         //set map object
         AddAndSetMapData(
@@ -453,7 +454,8 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
                 caption_photo_2,
                 caption_photo_3,
                 nama_perekomendasi_calon_mustahiq,
-                status_calon_mustahiq
+                status_calon_mustahiq,
+                jumlah_rating
         );
 
     }
@@ -476,9 +478,9 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
             String caption_photo_2,
             String caption_photo_3,
             String nama_perekomendasi_calon_mustahiq,
-            String status_calon_mustahiq) {
+            String status_calon_mustahiq,String jumlah_rating) {
 
-        CalonMustahiq calon_mustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, nama_perekomendasi_calon_mustahiq, status_calon_mustahiq);
+        CalonMustahiq calon_mustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, nama_perekomendasi_calon_mustahiq, status_calon_mustahiq,jumlah_rating);
 
 
 
