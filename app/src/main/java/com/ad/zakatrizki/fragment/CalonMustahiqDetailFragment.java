@@ -26,6 +26,8 @@ import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
 import com.ad.zakatrizki.model.CalonMustahiq;
 import com.ad.zakatrizki.model.Mustahiq;
+import com.ad.zakatrizki.model.PickLocation;
+import com.ad.zakatrizki.model.Refresh;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
 import com.ad.zakatrizki.utils.Prefs;
@@ -53,6 +55,7 @@ import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 import com.sdsmdg.tastytoast.TastyToast;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -66,9 +69,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+import static android.view.View.VISIBLE;
+
 public class CalonMustahiqDetailFragment extends Fragment
         implements ManageCalonMustahiqFragment.AddEditCalonMustahiqListener, OnMapReadyCallback,
-        CustomVolley.OnCallbackResponse,AddRatingFragment.RatingListener {
+        CustomVolley.OnCallbackResponse,AddRatingFragment.RatingListener, AddValidasiFragment.ValidasiListener {
 
     private static final String TAG_DETAIL = "TAG_DETAIL";
     @BindBool(R.bool.is_tablet)
@@ -110,6 +115,15 @@ public class CalonMustahiqDetailFragment extends Fragment
 
     @BindView(R.id.rating)
     AppCompatRatingBar rating;
+
+    @OnClick(R.id.fab_rekomendasi)
+    void AddRekomendasi() {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        AddValidasiFragment add = new AddValidasiFragment();
+        add.setTargetFragment(this, 0);
+        add.setData(calonMustahiq);
+        add.show(fragmentManager, "Add Rekomendasi");
+    }
 
 
     @OnClick(R.id.fab_rating)
@@ -187,7 +201,11 @@ public class CalonMustahiqDetailFragment extends Fragment
                 new IconDrawable(getActivity(), MaterialIcons.md_star)
                         .colorRes(R.color.white)
                         .actionBarSize());
-        fabRekomendasi.setVisibility(View.GONE);
+
+        fabRekomendasi.setImageDrawable(
+                new IconDrawable(getActivity(), MaterialIcons.md_check)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
 
         // Download calon_mustahiq details if new instance, else restore from saved instance
         if (savedInstanceState == null || !(savedInstanceState.containsKey(Zakat.CALON_MUSTAHIQ_ID)
@@ -251,6 +269,12 @@ public class CalonMustahiqDetailFragment extends Fragment
             fabAction.setVisibility(View.VISIBLE);
         }
 
+        if (Prefs.getLogin(getActivity())&& Prefs.getTipeUser(getActivity()).equalsIgnoreCase("1")) {
+            fabRekomendasi.setVisibility(View.VISIBLE);
+        }
+        else
+            fabRekomendasi.setVisibility(View.GONE);
+
         fabRating.setVisibility(View.VISIBLE);
 
         toolbar.setTitle(calonMustahiq.nama_calon_mustahiq);
@@ -290,6 +314,7 @@ public class CalonMustahiqDetailFragment extends Fragment
         progressCircle.setVisibility(View.GONE);
         movieHolder.setVisibility(View.GONE);
         fabRating.setVisibility(View.GONE);
+        fabRekomendasi.setVisibility(View.GONE);
         toolbarTextHolder.setVisibility(View.GONE);
         toolbar.setTitle("");
     }
@@ -301,6 +326,7 @@ public class CalonMustahiqDetailFragment extends Fragment
         progressCircle.setVisibility(View.GONE);
         movieHolder.setVisibility(View.GONE);
         fabRating.setVisibility(View.GONE);
+        fabRekomendasi.setVisibility(View.GONE);
         if(calonMustahiq.id_user_perekomendasi.equalsIgnoreCase(Prefs.getIdUser(getActivity()))) {
             fabAction.setVisibility(View.GONE);
         }
@@ -431,6 +457,17 @@ public class CalonMustahiqDetailFragment extends Fragment
     public void onFinishRating(CalonMustahiq calonMustahiq) {
         this.calonMustahiq = calonMustahiq;
         onDownloadSuccessful();
+
+    }
+
+    @Override
+    public void onFinishValidasi(Mustahiq mustahiq) {
+
+    }
+
+    @Override
+    public void onFinishValidasi(CalonMustahiq mustahiq) {
+        EventBus.getDefault().postSticky(new Refresh(true));
 
     }
 }

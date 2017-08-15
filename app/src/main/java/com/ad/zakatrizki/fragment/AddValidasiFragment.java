@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
+import com.ad.zakatrizki.model.CalonMustahiq;
 import com.ad.zakatrizki.model.Mustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
@@ -63,6 +64,7 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
     private ValidasiListener callback;
     private Mustahiq mustahiq;
     private Dialog alertDialog;
+    private CalonMustahiq calonMustahiq;
 
     public AddValidasiFragment() {
 
@@ -83,8 +85,8 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
             public void onClick(DialogInterface arg0, int arg1) {
                 Map<String, String> jsonParams = new HashMap<>();
                 jsonParams.put(Zakat.id_calon_mustahiq,
-                        String.valueOf(mustahiq.id_calon_mustahiq));
-                jsonParams.put(Zakat.id_amil_zakat,Prefs.getIdAmilZakat(getActivity()));
+                        String.valueOf(mustahiq != null ? mustahiq.id_calon_mustahiq : calonMustahiq.id_calon_mustahiq));
+                jsonParams.put(Zakat.id_amil_zakat, Prefs.getIdAmilZakat(getActivity()));
 
                 queue = customVolley.Rest(Request.Method.POST, ApiHelper.getAddValidasiLink(getActivity()), jsonParams, TAG_RATING);
 
@@ -150,17 +152,20 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
                 String jumlah_rating = obj.getString(Zakat.jumlah_rating);
                 String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
                 String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
-
-                mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
-                        latitude_calon_mustahiq,
-                        longitude_calon_mustahiq,
-                        no_identitas_calon_mustahiq,
-                        no_telp_calon_mustahiq,
-                        nama_perekomendasi_calon_mustahiq,
-                        alasan_perekomendasi_calon_mustahiq,
-                        status_mustahiq,
-                        jumlah_rating, nama_validasi_amil_zakat, waktu_terakhir_donasi);
-                callback.onFinishValidasi(mustahiq);
+                if (mustahiq != null) {
+                    mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
+                            latitude_calon_mustahiq,
+                            longitude_calon_mustahiq,
+                            no_identitas_calon_mustahiq,
+                            no_telp_calon_mustahiq,
+                            nama_perekomendasi_calon_mustahiq,
+                            alasan_perekomendasi_calon_mustahiq,
+                            status_mustahiq,
+                            jumlah_rating, nama_validasi_amil_zakat, waktu_terakhir_donasi);
+                    callback.onFinishValidasi(mustahiq);
+                } else {
+                    callback.onFinishValidasi(calonMustahiq);
+                }
                 dismiss();
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             } else {
@@ -234,10 +239,18 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
         }
     }
 
+    public void setData(CalonMustahiq calonMustahiq) {
+        this.calonMustahiq = calonMustahiq;
+    }
+
 
     public interface ValidasiListener {
 
         void onFinishValidasi(Mustahiq mustahiq);
+
+        void onFinishValidasi(CalonMustahiq mustahiq);
+
+
     }
 
 

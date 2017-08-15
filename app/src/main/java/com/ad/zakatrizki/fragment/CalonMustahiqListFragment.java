@@ -16,7 +16,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.InputType;
-import android.text.method.DigitsKeyListener;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -36,6 +35,7 @@ import com.ad.zakatrizki.activity.CariCalonMustahiqActivity;
 import com.ad.zakatrizki.activity.DrawerActivity;
 import com.ad.zakatrizki.adapter.CalonMustahiqAdapter;
 import com.ad.zakatrizki.model.CalonMustahiq;
+import com.ad.zakatrizki.model.Refresh;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
 import com.ad.zakatrizki.utils.Prefs;
@@ -50,6 +50,9 @@ import com.mugen.Mugen;
 import com.mugen.MugenCallbacks;
 import com.sdsmdg.tastytoast.TastyToast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -482,7 +485,7 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
 
         String jumlah_rating = obj.getString(Zakat.jumlah_rating);
 
-        Log.v("jumlah_rating",jumlah_rating+"");
+        Log.v("jumlah_rating", jumlah_rating + "");
 
         //set map object
         AddAndSetMapData(
@@ -694,6 +697,7 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
 
     @Override
     public void onRootClick(View v, int position) {
+        position_delete = position;
 
         if (isTablet) {
             adapterCalonMustahiq.setSelected(position);
@@ -803,10 +807,33 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
     }
 
     public void hideSoftKeyboard() {
-        if(getActivity().getCurrentFocus()!=null) {
-            InputMethodManager inputMethodManager = (InputMethodManager)getActivity(). getSystemService(INPUT_METHOD_SERVICE);
+        if (getActivity().getCurrentFocus() != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         }
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onRefresh(Refresh cp) {
+        if (cp.getRefresh()) {
+            adapterCalonMustahiq.remove(position_delete);
+        }
+        Refresh stickyEvent = EventBus.getDefault().getStickyEvent(Refresh.class);
+        if (stickyEvent != null) {
+            EventBus.getDefault().removeStickyEvent(stickyEvent);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
 }

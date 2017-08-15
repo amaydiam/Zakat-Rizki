@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
+import com.ad.zakatrizki.model.CalonMustahiq;
 import com.ad.zakatrizki.model.Mustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
@@ -365,6 +366,10 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
     public void onFinishValidasi(Mustahiq mustahiq) {
         this.mustahiq = mustahiq;
         onDownloadSuccessful();
+
+    }
+    @Override
+    public void onFinishValidasi(CalonMustahiq mustahiq) {
 
     }
 }
