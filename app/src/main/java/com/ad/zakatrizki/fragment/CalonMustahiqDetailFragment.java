@@ -1,32 +1,24 @@
 package com.ad.zakatrizki.fragment;
 
-import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
 import com.ad.zakatrizki.model.CalonMustahiq;
 import com.ad.zakatrizki.model.Mustahiq;
-import com.ad.zakatrizki.model.PickLocation;
 import com.ad.zakatrizki.model.Refresh;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
@@ -37,10 +29,6 @@ import com.ad.zakatrizki.widget.RobotoLightTextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.github.clans.fab.FloatingActionButton;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -49,17 +37,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.MaterialIcons;
 import com.sdsmdg.tastytoast.TastyToast;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Locale;
 
 import agency.tango.android.avatarview.loader.PicassoLoader;
 import agency.tango.android.avatarview.views.AvatarView;
@@ -69,11 +52,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import static android.view.View.VISIBLE;
-
 public class CalonMustahiqDetailFragment extends Fragment
         implements ManageCalonMustahiqFragment.AddEditCalonMustahiqListener, OnMapReadyCallback,
-        CustomVolley.OnCallbackResponse,AddRatingFragment.RatingListener, AddValidasiFragment.ValidasiListener {
+        CustomVolley.OnCallbackResponse, AddRatingFragment.RatingListener, AddValidasiFragment.ValidasiListener {
 
     private static final String TAG_DETAIL = "TAG_DETAIL";
     @BindBool(R.bool.is_tablet)
@@ -265,14 +246,13 @@ public class CalonMustahiqDetailFragment extends Fragment
         progressCircle.setVisibility(View.GONE);
         errorMessage.setVisibility(View.GONE);
         movieHolder.setVisibility(View.VISIBLE);
-        if(calonMustahiq.id_user_perekomendasi.equalsIgnoreCase(Prefs.getIdUser(getActivity()))) {
+        if (calonMustahiq.id_user_perekomendasi.equalsIgnoreCase(Prefs.getIdUser(getActivity()))) {
             fabAction.setVisibility(View.VISIBLE);
         }
 
-        if (Prefs.getLogin(getActivity())&& Prefs.getTipeUser(getActivity()).equalsIgnoreCase("1")) {
+        if (Prefs.getLogin(getActivity()) && Prefs.getTipeUser(getActivity()).equalsIgnoreCase("1")) {
             fabRekomendasi.setVisibility(View.VISIBLE);
-        }
-        else
+        } else
             fabRekomendasi.setVisibility(View.GONE);
 
         fabRating.setVisibility(View.VISIBLE);
@@ -288,7 +268,7 @@ public class CalonMustahiqDetailFragment extends Fragment
         namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(calonMustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : calonMustahiq.nama_perekomendasi_calon_mustahiq));
 
         layoutRating.setVisibility(View.VISIBLE);
-        Log.v("calonMustahiq.jumlah_rating",calonMustahiq.jumlah_rating+"");
+        Log.v("calonMustahiq.jumlah_rating", calonMustahiq.jumlah_rating + "");
         float rt = 0;
         try {
 
@@ -327,7 +307,7 @@ public class CalonMustahiqDetailFragment extends Fragment
         movieHolder.setVisibility(View.GONE);
         fabRating.setVisibility(View.GONE);
         fabRekomendasi.setVisibility(View.GONE);
-        if(calonMustahiq.id_user_perekomendasi.equalsIgnoreCase(Prefs.getIdUser(getActivity()))) {
+        if (calonMustahiq.id_user_perekomendasi.equalsIgnoreCase(Prefs.getIdUser(getActivity()))) {
             fabAction.setVisibility(View.GONE);
         }
         toolbarTextHolder.setVisibility(View.GONE);
@@ -389,7 +369,7 @@ public class CalonMustahiqDetailFragment extends Fragment
                 String status_calon_mustahiq = jsDetail.getString(Zakat.status_calon_mustahiq);
                 String jumlah_rating = jsDetail.getString(Zakat.jumlah_rating);
 
-                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1,caption_photo_2,caption_photo_3,nama_perekomendasi_calon_mustahiq, status_calon_mustahiq,jumlah_rating);
+                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, nama_perekomendasi_calon_mustahiq, status_calon_mustahiq, jumlah_rating);
 
                 if (Boolean.parseBoolean(isSuccess))
                     onDownloadSuccessful();
@@ -430,14 +410,12 @@ public class CalonMustahiqDetailFragment extends Fragment
     }
 
 
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.getUiSettings().setMapToolbarEnabled(false);
 
-        LatLng Posisi = new LatLng(Double.parseDouble(calonMustahiq.latitude_calon_mustahiq.equalsIgnoreCase("null")?"0.0":calonMustahiq.latitude_calon_mustahiq), Double.parseDouble(calonMustahiq.longitude_calon_mustahiq.equalsIgnoreCase("null")?"0.0":calonMustahiq.longitude_calon_mustahiq));
+        LatLng Posisi = new LatLng(Double.parseDouble(calonMustahiq.latitude_calon_mustahiq.equalsIgnoreCase("null") ? "0.0" : calonMustahiq.latitude_calon_mustahiq), Double.parseDouble(calonMustahiq.longitude_calon_mustahiq.equalsIgnoreCase("null") ? "0.0" : calonMustahiq.longitude_calon_mustahiq));
         MarkerOptions marker = new MarkerOptions()
                 .position(Posisi)
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_mustahiq));
@@ -468,6 +446,6 @@ public class CalonMustahiqDetailFragment extends Fragment
     @Override
     public void onFinishValidasi(CalonMustahiq mustahiq) {
         EventBus.getDefault().postSticky(new Refresh(true));
-
+        getActivity().finish();
     }
 }
