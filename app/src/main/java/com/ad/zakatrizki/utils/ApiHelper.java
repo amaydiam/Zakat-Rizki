@@ -102,12 +102,12 @@ public class ApiHelper {
         return getApiUrl(context) + "rating_calon_mustahiq/addrating";
     }
 
-    public static String getAddRekomendasiLink(Context context) {
-        return getApiUrl(context) + "rekomendasi_mustahiq/addrekomendasi/";
+    public static String getAddValidasiLink(Context context) {
+        return getApiUrl(context) + "validasi_mustahiq/addvalidasi/";
     }
 
-    public static String getDeleteRekomendasiLink(Context context, String id_mustahiq) {
-        return getApiUrl(context) + "rekomendasi_mustahiq/deleterekomendasi/"+id_mustahiq;
+    public static String getDeleteValidasiLink(Context context, String id_mustahiq) {
+        return getApiUrl(context) + "validasi_mustahiq/deletevalidasi/"+id_mustahiq;
     }
 
 }

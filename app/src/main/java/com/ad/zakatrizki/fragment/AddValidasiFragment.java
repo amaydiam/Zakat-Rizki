@@ -44,12 +44,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class AddRekomendasiFragment extends DialogFragment implements CustomVolley.OnCallbackResponse {
+public class AddValidasiFragment extends DialogFragment implements CustomVolley.OnCallbackResponse {
     private static final String TAG_RATING = "TAG_RATING";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.rekomendasi)
-    Button rekomendasi;
+    @BindView(R.id.validasi)
+    Button validasi;
     @BindView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
 
@@ -60,11 +60,11 @@ public class AddRekomendasiFragment extends DialogFragment implements CustomVoll
     private Unbinder butterKnife;
 
 
-    private RekomendasiListener callback;
+    private ValidasiListener callback;
     private Mustahiq mustahiq;
     private Dialog alertDialog;
 
-    public AddRekomendasiFragment() {
+    public AddValidasiFragment() {
 
     }
 
@@ -73,21 +73,20 @@ public class AddRekomendasiFragment extends DialogFragment implements CustomVoll
     }
 
 
-    @OnClick(R.id.rekomendasi)
-    void Rekomendasi() {
+    @OnClick(R.id.validasi)
+    void Validasi() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        alertDialogBuilder.setMessage("Anda yakin akan memberikan rekomendasi pada mustahiq ini?");
+        alertDialogBuilder.setMessage("Anda yakin akan memberikan validasi pada mustahiq ini?");
 
         alertDialogBuilder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
                 Map<String, String> jsonParams = new HashMap<>();
-                jsonParams.put(Zakat.id_mustahiq,
-                        String.valueOf(mustahiq.id_mustahiq));
-                jsonParams.put(Zakat.id_user,
-                        String.valueOf(Prefs.getIdUser(getActivity())));
+                jsonParams.put(Zakat.id_calon_mustahiq,
+                        String.valueOf(mustahiq.id_calon_mustahiq));
+                jsonParams.put(Zakat.id_amil_zakat,Prefs.getIdAmilZakat(getActivity()));
 
-                queue = customVolley.Rest(Request.Method.POST, ApiHelper.getAddRekomendasiLink(getActivity()), jsonParams, TAG_RATING);
+                queue = customVolley.Rest(Request.Method.POST, ApiHelper.getAddValidasiLink(getActivity()), jsonParams, TAG_RATING);
 
             }
         });
@@ -161,7 +160,7 @@ public class AddRekomendasiFragment extends DialogFragment implements CustomVoll
                         alasan_perekomendasi_calon_mustahiq,
                         status_mustahiq,
                         jumlah_rating, nama_validasi_amil_zakat, waktu_terakhir_donasi);
-                callback.onFinishRekomendasi(mustahiq);
+                callback.onFinishValidasi(mustahiq);
                 dismiss();
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             } else {
@@ -188,7 +187,7 @@ public class AddRekomendasiFragment extends DialogFragment implements CustomVoll
         super.onCreate(savedInstanceState);
 
         try {
-            callback = (RekomendasiListener) getTargetFragment();
+            callback = (ValidasiListener) getTargetFragment();
         } catch (Exception e) {
             throw new ClassCastException("Calling Fragment must implement KonfirmasiPendaftaranPesertaListener");
         }
@@ -198,13 +197,13 @@ public class AddRekomendasiFragment extends DialogFragment implements CustomVoll
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
 
         View view = inflater.inflate(
-                R.layout.content_rekomendasi, container);
+                R.layout.content_validasi, container);
 
         butterKnife = ButterKnife.bind(this, view);
         customVolley = new CustomVolley(getActivity());
         customVolley.setOnCallbackResponse(this);
         snackbar = new SnackBar(getActivity(), coordinatorLayout);
-        toolbar.setTitle("Rekomendasi");
+        toolbar.setTitle("Validasi");
         toolbar.setNavigationIcon(
                 new IconDrawable(getActivity(), MaterialIcons.md_close)
                         .colorRes(R.color.white)
@@ -236,9 +235,9 @@ public class AddRekomendasiFragment extends DialogFragment implements CustomVoll
     }
 
 
-    public interface RekomendasiListener {
+    public interface ValidasiListener {
 
-        void onFinishRekomendasi(Mustahiq mustahiq);
+        void onFinishValidasi(Mustahiq mustahiq);
     }
 
 

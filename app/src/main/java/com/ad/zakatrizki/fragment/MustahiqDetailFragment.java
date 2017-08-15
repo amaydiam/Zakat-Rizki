@@ -46,7 +46,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFragment.AddEditMustahiqListener, CustomVolley.OnCallbackResponse, OnMapReadyCallback, AddRekomendasiFragment.RekomendasiListener {
+public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFragment.AddEditMustahiqListener, CustomVolley.OnCallbackResponse, OnMapReadyCallback, AddValidasiFragment.ValidasiListener {
 
     private static final String TAG_DETAIL = "TAG_DETAIL";
     @BindBool(R.bool.is_tablet)
@@ -121,7 +121,7 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
     @OnClick(R.id.fab_rekomendasi)
     void AddRekomendasi() {
         FragmentManager fragmentManager = getChildFragmentManager();
-        AddRekomendasiFragment add = new AddRekomendasiFragment();
+        AddValidasiFragment add = new AddValidasiFragment();
         add.setTargetFragment(this, 0);
         add.setData(mustahiq);
         add.show(fragmentManager, "Add Rekomendasi");
@@ -362,7 +362,7 @@ public class MustahiqDetailFragment extends Fragment implements ManageMustahiqFr
     }
 
     @Override
-    public void onFinishRekomendasi(Mustahiq mustahiq) {
+    public void onFinishValidasi(Mustahiq mustahiq) {
         this.mustahiq = mustahiq;
         onDownloadSuccessful();
 

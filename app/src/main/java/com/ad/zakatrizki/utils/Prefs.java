@@ -107,8 +107,9 @@ public final class Prefs {
         return e;
     }
 
-    public static void getIdAmilZakat(final Context context, String id_amil_zakat) {
-        Prefs.putPref(context, Zakat.ID_AMIL_ZAKAT, id_amil_zakat);
+    public static String getIdAmilZakat(final Context context) {
+        String e = Prefs.getPref(context, Zakat.ID_AMIL_ZAKAT, null);
+        return e;
     }
 
     public static void putIdAmilZakat(final Context context, String id_amil_zakat) {
