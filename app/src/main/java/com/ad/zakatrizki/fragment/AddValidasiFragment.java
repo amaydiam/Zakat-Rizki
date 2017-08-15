@@ -78,7 +78,7 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
     @OnClick(R.id.validasi)
     void Validasi() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        alertDialogBuilder.setMessage("Anda yakin akan memberikan validasi pada mustahiq ini?");
+        alertDialogBuilder.setMessage("Anda yakin akan memberikan validasi pada " + (mustahiq != null ? "" : "Calon") + " ini?");
 
         alertDialogBuilder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
             @Override
@@ -136,23 +136,23 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
             String res = json.getString(Zakat.isSuccess);
             String message = json.getString(Zakat.message);
             if (Boolean.valueOf(res)) {
-
-                JSONObject obj = new JSONObject(json.getString(Zakat.mustahiq));
-                String id_mustahiq = obj.getString(Zakat.id_mustahiq);
-                String id_calon_mustahiq = obj.getString(Zakat.id_calon_mustahiq);
-                String nama_calon_mustahiq = obj.getString(Zakat.nama_calon_mustahiq);
-                String alamat_calon_mustahiq = obj.getString(Zakat.alamat_calon_mustahiq);
-                String latitude_calon_mustahiq = obj.getString(Zakat.latitude_calon_mustahiq);
-                String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
-                String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
-                String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
-                String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
-                String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
-                String status_mustahiq = obj.getString(Zakat.status_mustahiq);
-                String jumlah_rating = obj.getString(Zakat.jumlah_rating);
-                String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
-                String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
                 if (mustahiq != null) {
+                    JSONObject obj = new JSONObject(json.getString(Zakat.mustahiq));
+                    String id_mustahiq = obj.getString(Zakat.id_mustahiq);
+                    String id_calon_mustahiq = obj.getString(Zakat.id_calon_mustahiq);
+                    String nama_calon_mustahiq = obj.getString(Zakat.nama_calon_mustahiq);
+                    String alamat_calon_mustahiq = obj.getString(Zakat.alamat_calon_mustahiq);
+                    String latitude_calon_mustahiq = obj.getString(Zakat.latitude_calon_mustahiq);
+                    String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
+                    String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
+                    String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                    String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
+                    String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
+                    String status_mustahiq = obj.getString(Zakat.status_mustahiq);
+                    String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+                    String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
+                    String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
+
                     mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
                             latitude_calon_mustahiq,
                             longitude_calon_mustahiq,
