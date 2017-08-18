@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
 import com.ad.zakatrizki.activity.CariMustahiqActivity;
+import com.ad.zakatrizki.activity.DonasiDetailActivity;
 import com.ad.zakatrizki.activity.DrawerActivity;
 import com.ad.zakatrizki.activity.MustahiqDetailActivity;
 import com.ad.zakatrizki.adapter.MustahiqAdapter;
@@ -37,6 +38,7 @@ import com.ad.zakatrizki.model.AmilZakat;
 import com.ad.zakatrizki.model.Mustahiq;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
+import com.ad.zakatrizki.utils.Prefs;
 import com.ad.zakatrizki.utils.TextUtils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -61,6 +63,8 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 
 public class MustahiqListFragment extends Fragment implements MustahiqAdapter.OnMustahiqItemClickListener,
@@ -459,6 +463,19 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
         String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
         String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
+
+        String photo_1 = obj
+                .getString(Zakat.photo_1);
+        String photo_2 = obj
+                .getString(Zakat.photo_2);
+        String photo_3 = obj
+                .getString(Zakat.photo_3);
+        String caption_photo_1 = obj
+                .getString(Zakat.caption_photo_1);
+        String caption_photo_2 = obj
+                .getString(Zakat.caption_photo_2);
+        String caption_photo_3 = obj
+                .getString(Zakat.caption_photo_3);
         String status_mustahiq = obj.getString(Zakat.status_mustahiq);
         String jumlah_rating = obj.getString(Zakat.jumlah_rating);
         String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
@@ -466,29 +483,25 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
         //set map object
         AddAndSetMapData(
                 position,
-                id_mustahiq,
-                id_calon_mustahiq,
-                nama_calon_mustahiq,
+                id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq,
+                alamat_calon_mustahiq,
                 latitude_calon_mustahiq,
                 longitude_calon_mustahiq,
-                alamat_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
                 nama_perekomendasi_calon_mustahiq,
                 alasan_perekomendasi_calon_mustahiq,
+                photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3,
                 status_mustahiq,
                 jumlah_rating,
-                nama_validasi_amil_zakat,
-                waktu_terakhir_donasi
+                nama_validasi_amil_zakat, waktu_terakhir_donasi
         );
 
     }
 
     private void AddAndSetMapData(
             String position,
-            String id_mustahiq,
-            String id_calon_mustahiq,
-            String nama_calon_mustahiq,
+            String id_mustahiq, String id_calon_mustahiq, String nama_calon_mustahiq,
             String alamat_calon_mustahiq,
             String latitude_calon_mustahiq,
             String longitude_calon_mustahiq,
@@ -496,15 +509,12 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
             String no_telp_calon_mustahiq,
             String nama_perekomendasi_calon_mustahiq,
             String alasan_perekomendasi_calon_mustahiq,
+            String photo_1, String photo_2, String photo_3, String caption_photo_1, String caption_photo_2, String caption_photo_3,
             String status_mustahiq,
             String jumlah_rating,
-            String id_amil_zakat,
-            String waktu_terakhir_donasi) {
+            String nama_validasi_amil_zakat, String waktu_terakhir_donasi) {
 
-        Mustahiq mustahiq = new Mustahiq(
-                id_mustahiq,
-                id_calon_mustahiq,
-                nama_calon_mustahiq,
+        Mustahiq mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq,
                 alamat_calon_mustahiq,
                 latitude_calon_mustahiq,
                 longitude_calon_mustahiq,
@@ -512,10 +522,10 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 no_telp_calon_mustahiq,
                 nama_perekomendasi_calon_mustahiq,
                 alasan_perekomendasi_calon_mustahiq,
+                photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3,
                 status_mustahiq,
                 jumlah_rating,
-                id_amil_zakat,
-                waktu_terakhir_donasi);
+                nama_validasi_amil_zakat, waktu_terakhir_donasi);
 
         if (position.equals(TAG_BAWAH)) {
             dataMustahiqs.add(mustahiq);
@@ -724,9 +734,20 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
 
         if (isTablet) {
             adapterMustahiq.setSelected(position);
-            ((DrawerActivity) getActivity()).loadDetailMustahiqFragmentWith(adapterMustahiq.data.get(position).id_mustahiq);
+
+            if (Prefs.getLogin(getActivity()) && Prefs.getTipeUser(getActivity()).equalsIgnoreCase("1")) {
+                ((DrawerActivity) getActivity()).loadDetailMustahiqFragmentWith(adapterMustahiq.data.get(position).id_mustahiq);
+            } else {
+                ((DrawerActivity) getActivity()).loadDetailDonasiFragmentWith(adapterMustahiq.data.get(position).id_mustahiq);
+            }
         } else {
-            Intent intent = new Intent(activity, MustahiqDetailActivity.class);
+            Intent intent=null;
+
+            if (Prefs.getLogin(getActivity()) && Prefs.getTipeUser(getActivity()).equalsIgnoreCase("1")) {
+                intent = new Intent(activity, MustahiqDetailActivity.class);
+            } else {
+                intent = new Intent(activity, DonasiDetailActivity.class);
+            }
             intent.putExtra(Zakat.MUSTAHIQ_ID, adapterMustahiq.data.get(position).id_mustahiq);
             startActivity(intent);
         }

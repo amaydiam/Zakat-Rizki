@@ -179,7 +179,7 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
 
     private void viewFoto(int type) {
         FragmentManager ft = getChildFragmentManager();
-        DialogViewSinggleImageFragment newFragment = DialogViewSinggleImageFragment.newInstance(type == PHOTO_1 ? filePhoto1.getAbsolutePath() : (type == PHOTO_2 ? filePhoto2.getAbsolutePath() : filePhoto3.getAbsolutePath()));
+        DialogViewSinggleImageFragment newFragment = DialogViewSinggleImageFragment.newInstance(type == PHOTO_1 ? filePhoto1.getAbsolutePath() : (type == PHOTO_2 ? filePhoto2.getAbsolutePath() : filePhoto3.getAbsolutePath()), type == PHOTO_1 ? val_caption_img_foto_1 : (type == PHOTO_2 ? val_caption_img_foto_2 : val_caption_img_foto_3));
         newFragment.setTargetFragment(this, 0);
         newFragment.show(ft, "slideshow");
     }
@@ -462,6 +462,8 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                     String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
                     String id_user_perekomendasi = obj
                             .getString(Zakat.id_user_perekomendasi);
+                    String nama_perekomendasi_calon_mustahiq = obj
+                            .getString(Zakat.nama_perekomendasi_calon_mustahiq);
                     String alasan_perekomendasi_calon_mustahiq = obj
                             .getString(Zakat.alasan_perekomendasi_calon_mustahiq);
                     String photo_1 = obj
@@ -476,12 +478,10 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                             .getString(Zakat.caption_photo_2);
                     String caption_photo_3 = obj
                             .getString(Zakat.caption_photo_3);
-                    String nama_perekomendasi_calon_mustahiq = obj
-                            .getString(Zakat.nama_perekomendasi_calon_mustahiq);
                     String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
 
-                    calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, nama_perekomendasi_calon_mustahiq, status_calon_mustahiq,jumlah_rating);
+                    calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, nama_perekomendasi_calon_mustahiq,alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, status_calon_mustahiq,jumlah_rating);
                     if (TAG.equals(TAG_ADD)) {
                         callback.onFinishAddCalonMustahiq(calonMustahiq);
                     } else if (TAG.equals(TAG_EDIT)) {

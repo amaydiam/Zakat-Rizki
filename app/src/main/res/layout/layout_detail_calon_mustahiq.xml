@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,98 +13,103 @@
         android:orientation="vertical"
         android:padding="@dimen/dist_large">
 
-    <agency.tango.android.avatarview.views.AvatarView
-        android:id="@+id/foto_profil"
-        android:layout_width="@dimen/foto_profil_detail_size"
-        android:layout_height="@dimen/foto_profil_detail_size"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        app:av_border_color="@android:color/white"
-        app:av_border_width="4dp"
-        app:av_text_size_percentage="35" />
+        <agency.tango.android.avatarview.views.AvatarView
+            android:id="@+id/foto_profil"
+            android:layout_width="@dimen/foto_profil_detail_size"
+            android:layout_height="@dimen/foto_profil_detail_size"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            app:av_border_color="@android:color/white"
+            app:av_border_width="4dp"
+            app:av_text_size_percentage="35" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <com.ad.zakatrizki.widget.RobotoBoldTextView
-            android:id="@+id/nama_calon_mustahiq"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_large"
-            tools:text="nama_calon_mustahiq" />
-
-        <com.ad.zakatrizki.widget.RobotoLightTextView
-            android:id="@+id/alamat_calon_mustahiq"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_large"
-            tools:text="alamat_calon_mustahiq" />
-
-        <com.ad.zakatrizki.widget.RobotoLightTextView
-            android:id="@+id/no_identitas_calon_mustahiq"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_large"
-            tools:text="no_identitas_calon_mustahiq" />
-
-        <com.ad.zakatrizki.widget.RobotoLightTextView
-            android:id="@+id/no_telp_calon_mustahiq"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_large"
-            tools:text="no_telp_calon_mustahiq" />
-
-        <com.ad.zakatrizki.widget.RobotoLightTextView
-            android:id="@+id/nama_perekomendasi_calon_mustahiq"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_large"
-            tools:text="nama_perekomendasi_calon_mustahiq" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_foto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <LinearLayout
-            android:id="@+id/layout_rating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left|center"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            tools:visibility="visible">
+            android:orientation="vertical">
 
-            <com.ad.zakatrizki.widget.RobotoLightTextView
+            <com.ad.zakatrizki.widget.RobotoBoldTextView
+                android:id="@+id/nama_calon_mustahiq"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+
                 android:textColor="@color/text_primary"
                 android:textSize="@dimen/text_large"
-                android:text="Rating : " />
+                tools:text="nama_calon_mustahiq" />
 
-            <android.support.v7.widget.AppCompatRatingBar
-                android:id="@+id/rating"
+            <com.ad.zakatrizki.widget.RobotoLightTextView
+                android:id="@+id/alamat_calon_mustahiq"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:stepSize="1"
-                android:isIndicator="true"
-                style="?android:attr/ratingBarStyleSmall"/>
+                android:ellipsize="end"
+
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_large"
+                tools:text="alamat_calon_mustahiq" />
+
+            <com.ad.zakatrizki.widget.RobotoLightTextView
+                android:id="@+id/no_identitas_calon_mustahiq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_large"
+                tools:text="no_identitas_calon_mustahiq" />
+
+            <com.ad.zakatrizki.widget.RobotoLightTextView
+                android:id="@+id/no_telp_calon_mustahiq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_large"
+                tools:text="no_telp_calon_mustahiq" />
+
+            <com.ad.zakatrizki.widget.RobotoLightTextView
+                android:id="@+id/nama_perekomendasi_calon_mustahiq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_large"
+                tools:text="nama_perekomendasi_calon_mustahiq" />
+
+            <LinearLayout
+                android:id="@+id/layout_rating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <com.ad.zakatrizki.widget.RobotoLightTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:text="Rating : "
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_large" />
+
+                <android.support.v7.widget.AppCompatRatingBar
+                    android:id="@+id/rating"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:stepSize="1" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-        </LinearLayout>
 
     <fragment
         android:id="@+id/map"

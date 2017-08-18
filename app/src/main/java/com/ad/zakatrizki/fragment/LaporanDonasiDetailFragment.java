@@ -1,5 +1,6 @@
 package com.ad.zakatrizki.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
+import com.ad.zakatrizki.activity.MustahiqDetailActivity;
 import com.ad.zakatrizki.model.LaporanDonasi;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
@@ -95,6 +97,14 @@ public class LaporanDonasiDetailFragment extends Fragment implements CustomVolle
     private PicassoLoader imageLoader;
     private CustomVolley customVolley;
     private RequestQueue queue;
+
+    @OnClick(R.id.detail_mustahiq)
+    void DetailMustahiq(){
+
+        Intent intent = new Intent(getActivity(), MustahiqDetailActivity.class);
+        intent.putExtra(Zakat.MUSTAHIQ_ID, laporanDonasi.id_mustahiq);
+        startActivity(intent);
+    }
 
     // Fragment lifecycle
     @Override

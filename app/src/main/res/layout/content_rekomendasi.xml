@@ -41,35 +41,28 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Beri rating pada mustahiq ini"
+                            android:text="Rekomendasi pada calon mustahiq ini"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
-
-                        <android.support.v7.widget.AppCompatRatingBar
-                            android:id="@+id/addrating"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:stepSize="1"
-                            android:layout_gravity="center"
-                            style="?android:attr/ratingBarStyle"/>
 
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
 
                 <Button
-                    android:id="@+id/rating"
+                    android:id="@+id/rekomendasi"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Rating"
+                    android:text="Rekomendasi"
                     android:background="@color/accent"
                     android:textColor="@color/white"
-                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"
                     android:layout_marginLeft="@dimen/activity_half_vertical_margin"
+                    android:layout_marginBottom="@dimen/activity_half_vertical_margin"
                     android:layout_marginRight="@dimen/activity_half_vertical_margin"/>
 
             </LinearLayout>
 
+            
         </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

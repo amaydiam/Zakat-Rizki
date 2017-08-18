@@ -10,6 +10,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatRatingBar;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
@@ -23,8 +26,10 @@ import android.widget.Toast;
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
 import com.ad.zakatrizki.activity.ActionDonasiBaruActivity;
+import com.ad.zakatrizki.adapter.PhotoAdapter;
 import com.ad.zakatrizki.model.CalonMustahiq;
 import com.ad.zakatrizki.model.Mustahiq;
+import com.ad.zakatrizki.model.Photo;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
 import com.ad.zakatrizki.utils.TextUtils;
@@ -46,6 +51,7 @@ import com.joanzapata.iconify.fonts.MaterialIcons;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import agency.tango.android.avatarview.loader.PicassoLoader;
@@ -56,7 +62,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class DonasiDetailFragment extends Fragment implements ManageDonasiFragment.AddEditDonasiListener, AddRatingFragment.RatingListener, CustomVolley.OnCallbackResponse, OnMapReadyCallback {
+public class DonasiDetailFragment extends Fragment implements ManageDonasiFragment.AddEditDonasiListener, AddRatingFragment.RatingListener, CustomVolley.OnCallbackResponse, OnMapReadyCallback, PhotoAdapter.OnPhotoItemClickListener {
 
     private static final String TAG_DETAIL = "TAG_DETAIL";
     private static final String TAG_REKOMENDASI = "TAG_REKOMENDASI";
@@ -163,6 +169,14 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         }
     }
 
+
+    @BindView(R.id.recyclerview_foto)
+    RecyclerView recyclerView;
+
+    private ArrayList<Photo> dataPhotos = new ArrayList<>();
+    private PhotoAdapter adapterPhoto;
+    private LinearLayoutManager mLayoutManager;
+
     @OnClick(R.id.fab_action)
     void DonasiMustahiq() {
         Intent i = new Intent(getActivity(), ActionDonasiBaruActivity.class);
@@ -209,10 +223,27 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
                         .colorRes(R.color.white)
                         .actionBarSize());
 
+
+        //inisial adapterMustahiq
+        adapterPhoto = new PhotoAdapter(getActivity(), dataPhotos);
+        adapterPhoto.setOnPhotoItemClickListener(this);
+
+        //recyclerView
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+
+        // set layout manager
+        recyclerView.setLayoutManager(mLayoutManager);
+
+        // set adapterPhoto
+        recyclerView.setAdapter(adapterPhoto);
+
         // Download calon_mustahiq details if new instance, else restore from saved instance
-        if (savedInstanceState == null || !(savedInstanceState.containsKey(Zakat.CALON_MUSTAHIQ_ID)
+        if (savedInstanceState == null || !(savedInstanceState.containsKey(Zakat.MUSTAHIQ_ID)
                 && savedInstanceState.containsKey(Zakat.CALON_MUSTAHIQ_OBJECT))) {
-            id_msthq = getArguments().getString(Zakat.CALON_MUSTAHIQ_ID);
+            id_msthq = getArguments().getString(Zakat.MUSTAHIQ_ID);
             if (TextUtils.isNullOrEmpty(id_msthq)) {
                 progressCircle.setVisibility(View.GONE);
                 toolbarTextHolder.setVisibility(View.GONE);
@@ -221,7 +252,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
                 downloadLokasiDetails(id_msthq);
             }
         } else {
-            id_msthq = savedInstanceState.getString(Zakat.CALON_MUSTAHIQ_ID);
+            id_msthq = savedInstanceState.getString(Zakat.MUSTAHIQ_ID);
             mustahiq = savedInstanceState.getParcelable(Zakat.CALON_MUSTAHIQ_OBJECT);
             onDownloadSuccessful();
         }
@@ -239,7 +270,7 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mustahiq != null && id_msthq != null) {
-            outState.putString(Zakat.CALON_MUSTAHIQ_ID, id_msthq);
+            outState.putString(Zakat.MUSTAHIQ_ID, id_msthq);
             outState.putParcelable(Zakat.CALON_MUSTAHIQ_OBJECT, mustahiq);
         }
     }
@@ -295,6 +326,13 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
         } catch (Exception ignored) {
         }
         rating.setRating(rt);
+
+
+        dataPhotos.add(new Photo(mustahiq.photo_1, mustahiq.caption_photo_1));
+        dataPhotos.add(new Photo(mustahiq.photo_2, mustahiq.caption_photo_2));
+        dataPhotos.add(new Photo(mustahiq.photo_3, mustahiq.caption_photo_3));
+
+        adapterPhoto.notifyDataSetChanged();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
@@ -370,6 +408,19 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
                     String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
                     String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
                     String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
+
+                    String photo_1 = obj
+                            .getString(Zakat.photo_1);
+                    String photo_2 = obj
+                            .getString(Zakat.photo_2);
+                    String photo_3 = obj
+                            .getString(Zakat.photo_3);
+                    String caption_photo_1 = obj
+                            .getString(Zakat.caption_photo_1);
+                    String caption_photo_2 = obj
+                            .getString(Zakat.caption_photo_2);
+                    String caption_photo_3 = obj
+                            .getString(Zakat.caption_photo_3);
                     String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
                     String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
@@ -382,6 +433,12 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
                             no_telp_calon_mustahiq,
                             nama_perekomendasi_calon_mustahiq,
                             alasan_perekomendasi_calon_mustahiq,
+                            photo_1,
+                            photo_2,
+                            photo_3,
+                            caption_photo_1,
+                            caption_photo_2,
+                            caption_photo_3,
                             status_mustahiq, jumlah_rating, nama_validasi_amil_zakat, waktu_terakhir_donasi);
 
                     if (Boolean.parseBoolean(isSuccess))
@@ -468,5 +525,18 @@ public class DonasiDetailFragment extends Fragment implements ManageDonasiFragme
     @Override
     public void onFinishRating(CalonMustahiq calonMustahiq) {
 
+    }
+
+    @Override
+    public void onActionClick(View v, int position) {
+
+    }
+
+    @Override
+    public void onRootClick(View v, int position) {
+        FragmentManager ft = getChildFragmentManager();
+        DialogViewSinggleImageFragment newFragment = DialogViewSinggleImageFragment.newInstance(ApiHelper.getBaseUrl(getActivity())+adapterPhoto.data.get(position).getPhoto(), adapterPhoto.data.get(position).getCaption_photo());
+        newFragment.setTargetFragment(this, 0);
+        newFragment.show(ft, "slideshow");
     }
 }

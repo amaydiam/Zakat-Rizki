@@ -132,7 +132,6 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
                 ket.setVisibility(VISIBLE);
             } else {
                 drawer_donasi.setVisible(true);
-                drawer_mustahiq.setVisible(false);
                 ket.setVisibility(GONE);
             }
         } else {
@@ -142,7 +141,6 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
                 drawer_calon_mustahiq.setVisible(false);
             }
             drawer_donasi.setVisible(true);
-            drawer_mustahiq.setVisible(false);
             drawer_logout_login.setTitle("Login");
             drawer_logout_login.setIcon(new IconDrawable(getActivity(), MaterialCommunityIcons.mdi_login).actionBarSize());
             ket.setText(getResources().getString(R.string.app_name));

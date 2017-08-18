@@ -1,5 +1,6 @@
 package com.ad.zakatrizki.fragment;
 
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.AppCompatRatingBar;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,8 +21,10 @@ import android.widget.TextView;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
+import com.ad.zakatrizki.adapter.PhotoAdapter;
 import com.ad.zakatrizki.model.CalonMustahiq;
 import com.ad.zakatrizki.model.Mustahiq;
+import com.ad.zakatrizki.model.Photo;
 import com.ad.zakatrizki.model.Refresh;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
@@ -44,6 +50,8 @@ import com.sdsmdg.tastytoast.TastyToast;
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import agency.tango.android.avatarview.loader.PicassoLoader;
 import agency.tango.android.avatarview.views.AvatarView;
 import butterknife.BindBool;
@@ -54,7 +62,10 @@ import butterknife.Unbinder;
 
 public class CalonMustahiqDetailFragment extends Fragment
         implements ManageCalonMustahiqFragment.AddEditCalonMustahiqListener, OnMapReadyCallback,
-        CustomVolley.OnCallbackResponse, AddRatingFragment.RatingListener, AddValidasiFragment.ValidasiListener {
+        CustomVolley.OnCallbackResponse, AddRatingFragment.RatingListener,
+        AddValidasiFragment.ValidasiListener,
+        AddRekomendasiFragment.RekomendasiListener,
+        PhotoAdapter.OnPhotoItemClickListener {
 
     private static final String TAG_DETAIL = "TAG_DETAIL";
     @BindBool(R.bool.is_tablet)
@@ -97,13 +108,30 @@ public class CalonMustahiqDetailFragment extends Fragment
     @BindView(R.id.rating)
     AppCompatRatingBar rating;
 
+
+    @BindView(R.id.recyclerview_foto)
+    RecyclerView recyclerView;
+
+    private ArrayList<Photo> dataPhotos = new ArrayList<>();
+    private PhotoAdapter adapterPhoto;
+    private LinearLayoutManager mLayoutManager;
+
     @OnClick(R.id.fab_rekomendasi)
     void AddRekomendasi() {
         FragmentManager fragmentManager = getChildFragmentManager();
-        AddValidasiFragment add = new AddValidasiFragment();
-        add.setTargetFragment(this, 0);
-        add.setData(calonMustahiq);
-        add.show(fragmentManager, "Add Rekomendasi");
+        if (Prefs.getLogin(getActivity())) {
+            if (Prefs.getTipeUser(getActivity()).equalsIgnoreCase("1")) {
+                AddValidasiFragment add = new AddValidasiFragment();
+                add.setTargetFragment(this, 0);
+                add.setData(calonMustahiq);
+                add.show(fragmentManager, "Add Validasi");
+            } else {
+                AddRekomendasiFragment add = new AddRekomendasiFragment();
+                add.setTargetFragment(this, 0);
+                add.setData(calonMustahiq);
+                add.show(fragmentManager, "Add Rekomendasi");
+            }
+        }
     }
 
 
@@ -171,6 +199,30 @@ public class CalonMustahiqDetailFragment extends Fragment
             });
         }
 
+
+        //inisial adapterMustahiq
+        adapterPhoto = new PhotoAdapter(getActivity(), dataPhotos);
+        adapterPhoto.setOnPhotoItemClickListener(this);
+
+        //recyclerView
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setHasFixedSize(true);
+
+        //inisial layout manager
+       /* int grid_column_count = getResources().getInteger(R.integer.grid_column_count);
+        StaggeredGridLayoutManager mLayoutManager = new StaggeredGridLayoutManager(grid_column_count, StaggeredGridLayoutManager.VERTICAL);
+*/
+
+        //   final LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        //  mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+
+        // set layout manager
+        recyclerView.setLayoutManager(mLayoutManager);
+
+        // set adapterPhoto
+        recyclerView.setAdapter(adapterPhoto);
 
         //setup fab
         fabAction.setImageDrawable(
@@ -250,7 +302,7 @@ public class CalonMustahiqDetailFragment extends Fragment
             fabAction.setVisibility(View.VISIBLE);
         }
 
-        if (Prefs.getLogin(getActivity()) && Prefs.getTipeUser(getActivity()).equalsIgnoreCase("1")) {
+        if (Prefs.getLogin(getActivity()) ) {
             fabRekomendasi.setVisibility(View.VISIBLE);
         } else
             fabRekomendasi.setVisibility(View.GONE);
@@ -276,6 +328,13 @@ public class CalonMustahiqDetailFragment extends Fragment
         } catch (Exception ignored) {
         }
         rating.setRating(rt);
+
+
+        dataPhotos.add(new Photo(calonMustahiq.photo_1, calonMustahiq.caption_photo_1));
+        dataPhotos.add(new Photo(calonMustahiq.photo_2, calonMustahiq.caption_photo_2));
+        dataPhotos.add(new Photo(calonMustahiq.photo_3, calonMustahiq.caption_photo_3));
+
+        adapterPhoto.notifyDataSetChanged();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
@@ -350,6 +409,8 @@ public class CalonMustahiqDetailFragment extends Fragment
                 String no_identitas_calon_mustahiq = jsDetail.getString(Zakat.no_identitas_calon_mustahiq);
                 String no_telp_calon_mustahiq = jsDetail.getString(Zakat.no_telp_calon_mustahiq);
                 String id_user_perekomendasi = jsDetail.getString(Zakat.id_user_perekomendasi);
+                String nama_perekomendasi_calon_mustahiq = jsDetail
+                        .getString(Zakat.nama_perekomendasi_calon_mustahiq);
                 String alasan_perekomendasi_calon_mustahiq = jsDetail
                         .getString(Zakat.alasan_perekomendasi_calon_mustahiq);
                 String photo_1 = jsDetail
@@ -364,12 +425,10 @@ public class CalonMustahiqDetailFragment extends Fragment
                         .getString(Zakat.caption_photo_2);
                 String caption_photo_3 = jsDetail
                         .getString(Zakat.caption_photo_3);
-                String nama_perekomendasi_calon_mustahiq = jsDetail
-                        .getString(Zakat.nama_perekomendasi_calon_mustahiq);
                 String status_calon_mustahiq = jsDetail.getString(Zakat.status_calon_mustahiq);
                 String jumlah_rating = jsDetail.getString(Zakat.jumlah_rating);
 
-                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, nama_perekomendasi_calon_mustahiq, status_calon_mustahiq, jumlah_rating);
+                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, nama_perekomendasi_calon_mustahiq, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, status_calon_mustahiq, jumlah_rating);
 
                 if (Boolean.parseBoolean(isSuccess))
                     onDownloadSuccessful();
@@ -447,5 +506,31 @@ public class CalonMustahiqDetailFragment extends Fragment
     public void onFinishValidasi(CalonMustahiq mustahiq) {
         EventBus.getDefault().postSticky(new Refresh(true));
         getActivity().finish();
+    }
+
+    @Override
+    public void onActionClick(View v, int position) {
+
+    }
+
+    @Override
+    public void onRootClick(View v, int position) {
+        FragmentManager ft = getChildFragmentManager();
+        DialogViewSinggleImageFragment newFragment = DialogViewSinggleImageFragment.newInstance(ApiHelper.getBaseUrl(getActivity())+adapterPhoto.data.get(position).getPhoto(), adapterPhoto.data.get(position).getCaption_photo());
+        newFragment.setTargetFragment(this, 0);
+        newFragment.show(ft, "slideshow");
+    }
+
+    @Override
+    public void onFinishRekomendasi(Mustahiq mustahiq) {
+
+    }
+
+    @Override
+    public void onFinishRekomendasi(CalonMustahiq calonMustahiq) {
+       /* EventBus.getDefault().postSticky(new Refresh(true));
+        getActivity().finish();*/
+       this.calonMustahiq =calonMustahiq;
+
     }
 }

@@ -81,6 +81,7 @@ public class Zakat extends Application {
     public static final String ID_BADAN_AMIL_ZAKAT = "id_badan_amil_zakat";
     public static final String NAMA_BADAN_AMIL_ZAKAT = "nama_badan_amil_zakat";
     public static final String nama_validasi_amil_zakat = "nama_validasi_amil_zakat";
+    public static final String CAPTION_PHOTO = "caption_photo";
 
     public static String mustahiq = "mustahiq";
     public static String id_mustahiq = "id_mustahiq";

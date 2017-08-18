@@ -231,6 +231,19 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                     String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
                     String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
                     String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
+
+                    String photo_1 = obj
+                            .getString(Zakat.photo_1);
+                    String photo_2 = obj
+                            .getString(Zakat.photo_2);
+                    String photo_3 = obj
+                            .getString(Zakat.photo_3);
+                    String caption_photo_1 = obj
+                            .getString(Zakat.caption_photo_1);
+                    String caption_photo_2 = obj
+                            .getString(Zakat.caption_photo_2);
+                    String caption_photo_3 = obj
+                            .getString(Zakat.caption_photo_3);
                     String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
                     String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
@@ -243,6 +256,12 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                             no_telp_calon_mustahiq,
                             nama_perekomendasi_calon_mustahiq,
                             alasan_perekomendasi_calon_mustahiq,
+                            photo_1,
+                            photo_2,
+                            photo_3,
+                            caption_photo_1,
+                            caption_photo_2,
+                            caption_photo_3,
                             status_mustahiq,
                             jumlah_rating, nama_validasi_amil_zakat, waktu_terakhir_donasi);
                     if (TAG.equals(TAG_ADD)) {

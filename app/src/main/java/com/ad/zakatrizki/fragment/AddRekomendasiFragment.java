@@ -45,12 +45,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class AddValidasiFragment extends DialogFragment implements CustomVolley.OnCallbackResponse {
+public class AddRekomendasiFragment extends DialogFragment implements CustomVolley.OnCallbackResponse {
     private static final String TAG_RATING = "TAG_RATING";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.validasi)
-    Button validasi;
+    @BindView(R.id.rekomendasi)
+    Button rekomendasi;
     @BindView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
 
@@ -61,12 +61,12 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
     private Unbinder butterKnife;
 
 
-    private ValidasiListener callback;
+    private RekomendasiListener callback;
     private Mustahiq mustahiq;
     private Dialog alertDialog;
     private CalonMustahiq calonMustahiq;
 
-    public AddValidasiFragment() {
+    public AddRekomendasiFragment() {
 
     }
 
@@ -75,10 +75,10 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
     }
 
 
-    @OnClick(R.id.validasi)
-    void Validasi() {
+    @OnClick(R.id.rekomendasi)
+    void Rekomendasi() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-        alertDialogBuilder.setMessage("Anda yakin akan memberikan validasi pada " + (mustahiq != null ? "" : "Calon") + " ini?");
+        alertDialogBuilder.setMessage("Anda yakin akan memberikan rekomendasi pada " + (mustahiq != null ? "" : "Calon") + " ini?");
 
         alertDialogBuilder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
             @Override
@@ -86,9 +86,9 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
                 Map<String, String> jsonParams = new HashMap<>();
                 jsonParams.put(Zakat.id_calon_mustahiq,
                         String.valueOf(mustahiq != null ? mustahiq.id_calon_mustahiq : calonMustahiq.id_calon_mustahiq));
-                jsonParams.put(Zakat.id_amil_zakat, Prefs.getIdAmilZakat(getActivity()));
+                jsonParams.put(Zakat.id_user, Prefs.getIdUser(getActivity()));
 
-                queue = customVolley.Rest(Request.Method.POST, ApiHelper.getAddValidasiLink(getActivity()), jsonParams, TAG_RATING);
+                queue = customVolley.Rest(Request.Method.POST, ApiHelper.getAddRekomendasiLink(getActivity()), jsonParams, TAG_RATING);
 
             }
         });
@@ -163,7 +163,6 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
                             .getString(Zakat.caption_photo_3);
                     String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
-                    String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
                     String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
                     mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
@@ -180,10 +179,10 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
                             caption_photo_2,
                             caption_photo_3,
                             status_mustahiq,
-                            jumlah_rating, nama_validasi_amil_zakat, waktu_terakhir_donasi);
-                    callback.onFinishValidasi(mustahiq);
+                            jumlah_rating, nama_perekomendasi_calon_mustahiq, waktu_terakhir_donasi);
+                    callback.onFinishRekomendasi(mustahiq);
                 } else {
-                    callback.onFinishValidasi(calonMustahiq);
+                    callback.onFinishRekomendasi(calonMustahiq);
                 }
                 dismiss();
                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -211,7 +210,7 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
         super.onCreate(savedInstanceState);
 
         try {
-            callback = (ValidasiListener) getTargetFragment();
+            callback = (RekomendasiListener) getTargetFragment();
         } catch (Exception e) {
             throw new ClassCastException("Calling Fragment must implement KonfirmasiPendaftaranPesertaListener");
         }
@@ -221,13 +220,13 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
 
         View view = inflater.inflate(
-                R.layout.content_validasi, container);
+                R.layout.content_rekomendasi, container);
 
         butterKnife = ButterKnife.bind(this, view);
         customVolley = new CustomVolley(getActivity());
         customVolley.setOnCallbackResponse(this);
         snackbar = new SnackBar(getActivity(), coordinatorLayout);
-        toolbar.setTitle("Validasi");
+        toolbar.setTitle("Rekomendasi");
         toolbar.setNavigationIcon(
                 new IconDrawable(getActivity(), MaterialIcons.md_close)
                         .colorRes(R.color.white)
@@ -263,11 +262,11 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
     }
 
 
-    public interface ValidasiListener {
+    public interface RekomendasiListener {
 
-        void onFinishValidasi(Mustahiq mustahiq);
+        void onFinishRekomendasi(Mustahiq mustahiq);
 
-        void onFinishValidasi(CalonMustahiq mustahiq);
+        void onFinishRekomendasi(CalonMustahiq mustahiq);
 
 
     }

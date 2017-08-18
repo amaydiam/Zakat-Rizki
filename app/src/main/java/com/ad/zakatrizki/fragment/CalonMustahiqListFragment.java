@@ -465,6 +465,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
         String id_user_perekomendasi = obj.getString(Zakat.id_user_perekomendasi);
+        String nama_perekomendasi_calon_mustahiq = obj
+                .getString(Zakat.nama_perekomendasi_calon_mustahiq);
         String alasan_perekomendasi_calon_mustahiq = obj
                 .getString(Zakat.alasan_perekomendasi_calon_mustahiq);
         String photo_1 = obj
@@ -479,8 +481,6 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 .getString(Zakat.caption_photo_2);
         String caption_photo_3 = obj
                 .getString(Zakat.caption_photo_3);
-        String nama_perekomendasi_calon_mustahiq = obj
-                .getString(Zakat.nama_perekomendasi_calon_mustahiq);
         String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
 
         String jumlah_rating = obj.getString(Zakat.jumlah_rating);
@@ -496,6 +496,7 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
                 id_user_perekomendasi,
+                nama_perekomendasi_calon_mustahiq,
                 alasan_perekomendasi_calon_mustahiq,
                 photo_1,
                 photo_2,
@@ -503,7 +504,6 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 caption_photo_1,
                 caption_photo_2,
                 caption_photo_3,
-                nama_perekomendasi_calon_mustahiq,
                 status_calon_mustahiq,
                 jumlah_rating
         );
@@ -520,6 +520,7 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
             String no_identitas_calon_mustahiq,
             String no_telp_calon_mustahiq,
             String id_user_perekomendasi,
+            String nama_perekomendasi_calon_mustahiq,
             String alasan_perekomendasi_calon_mustahiq,
             String photo_1,
             String photo_2,
@@ -527,7 +528,6 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
             String caption_photo_1,
             String caption_photo_2,
             String caption_photo_3,
-            String nama_perekomendasi_calon_mustahiq,
             String status_calon_mustahiq,
             String jumlah_rating) {
 
@@ -538,6 +538,7 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
                 id_user_perekomendasi,
+                nama_perekomendasi_calon_mustahiq,
                 alasan_perekomendasi_calon_mustahiq,
                 photo_1,
                 photo_2,
@@ -545,7 +546,6 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 caption_photo_1,
                 caption_photo_2,
                 caption_photo_3,
-                nama_perekomendasi_calon_mustahiq,
                 status_calon_mustahiq,
                 jumlah_rating
         );

@@ -28,7 +28,7 @@ public class DonasiDetailActivity extends AppCompatActivity {
             Uri data = intent.getData();
             if (data == null) {
                 // Not loading from deep link
-                mustahiqId = getIntent().getStringExtra(Zakat.CALON_MUSTAHIQ_ID);
+                mustahiqId = getIntent().getStringExtra(Zakat.MUSTAHIQ_ID);
                 loadDonasiDetailsOf(mustahiqId);
             } else {
                 // Loading from deep link
@@ -64,7 +64,7 @@ public class DonasiDetailActivity extends AppCompatActivity {
     private void loadDonasiDetailsOf(String mustahiqId) {
         DonasiDetailFragment fragment = new DonasiDetailFragment();
         Bundle args = new Bundle();
-        args.putString(Zakat.CALON_MUSTAHIQ_ID, mustahiqId);
+        args.putString(Zakat.MUSTAHIQ_ID, mustahiqId);
         fragment.setArguments(args);
         getSupportFragmentManager().beginTransaction().replace(R.id.content_detail_container, fragment).commit();
     }
