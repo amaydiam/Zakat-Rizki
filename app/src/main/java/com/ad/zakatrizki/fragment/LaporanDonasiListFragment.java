@@ -113,6 +113,10 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
     @BindView(R.id.btn_filter)
     IconButton btnFilter;
 
+    @BindView(R.id.ket_filter)
+    TextView ketFilter;
+
+
     private ArrayList<LaporanDonasi> data = new ArrayList<>();
     private GridLayoutManager mLayoutManager;
     private String keyword = null;
@@ -364,6 +368,7 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
     }
 
     private void getDataFromServer(final String TAG) {
+        CheckFilter();
         /*queue = customVolley.Rest(Request.Method.GET, Zakat.api_test + "?" + Zakat.app_key + "=" + Zakat.value_app_key + "&session_key=" + session_key
                 + "&PAGE=" + PAGE + "&limit="
                 + Zakat.LIMIT_DATA, null, TAG);*/
@@ -776,5 +781,18 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
         this.s_bulan = s_bulan;
         this.s_index_bulan = s_index_bulan;
         RefreshData();
+    }
+
+    private void CheckFilter() {
+        if (!s_tahun.equalsIgnoreCase("ALL")) {
+
+            ketFilter.setVisibility(View.VISIBLE);
+
+            if (!s_bulan.equalsIgnoreCase("ALL"))
+                ketFilter.setText("Penyaringan: " + s_bulan + " " + s_tahun);
+            else
+                ketFilter.setText("Penyaringan: " + s_tahun);
+        } else
+            ketFilter.setVisibility(View.GONE);
     }
 }

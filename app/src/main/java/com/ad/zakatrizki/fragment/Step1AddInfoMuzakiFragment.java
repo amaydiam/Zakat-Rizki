@@ -230,7 +230,7 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
         s_no_telp_muzaki = noTelpMuzaki.getText().toString().trim();
         s_jumlah_donasi = jumlahDonasi.getText().toString().trim().replace(".", "");
         try {
-            s_jumlah_donasi = array_id_nama_validasi_amil_zakat.get(idAmilZakat.getSelectedItemPosition());
+            s_id_amil_zakat = array_id_nama_validasi_amil_zakat.get(idAmilZakat.getSelectedItemPosition());
         }
         catch (Exception ignored){}
     }

@@ -15,10 +15,12 @@ import android.widget.TextView;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.Zakat;
+import com.ad.zakatrizki.activity.DonasiDetailActivity;
 import com.ad.zakatrizki.activity.MustahiqDetailActivity;
 import com.ad.zakatrizki.model.LaporanDonasi;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
+import com.ad.zakatrizki.utils.Prefs;
 import com.ad.zakatrizki.utils.TextUtils;
 import com.ad.zakatrizki.utils.Utils;
 import com.ad.zakatrizki.widget.RobotoBoldTextView;
@@ -99,9 +101,14 @@ public class LaporanDonasiDetailFragment extends Fragment implements CustomVolle
     private RequestQueue queue;
 
     @OnClick(R.id.detail_mustahiq)
-    void DetailMustahiq(){
+    void DetailMustahiq() {
+        Intent intent = null;
 
-        Intent intent = new Intent(getActivity(), MustahiqDetailActivity.class);
+        if (Prefs.getLogin(getActivity()) && Prefs.getTipeUser(getActivity()).equalsIgnoreCase("1")) {
+            intent = new Intent(getActivity(), MustahiqDetailActivity.class);
+        } else {
+            intent = new Intent(getActivity(), DonasiDetailActivity.class);
+        }
         intent.putExtra(Zakat.MUSTAHIQ_ID, laporanDonasi.id_mustahiq);
         startActivity(intent);
     }

@@ -1,12 +1,10 @@
 package com.ad.zakatrizki.fragment;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -17,8 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.ad.zakatrizki.R;
-import com.ad.zakatrizki.utils.Menus;
-import com.ad.zakatrizki.utils.SnackBar;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.EntypoModule;
@@ -53,27 +49,14 @@ public class FilterLaporanDonasiFragment extends DialogFragment {
     Button btnSet;
     @BindView(R.id.btn_clear)
     Button btnClear;
-    private Dialog alertDialog;
     private AddEditCalonMustahiqListener callback;
     private String s_tahun = "ALL";
     private String s_bulan = "ALL";
     private String s_index_bulan = "ALL";
     private Unbinder butterKnife;
-    private SnackBar snackbar;
 
     public FilterLaporanDonasiFragment() {
 
-    }
-
-    void Action(int id) {
-
-        switch (id) {
-
-            case Menus.SEND:
-                getData();
-
-                break;
-        }
     }
 
     @OnItemSelected(R.id.tahun)
@@ -90,7 +73,16 @@ public class FilterLaporanDonasiFragment extends DialogFragment {
     void Send() {
         getData();
         callback.onFinishFilter(s_tahun, s_bulan, s_index_bulan);
-        alertDialog.dismiss();
+        dismiss();
+    }
+
+    @OnClick(R.id.btn_clear)
+    void RESET() {
+        s_tahun = "ALL";
+        s_bulan = "ALL";
+        s_index_bulan = "ALL";
+        callback.onFinishFilter(s_tahun, s_bulan, s_index_bulan);
+        dismiss();
     }
 
     private void getData() {
@@ -150,15 +142,7 @@ public class FilterLaporanDonasiFragment extends DialogFragment {
                 R.layout.content_filter_laporan_donasi, container);
 
         butterKnife = ButterKnife.bind(this, view);
-        snackbar = new SnackBar(getActivity(), coordinatorLayout);
         toolbar.setTitle("Filter");
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Action(item.getItemId());
-                return true;
-            }
-        });
         toolbar.setNavigationIcon(
                 new IconDrawable(getActivity(), MaterialIcons.md_close)
                         .colorRes(R.color.white)
@@ -170,14 +154,22 @@ public class FilterLaporanDonasiFragment extends DialogFragment {
             }
         });
 
-        ArrayList<String> stringArrayList = new ArrayList<String>();
+        ArrayList<String> stringArrayList = new ArrayList<>();
 
         stringArrayList.add("ALL");
-        for (int i = 30; i < Calendar.getInstance().get(Calendar.YEAR); i++) {
+        for (int i = 0; i <= 30; i++) {
             stringArrayList.add(String.valueOf((Calendar.getInstance().get(Calendar.YEAR)) - i));
         }
+        ArrayAdapter<String> adapterTahun = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, stringArrayList);
+        adapterTahun.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+        tahun.setAdapter(adapterTahun);
 
-        tahun.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, stringArrayList));
+        String arrBulan[] = {"ALL", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"};
+
+        ArrayAdapter<String> adapterBulan = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, arrBulan);
+        adapterBulan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+        bulan.setAdapter(adapterBulan);
+
 
         if (!s_tahun.equalsIgnoreCase("ALL")) {
             for (int ii = 0; ii < stringArrayList.size(); ii++) {
@@ -186,15 +178,11 @@ public class FilterLaporanDonasiFragment extends DialogFragment {
                 }
             }
             layoutBulan.setVisibility(View.VISIBLE);
-
-            // Array of choices
-            String Bulan[] = {"ALL", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"};
-
-            bulan.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, Bulan));
+            btnClear.setVisibility(View.VISIBLE);
 
             if (!s_bulan.equalsIgnoreCase("ALL")) {
-                for (int iii = 0; iii < stringArrayList.size(); iii++) {
-                    if (Bulan[iii].equalsIgnoreCase(s_bulan)) {
+                for (int iii = 0; iii < arrBulan.length; iii++) {
+                    if (arrBulan[iii].equalsIgnoreCase(s_bulan)) {
                         bulan.setSelection(iii);
                     }
                 }
@@ -203,6 +191,7 @@ public class FilterLaporanDonasiFragment extends DialogFragment {
 
         } else {
             layoutBulan.setVisibility(View.GONE);
+            btnClear.setVisibility(View.GONE);
         }
 
         getDialog().getWindow().setSoftInputMode(
