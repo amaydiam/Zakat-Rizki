@@ -21,8 +21,8 @@ public class ApiHelper {
     }
 
     //laporan donasi
-    public static String getLaporanDonasiLink(Context context, int page, String keyword) {
-        return getApiUrl(context) + "donasi/donasi/" + page + (!TextUtils.isNullOrEmpty(keyword) ? ("/" + keyword) : "");
+    public static String getLaporanDonasiLink(Context context, String type, String s_tahun, String s_index_bulan, int page, String keyword) {
+        return getApiUrl(context) + "donasi/donasi/" + type + "/" + s_tahun + "/"+ s_index_bulan + "/"+ page + (!TextUtils.isNullOrEmpty(keyword) ? ("/" + keyword) : "");
     }
 
     public static String getLaporanDonasiDetailLink(Context context, String id) {
@@ -32,7 +32,7 @@ public class ApiHelper {
     //CalonMustahiq
     public static String getCalonMustahiqLink(Context context, int page, String keyword) {
 
-        return getApiUrl(context) + "calon_mustahiq/calon_mustahiq/" + page+ (!TextUtils.isNullOrEmpty(keyword) ? ("/" + keyword) : "");
+        return getApiUrl(context) + "calon_mustahiq/calon_mustahiq/" + page + (!TextUtils.isNullOrEmpty(keyword) ? ("/" + keyword) : "");
     }
 
     public static String getCalonMustahiqDetailLink(Context context, String id) {
@@ -50,7 +50,7 @@ public class ApiHelper {
 
 
     //Mustahiq
-    public static String getMustahiqLink(Context context, int page,String keyword) {
+    public static String getMustahiqLink(Context context, int page, String keyword) {
         return getApiUrl(context) + "mustahiq/mustahiq/" + page + (!TextUtils.isNullOrEmpty(keyword) ? ("/" + keyword) : "");
     }
 
@@ -107,7 +107,7 @@ public class ApiHelper {
     }
 
     public static String getDeleteValidasiLink(Context context, String id_mustahiq) {
-        return getApiUrl(context) + "validasi_mustahiq/deletevalidasi/"+id_mustahiq;
+        return getApiUrl(context) + "validasi_mustahiq/deletevalidasi/" + id_mustahiq;
     }
 
     public static String getAddRekomendasiLink(Context context) {
@@ -115,7 +115,7 @@ public class ApiHelper {
     }
 
     public static String getDeleteRekomendasiLink(Context context, String id_calon_mustahiq) {
-        return getApiUrl(context) + "rekomendasi_calon_mustahiq/deleterekomendasi/"+id_calon_mustahiq;
+        return getApiUrl(context) + "rekomendasi_calon_mustahiq/deleterekomendasi/" + id_calon_mustahiq;
     }
 
 }

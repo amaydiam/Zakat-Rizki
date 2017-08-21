@@ -11,6 +11,10 @@
             android:id="@+id/drawer_laporan_donasi"
             android:checkable="true"
             android:title="@string/drawer_laporan_donasi" />
+        <item
+            android:id="@+id/drawer_laporan_donasi_self"
+            android:checkable="true"
+            android:title="@string/drawer_laporan_donasi_self" />
 
         <item
             android:id="@+id/drawer_calon_mustahiq"

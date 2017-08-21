@@ -205,6 +205,8 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
                         step1Fragment.s_no_telp_muzaki);
                 jsonParams.put(Zakat.jumlah_donasi,
                         step1Fragment.s_jumlah_donasi);
+                jsonParams.put(Zakat.id_amil_zakat,
+                        step1Fragment.s_id_amil_zakat);
             }
 
             if (fragment1 instanceof Step2AddBuktiPembayaranFragment) {
@@ -376,6 +378,7 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
                         || !step1Fragment.s_no_identitas_muzaki.equals("")
                         || !step1Fragment.s_no_telp_muzaki.equals("0")
                         || !step1Fragment.s_jumlah_donasi.equals("0")
+                        || !step1Fragment.s_id_amil_zakat.equals("0")
                         || step1Fragment.errorForm
                         ) {
                     AlertDialog.Builder alt_bld = new AlertDialog.Builder(this);

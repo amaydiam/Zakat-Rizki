@@ -14,6 +14,7 @@ public class Zakat extends Application {
     public static final int VIEW_TYPE_MUSTAHIQ = 2;
     public static final int VIEW_TYPE_DONASI = 3;
     public static final int VIEW_TYPE_LAPORAN_DONASI = 4;
+    public static final int VIEW_TYPE_LAPORAN_DONASI_SELF = 5;
 
     public static final int MY_SOCKET_TIMEOUT_MS = 60000;
     public static final int JPEG_OUTPUT_QUALITY = 70;
@@ -80,8 +81,10 @@ public class Zakat extends Application {
     public static final String ID_AMIL_ZAKAT = "id_amil_zakat";
     public static final String ID_BADAN_AMIL_ZAKAT = "id_badan_amil_zakat";
     public static final String NAMA_BADAN_AMIL_ZAKAT = "nama_badan_amil_zakat";
+    public static final String id_nama_validasi_amil_zakat = "id_nama_validasi_amil_zakat";
     public static final String nama_validasi_amil_zakat = "nama_validasi_amil_zakat";
     public static final String CAPTION_PHOTO = "caption_photo";
+    public static final String TYPE = "type";
 
     public static String mustahiq = "mustahiq";
     public static String id_mustahiq = "id_mustahiq";
@@ -108,6 +111,10 @@ public class Zakat extends Application {
     public static String rating="rating";
     public static String id_badan_amil_zakat = "id_badan_amil_zakat";
     public static String nama_badan_amil_zakat = "nama_badan_amil_zakat";
+
+
+    public static int ALL = 0;
+    public static int SELF = 1;
 
     @Override
     protected void attachBaseContext(Context base) {

@@ -4,10 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -36,6 +38,7 @@ import com.ad.zakatrizki.adapter.LaporanDonasiAdapter;
 import com.ad.zakatrizki.model.LaporanDonasi;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
+import com.ad.zakatrizki.utils.Prefs;
 import com.ad.zakatrizki.utils.TextUtils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -62,7 +65,12 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 public class LaporanDonasiListFragment extends Fragment implements LaporanDonasiAdapter.OnLaporanDonasiItemClickListener,
-        SwipeRefreshLayout.OnRefreshListener, CustomVolley.OnCallbackResponse {
+        SwipeRefreshLayout.OnRefreshListener, CustomVolley.OnCallbackResponse, FilterLaporanDonasiFragment.AddEditCalonMustahiqListener {
+
+
+    private String s_tahun = "ALL";
+    private String s_bulan = "ALL";
+    private String s_index_bulan = "ALL";
 
     private static final String TAG_MORE = "TAG_MORE";
     private static final String TAG_AWAL = "TAG_AWAL";
@@ -101,6 +109,10 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
     EditText search;
     @BindView(R.id.parent_search)
     CardView parentSearch;
+
+    @BindView(R.id.btn_filter)
+    IconButton btnFilter;
+
     private ArrayList<LaporanDonasi> data = new ArrayList<>();
     private GridLayoutManager mLayoutManager;
     private String keyword = null;
@@ -116,6 +128,7 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
     private CustomVolley customVolley;
     private RequestQueue queue;
     private int mPreviousVisibleItem;
+    private int type;
 
     public LaporanDonasiListFragment() {
     }
@@ -123,9 +136,21 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
     /**
      * Returns a new instance of this fragment for the given section
      * number.
+     *
+     * @param type
      */
-    public static LaporanDonasiListFragment newInstance() {
-        return new LaporanDonasiListFragment();
+    public static LaporanDonasiListFragment newInstance(int type) {
+        LaporanDonasiListFragment f = new LaporanDonasiListFragment();
+        Bundle args = new Bundle();
+        args.putInt(Zakat.TYPE, type);
+        f.setArguments(args);
+        return f;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        type = getArguments().getInt(Zakat.TYPE);
     }
     //  private String session_key;
 
@@ -137,6 +162,18 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
     @OnClick(R.id.btn_search)
     void btn_search() {
         Search();
+    }
+
+    @OnClick(R.id.btn_filter)
+    void setBtnFilter() {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FilterLaporanDonasiFragment manageMustahiq = new FilterLaporanDonasiFragment();
+        manageMustahiq.setTargetFragment(this, 0);
+        manageMustahiq.setCancelable(true);
+        manageMustahiq.setTahun(s_tahun);
+        manageMustahiq.setBulan(s_bulan);
+        manageMustahiq.setIndexBulan(s_index_bulan);
+        manageMustahiq.show(fragmentManager, "FILTER");
     }
 
     @OnClick(R.id.try_again)
@@ -166,6 +203,7 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
 
         }
 
+        btnFilter.setVisibility(View.VISIBLE);
 
         // Configure the swipe refresh layout
         swipeContainer.setOnRefreshListener(this);
@@ -334,7 +372,8 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
     }
 
     public String getUrlToDownload(int page) {
-        return ApiHelper.getLaporanDonasiLink(getActivity(), page, keyword);
+        return ApiHelper.getLaporanDonasiLink(getActivity(), String.valueOf((type != Zakat.ALL ? Prefs.getIdAmilZakat(getActivity()) : "ALL")), s_tahun, s_index_bulan, page,
+                keyword);
     }
 
 
@@ -470,7 +509,7 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
 
     }
 
-    private void AddAndSetMapData(String position, String id_donasi, String jumlah_donasi, String id_muzaki, String nama_muzaki, String alamat_muzaki, String no_identitas_muzaki, String no_telp_muzaki, String status_muzaki, String id_mustahiq,String id_calon_mustahiq, String nama_calon_mustahiq, String alamat_calon_mustahiq, String no_identitas_calon_mustahiq, String no_telp_calon_mustahiq, String status_calon_mustahiq, String id_amil_zakat, String nama_validasi_amil_zakat) {
+    private void AddAndSetMapData(String position, String id_donasi, String jumlah_donasi, String id_muzaki, String nama_muzaki, String alamat_muzaki, String no_identitas_muzaki, String no_telp_muzaki, String status_muzaki, String id_mustahiq, String id_calon_mustahiq, String nama_calon_mustahiq, String alamat_calon_mustahiq, String no_identitas_calon_mustahiq, String no_telp_calon_mustahiq, String status_calon_mustahiq, String id_amil_zakat, String nama_validasi_amil_zakat) {
 
         LaporanDonasi donasi = new LaporanDonasi(
                 id_donasi,
@@ -725,10 +764,17 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
 
 
     public void hideSoftKeyboard() {
-        if(getActivity().getCurrentFocus()!=null) {
-            InputMethodManager inputMethodManager = (InputMethodManager)getActivity(). getSystemService(INPUT_METHOD_SERVICE);
+        if (getActivity().getCurrentFocus() != null) {
+            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         }
     }
 
+    @Override
+    public void onFinishFilter(String s_tahun, String s_bulan, String s_index_bulan) {
+        this.s_tahun = s_tahun;
+        this.s_bulan = s_bulan;
+        this.s_index_bulan = s_index_bulan;
+        RefreshData();
+    }
 }

@@ -124,8 +124,9 @@ public final class Prefs {
         Prefs.putPref(context, Zakat.ID_BADAN_AMIL_ZAKAT, id_badan_amil_zakat);
     }
 
-    public static void getNamaAmilZakat(final Context context, String id_badan_amil_zakat) {
-        Prefs.putPref(context, Zakat.NAMA_BADAN_AMIL_ZAKAT, id_badan_amil_zakat);
+    public static String getNamaAmilZakat(final Context context) {
+        String e = Prefs.getPref(context, Zakat.NAMA_BADAN_AMIL_ZAKAT, null);
+        return e;
     }
 
     public static void putNamaAmilZakat(final Context context, String id_badan_amil_zakat) {

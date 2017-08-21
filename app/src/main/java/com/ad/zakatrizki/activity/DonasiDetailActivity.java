@@ -21,44 +21,8 @@ public class DonasiDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content_detail);
-
-        if (savedInstanceState == null) {
-            String mustahiqId;
-            Intent intent = getIntent();
-            Uri data = intent.getData();
-            if (data == null) {
-                // Not loading from deep link
-                mustahiqId = getIntent().getStringExtra(Zakat.MUSTAHIQ_ID);
-                loadDonasiDetailsOf(mustahiqId);
-            } else {
-                // Loading from deep link
-                String[] parts = data.toString().split("/");
-                mustahiqId = parts[parts.length - 1];
-                switch (mustahiqId) {
-                    // Load Donasi Lists
-                    case "movie":
-                        loadDonasiOfType(0);
-                        break;
-                    case "top-rated":
-                        loadDonasiOfType(1);
-                        break;
-                    case "faq":
-                        loadDonasiOfType(2);
-                        break;
-                    case "now-playing":
-                        loadDonasiOfType(3);
-                        break;
-                    // Load details of a particular movie
-                    default:
-                        int dashPosition = mustahiqId.indexOf("-");
-                        if (dashPosition != -1) {
-                            mustahiqId = mustahiqId.substring(0, dashPosition);
-                        }
-                        loadDonasiDetailsOf(mustahiqId);
-                        break;
-                }
-            }
-        }
+        String mustahiqId = getIntent().getStringExtra(Zakat.MUSTAHIQ_ID);
+        loadDonasiDetailsOf(mustahiqId);
     }
 
     private void loadDonasiDetailsOf(String mustahiqId) {

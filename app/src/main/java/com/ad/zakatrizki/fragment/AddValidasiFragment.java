@@ -163,6 +163,7 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
                             .getString(Zakat.caption_photo_3);
                     String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+                    String id_nama_validasi_amil_zakat = obj.getString(Zakat.id_nama_validasi_amil_zakat);
                     String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
                     String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
@@ -180,7 +181,7 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
                             caption_photo_2,
                             caption_photo_3,
                             status_mustahiq,
-                            jumlah_rating, nama_validasi_amil_zakat, waktu_terakhir_donasi);
+                            jumlah_rating,id_nama_validasi_amil_zakat, nama_validasi_amil_zakat, waktu_terakhir_donasi);
                     callback.onFinishValidasi(mustahiq);
                 } else {
                     callback.onFinishValidasi(calonMustahiq);

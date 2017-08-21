@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
 import com.ad.zakatrizki.R;
 import com.ad.zakatrizki.activity.ActionDonasiBaruActivity;
@@ -24,11 +26,15 @@ import com.ad.zakatrizki.widget.RobotoLightTextView;
 import com.ad.zakatrizki.widget.RobotoRegularEditText;
 import com.google.android.gms.maps.SupportMapFragment;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import agency.tango.android.avatarview.loader.PicassoLoader;
 import agency.tango.android.avatarview.views.AvatarView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemSelected;
 import butterknife.Unbinder;
 
 public class Step1AddInfoMuzakiFragment extends Fragment {
@@ -39,6 +45,7 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
     public String s_no_identitas_muzaki;
     public String s_no_telp_muzaki;
     public String s_jumlah_donasi;
+    public String s_id_amil_zakat ="";
     public boolean errorForm;
     @BindView(R.id.nama_muzaki)
     RobotoRegularEditText namaMuzaki;
@@ -74,14 +81,24 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
     Button btnStep2;
     @BindView(R.id.parent_layout)
     LinearLayout parentLayout;
+    @BindView(R.id.id_amil_zakat)
+    Spinner idAmilZakat;
+
     boolean after_launch;
     private ActionDonasiBaruActivity activity;
     private Unbinder unbinder;
     private PicassoLoader imageLoader;
+    ArrayList<String> array_id_nama_validasi_amil_zakat = new ArrayList<String>();
 
     @OnClick(R.id.btn_step_2)
     void Step2() {
         SubmitData1(true, 1);
+    }
+
+    @OnItemSelected(R.id.id_amil_zakat)
+    public void spinnerItemSelected(Spinner spinner, int position) {
+        // code here
+        s_id_amil_zakat =array_id_nama_validasi_amil_zakat.get(position);
     }
 
 
@@ -150,6 +167,20 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
             waktuTerakhirDonasi.setVisibility(View.GONE);
             statusMustahiq.setVisibility(View.GONE);
 
+            String nama_validasi_amil_zakat = activity.mustahiqPrepareDonasi.nama_validasi_amil_zakat;
+            String[] array_nama_validasi_amil_zakat = nama_validasi_amil_zakat.split(",");
+            if(!TextUtils.isNullOrEmpty(nama_validasi_amil_zakat)){
+
+                String id_nama_validasi_amil_zakat = activity.mustahiqPrepareDonasi.id_nama_validasi_amil_zakat;
+                String[] x_id_nama_validasi_amil_zakat = id_nama_validasi_amil_zakat.split(",");
+
+                Collections.addAll(array_id_nama_validasi_amil_zakat, x_id_nama_validasi_amil_zakat);
+
+                idAmilZakat.setAdapter(new ArrayAdapter<String>(getActivity(),
+                        android.R.layout.simple_spinner_item, array_nama_validasi_amil_zakat));
+
+            }
+
         }
     }
 
@@ -198,6 +229,10 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
         s_no_identitas_muzaki = noIdentitasMuzaki.getText().toString().trim();
         s_no_telp_muzaki = noTelpMuzaki.getText().toString().trim();
         s_jumlah_donasi = jumlahDonasi.getText().toString().trim().replace(".", "");
+        try {
+            s_jumlah_donasi = array_id_nama_validasi_amil_zakat.get(idAmilZakat.getSelectedItemPosition());
+        }
+        catch (Exception ignored){}
     }
 
     void getValidasiForm() {

@@ -46,6 +46,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="upload_document_permission"><![CDATA[Kamu harus unggah gambar %s. Aktifkan izin (permission) WRITE_EXTERNAL_STORAGE dan CAMERA di [Setting] > [Permission]]]></string>
     <string name="pick_source">Pick Image</string>
+    <string name="drawer_laporan_donasi_self">Donasi Kami</string>
 
 
 </resources>

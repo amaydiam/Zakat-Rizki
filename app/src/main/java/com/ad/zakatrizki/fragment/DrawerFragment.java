@@ -113,6 +113,10 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
 //donasi
         MenuItem drawer_laporan_donasi = menu.findItem(R.id.drawer_laporan_donasi);
         drawer_laporan_donasi.setIcon(new IconDrawable(getActivity(), MaterialCommunityIcons.mdi_file_document).actionBarSize());
+
+        MenuItem drawer_laporan_donasi_self = menu.findItem(R.id.drawer_laporan_donasi_self);
+        drawer_laporan_donasi_self.setIcon(new IconDrawable(getActivity(), MaterialCommunityIcons.mdi_file_document).actionBarSize());
+
 //mustahiq
         MenuItem drawer_mustahiq = menu.findItem(R.id.drawer_mustahiq);
         drawer_mustahiq.setIcon(new IconDrawable(getActivity(), FontAwesomeIcons.fa_group).actionBarSize());
@@ -121,6 +125,8 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
         drawer_calon_mustahiq.setIcon(new IconDrawable(getActivity(), FontAwesomeIcons.fa_user).actionBarSize());
 
         MenuItem drawer_logout_login = menu.findItem(R.id.drawer_logout_login);
+        drawer_laporan_donasi_self.setVisible(false);
+
         if (Prefs.getLogin(getActivity())) {
             drawer_donasi.setVisible(false);
             drawer_mustahiq.setVisible(true);
@@ -128,11 +134,14 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
             drawer_logout_login.setTitle("Logout");
             drawer_logout_login.setIcon(new IconDrawable(getActivity(), MaterialCommunityIcons.mdi_logout).actionBarSize());
             if (Prefs.getTipeUser(getActivity()).equalsIgnoreCase("1")) {
-                ket.setText("Admin");
+                drawer_laporan_donasi_self.setTitle("Donasi Melalui "+Prefs.getNamaAmilZakat(getActivity()));
+                drawer_laporan_donasi_self.setVisible(true);
+                ket.setText(Prefs.getNamaUser(getActivity())+"-"+Prefs.getNamaAmilZakat(getActivity()));
                 ket.setVisibility(VISIBLE);
             } else {
                 drawer_donasi.setVisible(true);
-                ket.setVisibility(GONE);
+                ket.setText(Prefs.getNamaUser(getActivity()));
+                ket.setVisibility(VISIBLE);
             }
         } else {
 
@@ -203,6 +212,9 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
             case Menus.DRAWER_LAPORAN_DONASI:
                 setSelectedDrawerItem(Zakat.VIEW_TYPE_LAPORAN_DONASI);
                 return true;
+            case Menus.DRAWER_LAPORAN_DONASI_SELF:
+                setSelectedDrawerItem(Zakat.VIEW_TYPE_LAPORAN_DONASI_SELF);
+                return true;
             case Menus.DRAWER_MUSTAHIQ:
                 setSelectedDrawerItem(Zakat.VIEW_TYPE_MUSTAHIQ);
                 return true;
@@ -256,7 +268,11 @@ public class DrawerFragment extends Fragment implements OnMenuItemClickListener,
                 break;
             case Zakat.VIEW_TYPE_LAPORAN_DONASI:
                 id = Menus.DRAWER_LAPORAN_DONASI;
-                fragment = new LaporanDonasiListFragment();
+                fragment =LaporanDonasiListFragment.newInstance(Zakat.ALL);
+                break;
+            case Zakat.VIEW_TYPE_LAPORAN_DONASI_SELF:
+                id = Menus.DRAWER_LAPORAN_DONASI_SELF;
+                fragment =LaporanDonasiListFragment.newInstance(Zakat.SELF);
                 break;
             case Zakat.VIEW_TYPE_MUSTAHIQ:
                 id = Menus.DRAWER_MUSTAHIQ;

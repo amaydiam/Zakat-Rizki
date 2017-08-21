@@ -246,6 +246,7 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                             .getString(Zakat.caption_photo_3);
                     String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+                    String id_nama_validasi_amil_zakat = obj.getString(Zakat.id_nama_validasi_amil_zakat);
                     String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
                     String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
@@ -263,7 +264,7 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                             caption_photo_2,
                             caption_photo_3,
                             status_mustahiq,
-                            jumlah_rating, nama_validasi_amil_zakat, waktu_terakhir_donasi);
+                            jumlah_rating, id_nama_validasi_amil_zakat, nama_validasi_amil_zakat, waktu_terakhir_donasi);
                     if (TAG.equals(TAG_ADD)) {
                         callback.onFinishAddMustahiq(mustahiq);
                     } else if (TAG.equals(TAG_EDIT)) {

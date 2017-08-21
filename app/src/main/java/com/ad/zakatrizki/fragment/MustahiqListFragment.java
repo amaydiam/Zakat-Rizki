@@ -479,6 +479,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
         String status_mustahiq = obj.getString(Zakat.status_mustahiq);
         String jumlah_rating = obj.getString(Zakat.jumlah_rating);
         String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
+        String id_nama_validasi_amil_zakat = obj.getString(Zakat.id_nama_validasi_amil_zakat);
         String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
         //set map object
         AddAndSetMapData(
@@ -494,6 +495,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3,
                 status_mustahiq,
                 jumlah_rating,
+                id_nama_validasi_amil_zakat,
                 nama_validasi_amil_zakat, waktu_terakhir_donasi
         );
 
@@ -512,6 +514,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
             String photo_1, String photo_2, String photo_3, String caption_photo_1, String caption_photo_2, String caption_photo_3,
             String status_mustahiq,
             String jumlah_rating,
+            String id_nama_validasi_amil_zakat,
             String nama_validasi_amil_zakat, String waktu_terakhir_donasi) {
 
         Mustahiq mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq,
@@ -525,6 +528,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3,
                 status_mustahiq,
                 jumlah_rating,
+                id_nama_validasi_amil_zakat,
                 nama_validasi_amil_zakat, waktu_terakhir_donasi);
 
         if (position.equals(TAG_BAWAH)) {

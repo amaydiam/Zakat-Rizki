@@ -35,6 +35,7 @@ public class Mustahiq implements Parcelable {
     public String caption_photo_3;
     public String status_mustahiq;
     public String jumlah_rating;
+    public String id_nama_validasi_amil_zakat;
     public String nama_validasi_amil_zakat;
     public String waktu_terakhir_donasi;
 
@@ -49,6 +50,7 @@ public class Mustahiq implements Parcelable {
                     String photo_1, String photo_2, String photo_3, String caption_photo_1, String caption_photo_2, String caption_photo_3,
                     String status_mustahiq,
                     String jumlah_rating,
+                     String id_nama_validasi_amil_zakat,
                     String nama_validasi_amil_zakat, String waktu_terakhir_donasi) {
         this.id_mustahiq = id_mustahiq;
         this.id_calon_mustahiq = id_calon_mustahiq;
@@ -68,6 +70,7 @@ public class Mustahiq implements Parcelable {
         this.caption_photo_3 = caption_photo_3;
         this.status_mustahiq = status_mustahiq;
         this.jumlah_rating = jumlah_rating;
+        this.id_nama_validasi_amil_zakat = id_nama_validasi_amil_zakat;
         this.nama_validasi_amil_zakat = nama_validasi_amil_zakat;
         this.waktu_terakhir_donasi = waktu_terakhir_donasi;
     }
@@ -91,6 +94,7 @@ public class Mustahiq implements Parcelable {
         caption_photo_3 = in.readString();
         status_mustahiq = in.readString();
         jumlah_rating = in.readString();
+        id_nama_validasi_amil_zakat = in.readString();
         nama_validasi_amil_zakat = in.readString();
         waktu_terakhir_donasi = in.readString();
     }
@@ -115,6 +119,7 @@ public class Mustahiq implements Parcelable {
         dest.writeString(caption_photo_3);
         dest.writeString(status_mustahiq);
         dest.writeString(jumlah_rating);
+        dest.writeString(id_nama_validasi_amil_zakat);
         dest.writeString(nama_validasi_amil_zakat);
         dest.writeString(waktu_terakhir_donasi);
     }
