@@ -418,6 +418,8 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
         String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+        String status_tempat_tinggal_calon_mustahiq = obj.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
+        String status_pekerjaan_calon_mustahiq = obj.getString(Zakat.status_pekerjaan_calon_mustahiq);
         String id_user_perekomendasi = obj.getString(Zakat.id_user_perekomendasi);
         String nama_perekomendasi_calon_mustahiq = obj
                 .getString(Zakat.nama_perekomendasi_calon_mustahiq);
@@ -445,6 +447,8 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
                 alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                status_tempat_tinggal_calon_mustahiq,
+                status_pekerjaan_calon_mustahiq,
                 id_user_perekomendasi,
                 nama_perekomendasi_calon_mustahiq,
                 alasan_perekomendasi_calon_mustahiq,
@@ -468,7 +472,7 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
             String latitude_calon_mustahiq,
             String longitude_calon_mustahiq,
             String no_identitas_calon_mustahiq,
-            String no_telp_calon_mustahiq,
+            String no_telp_calon_mustahiq, String status_tempat_tinggal_calon_mustahiq, String status_pekerjaan_calon_mustahiq,
             String id_user_perekomendasi,
             String nama_perekomendasi_calon_mustahiq,
             String alasan_perekomendasi_calon_mustahiq,
@@ -480,7 +484,9 @@ public class DialogPickCalonMustahiqFragment extends DialogFragment implements C
             String caption_photo_3,
             String status_calon_mustahiq,String jumlah_rating) {
 
-        CalonMustahiq calon_mustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, nama_perekomendasi_calon_mustahiq,alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, status_calon_mustahiq,jumlah_rating);
+        CalonMustahiq calon_mustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq,
+                status_tempat_tinggal_calon_mustahiq,
+                status_pekerjaan_calon_mustahiq, id_user_perekomendasi, nama_perekomendasi_calon_mustahiq,alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, status_calon_mustahiq,jumlah_rating);
 
 
 

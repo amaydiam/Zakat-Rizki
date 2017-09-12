@@ -87,6 +87,10 @@ public class LaporanDonasiDetailFragment extends Fragment implements CustomVolle
     RobotoLightTextView noIdentitasMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoLightTextView noTelpMustahiq;
+    @BindView(R.id.status_tempat_tinggal_calon_mustahiq)
+    RobotoLightTextView statusTempatTinggalCalonMustahiq;
+    @BindView(R.id.status_pekerjaan_calon_mustahiq)
+    RobotoLightTextView statusPekerjaanCalonMustahiq;
     @BindView(R.id.status_calon_mustahiq)
     RobotoLightTextView statusMustahiq;
     @BindView(R.id.nama_validasi_amil_zakat)
@@ -213,6 +217,9 @@ public class LaporanDonasiDetailFragment extends Fragment implements CustomVolle
         alamatMustahiq.setText("Alamat : " + (TextUtils.isNullOrEmpty(laporanDonasi.alamat_calon_mustahiq) ? "-" : laporanDonasi.alamat_calon_mustahiq));
         noIdentitasMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(laporanDonasi.no_identitas_calon_mustahiq) ? "-" : laporanDonasi.no_identitas_calon_mustahiq));
         noTelpMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(laporanDonasi.no_telp_calon_mustahiq) ? "-" : laporanDonasi.no_telp_calon_mustahiq));
+        noTelpMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(laporanDonasi.no_telp_calon_mustahiq) ? "-" : laporanDonasi.no_telp_calon_mustahiq));
+        statusTempatTinggalCalonMustahiq.setText("Status Tempat Tinggal : " + (TextUtils.isNullOrEmpty(laporanDonasi.status_tempat_tinggal_calon_mustahiq) ? "-" : laporanDonasi.status_tempat_tinggal_calon_mustahiq));
+        statusPekerjaanCalonMustahiq.setText("Status Pekerjaan : " + (TextUtils.isNullOrEmpty(laporanDonasi.status_pekerjaan_calon_mustahiq) ? "-" : laporanDonasi.status_pekerjaan_calon_mustahiq));
         statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (laporanDonasi.status_calon_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
         namaAmilZakat.setText("Validasi Amil Zakat Zakat : " + laporanDonasi.nama_validasi_amil_zakat);
 
@@ -278,6 +285,8 @@ public class LaporanDonasiDetailFragment extends Fragment implements CustomVolle
             String alamat_calon_mustahiq = jsDetail.getString(Zakat.alamat_calon_mustahiq);
             String no_identitas_calon_mustahiq = jsDetail.getString(Zakat.no_identitas_calon_mustahiq);
             String no_telp_calon_mustahiq = jsDetail.getString(Zakat.no_telp_calon_mustahiq);
+            String status_tempat_tinggal_calon_mustahiq = jsDetail.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
+            String status_pekerjaan_calon_mustahiq = jsDetail.getString(Zakat.status_pekerjaan_calon_mustahiq);
             String status_calon_mustahiq = jsDetail.getString(Zakat.status_calon_mustahiq);
             String id_amil_zakat = jsDetail.getString(Zakat.id_amil_zakat);
             String nama_validasi_amil_zakat = jsDetail.getString(Zakat.nama_validasi_amil_zakat);
@@ -297,6 +306,8 @@ public class LaporanDonasiDetailFragment extends Fragment implements CustomVolle
                     alamat_calon_mustahiq,
                     no_identitas_calon_mustahiq,
                     no_telp_calon_mustahiq,
+                    status_tempat_tinggal_calon_mustahiq,
+                    status_pekerjaan_calon_mustahiq,
                     status_calon_mustahiq,
                     id_amil_zakat,
                     nama_validasi_amil_zakat);

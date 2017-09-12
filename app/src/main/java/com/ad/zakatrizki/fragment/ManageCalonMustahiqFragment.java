@@ -23,6 +23,7 @@ import android.view.Window;
 import android.view.WindowManager.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ad.zakatrizki.R;
@@ -62,6 +63,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -108,6 +110,11 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
     @BindView(R.id.img_foto_3)
     ImageView imgFoto3;
 
+    @BindView(R.id.status_tempat_tinggal_calon_mustahiq)
+    Spinner statusTempatTinggalCalonMustahiq;
+    @BindView(R.id.status_pekerjaan_calon_mustahiq)
+    Spinner statusPekerjaanCalonMustahiq;
+
     private int TYPE_IMG;
     private int PHOTO_1 = 1;
     private int PHOTO_2 = 2;
@@ -115,6 +122,9 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
     private String val_server_photo_1;
     private String val_server_photo_2;
     private String val_server_photo_3;
+
+    String[] statusTempatTinggal = { "Rumah Pribadi",  "Sewa"};
+    String[] statusPekerjaan = { "Tetap",  "Tidak Tetap",  "Tidak Memiliki Pekerjaan"};
 
     @OnClick(R.id.pick_location)
     void pickLocation() {
@@ -223,6 +233,8 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
     private String val_nama_calon_mustahiq = "";
     private String val_alamat_calon_mustahiq = "";
     private String val_no_identitas_calon_mustahiq = "";
+    private String val_status_tempat_tinggal_calon_mustahiq = "";
+    private String val_status_pekerjaan_calon_mustahiq = "";
     private String val_no_telp_calon_mustahiq = "";
     private String val_alasan_perekomendasi_calon_mustahiq = "";
     private String val_caption_img_foto_1 = "";
@@ -259,11 +271,14 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                 if (val_nama_calon_mustahiq.length() == 0
                         || val_alamat_calon_mustahiq.length() == 0
                         || val_no_identitas_calon_mustahiq.length() == 0
+                        || val_status_tempat_tinggal_calon_mustahiq.length() == 0
+                        || val_status_pekerjaan_calon_mustahiq.length() == 0
                         || val_no_telp_calon_mustahiq.length() == 0
                         || val_alasan_perekomendasi_calon_mustahiq.length() == 0) {
                     snackbar.show("Harap isi semua form...");
                     return;
                 }
+
                 if (val_latitude_calon_mustahiq == null
                         || val_longitude_calon_mustahiq == null) {
                     snackbar.show("Harap masukan kordinat lokasi...");
@@ -306,6 +321,10 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                         String.valueOf(val_longitude_calon_mustahiq));
                 jsonParams.put(Zakat.no_identitas_calon_mustahiq,
                         val_no_identitas_calon_mustahiq);
+                jsonParams.put(Zakat.status_tempat_tinggal_calon_mustahiq,
+                        val_status_tempat_tinggal_calon_mustahiq);
+                jsonParams.put(Zakat.status_pekerjaan_calon_mustahiq ,
+                        val_status_pekerjaan_calon_mustahiq );
                 jsonParams.put(Zakat.no_telp_calon_mustahiq,
                         val_no_telp_calon_mustahiq);
                 jsonParams.put(Zakat.alasan_perekomendasi_calon_mustahiq,
@@ -387,6 +406,17 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
         val_nama_calon_mustahiq = namaCalonMustahiq.getText().toString().trim();
         val_alamat_calon_mustahiq = alamatCalonMustahiq.getText().toString().trim();
         val_no_identitas_calon_mustahiq = noIdentitasCalonMustahiq.getText().toString().trim();
+
+        try {
+            val_status_tempat_tinggal_calon_mustahiq = statusTempatTinggal[statusTempatTinggalCalonMustahiq.getSelectedItemPosition()];
+        }
+        catch (Exception ignored){}
+
+        try {
+            val_status_pekerjaan_calon_mustahiq = statusPekerjaan[statusPekerjaanCalonMustahiq.getSelectedItemPosition()];
+        }
+        catch (Exception ignored){}
+
         val_no_telp_calon_mustahiq = noTelpCalonMustahiq.getText().toString().trim();
         val_alasan_perekomendasi_calon_mustahiq = alasanPerekomendasiCalonMustahiq.getText().toString().trim();
         val_caption_img_foto_1 = captionImgFoto1.getText().toString().trim();
@@ -460,6 +490,8 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                     String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
                     String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
                     String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                    String status_tempat_tinggal_calon_mustahiq = obj.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
+                    String status_pekerjaan_calon_mustahiq = obj.getString(Zakat.status_pekerjaan_calon_mustahiq);
                     String id_user_perekomendasi = obj
                             .getString(Zakat.id_user_perekomendasi);
                     String nama_perekomendasi_calon_mustahiq = obj
@@ -481,7 +513,9 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                     String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
 
-                    calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, nama_perekomendasi_calon_mustahiq,alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, status_calon_mustahiq,jumlah_rating);
+                    calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq,
+                            status_tempat_tinggal_calon_mustahiq,
+                            status_pekerjaan_calon_mustahiq, id_user_perekomendasi, nama_perekomendasi_calon_mustahiq, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, status_calon_mustahiq, jumlah_rating);
                     if (TAG.equals(TAG_ADD)) {
                         callback.onFinishAddCalonMustahiq(calonMustahiq);
                     } else if (TAG.equals(TAG_EDIT)) {
@@ -576,6 +610,19 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
 
         // Spinner on item click listener
 
+
+        ArrayAdapter<String> adapterStatusTempatTinggal = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item, statusTempatTinggal);
+        adapterStatusTempatTinggal.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        statusTempatTinggalCalonMustahiq.setAdapter(adapterStatusTempatTinggal);
+
+
+        ArrayAdapter<String> adapterStatusPekerjaan = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item, statusPekerjaan);
+        adapterStatusPekerjaan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        statusPekerjaanCalonMustahiq.setAdapter(adapterStatusPekerjaan);
+
+
         if (action.equals("edit")) {
             toolbar.setSubtitle("Ubah");
             _delete.setVisible(true);
@@ -585,6 +632,8 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
             val_nama_calon_mustahiq = calonMustahiq.nama_calon_mustahiq;
             val_alamat_calon_mustahiq = calonMustahiq.alamat_calon_mustahiq;
             val_no_identitas_calon_mustahiq = calonMustahiq.no_identitas_calon_mustahiq;
+            val_status_tempat_tinggal_calon_mustahiq = calonMustahiq.status_tempat_tinggal_calon_mustahiq;
+            val_status_pekerjaan_calon_mustahiq = calonMustahiq.status_pekerjaan_calon_mustahiq;
             val_no_telp_calon_mustahiq = calonMustahiq.no_telp_calon_mustahiq;
             val_alasan_perekomendasi_calon_mustahiq = calonMustahiq.alasan_perekomendasi_calon_mustahiq;
 
@@ -601,7 +650,12 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
 
             namaCalonMustahiq.setText(val_nama_calon_mustahiq);
             alamatCalonMustahiq.setText(val_alamat_calon_mustahiq);
+
             noIdentitasCalonMustahiq.setText(val_no_identitas_calon_mustahiq);
+
+            statusTempatTinggalCalonMustahiq.setSelection(Arrays.asList(statusTempatTinggal).indexOf(val_status_tempat_tinggal_calon_mustahiq));
+            statusPekerjaanCalonMustahiq.setSelection(Arrays.asList(statusPekerjaan).indexOf(val_status_pekerjaan_calon_mustahiq));
+
             noTelpCalonMustahiq.setText(val_no_telp_calon_mustahiq);
             alasanPerekomendasiCalonMustahiq.setText(val_alasan_perekomendasi_calon_mustahiq);
             captionImgFoto1.setText(val_caption_img_foto_1);
@@ -613,6 +667,7 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
             toolbar.setSubtitle("Tambah");
             _delete.setVisible(false);
         }
+
 
         checkPhoto1();
         checkPhoto2();

@@ -70,7 +70,24 @@
 
                 android:textColor="@color/text_primary"
                 android:textSize="@dimen/text_large"
-                tools:text="no_telp_calon_mustahiq" />
+                tools:text="no_telp_calon_mustahiq" /><com.ad.zakatrizki.widget.RobotoLightTextView
+            android:id="@+id/status_tempat_tinggal_calon_mustahiq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_large"
+            tools:text="status_tempat_tinggal_calon_mustahiq" />
+            <com.ad.zakatrizki.widget.RobotoLightTextView
+                android:id="@+id/status_pekerjaan_calon_mustahiq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+
+                android:textColor="@color/text_primary"
+                android:textSize="@dimen/text_large"
+                tools:text="status_pekerjaan_calon_mustahiq" />
 
             <com.ad.zakatrizki.widget.RobotoLightTextView
                 android:id="@+id/nama_perekomendasi_calon_mustahiq"

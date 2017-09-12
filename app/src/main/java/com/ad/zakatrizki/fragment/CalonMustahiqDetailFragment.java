@@ -154,6 +154,10 @@ public class CalonMustahiqDetailFragment extends Fragment
     RobotoLightTextView noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoLightTextView noTelpCalonMustahiq;
+    @BindView(R.id.status_tempat_tinggal_calon_mustahiq)
+    RobotoLightTextView statusTempatTinggalCalonMustahiq;
+    @BindView(R.id.status_pekerjaan_calon_mustahiq)
+    RobotoLightTextView statusPekerjaanCalonMustahiq;
     @BindView(R.id.nama_perekomendasi_calon_mustahiq)
     RobotoLightTextView namaPerekomendasiCalonMustahiq;
     private ProgressDialog dialogProgress;
@@ -317,6 +321,8 @@ public class CalonMustahiqDetailFragment extends Fragment
         alamatCalonMustahiq.setText("Alamat : " + (TextUtils.isNullOrEmpty(calonMustahiq.alamat_calon_mustahiq) ? "-" : calonMustahiq.alamat_calon_mustahiq));
         noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(calonMustahiq.no_identitas_calon_mustahiq) ? "-" : calonMustahiq.no_identitas_calon_mustahiq));
         noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(calonMustahiq.no_telp_calon_mustahiq) ? "-" : calonMustahiq.no_telp_calon_mustahiq));
+       statusTempatTinggalCalonMustahiq.setText("Status Tempat Tinggal : " + (TextUtils.isNullOrEmpty(calonMustahiq.status_tempat_tinggal_calon_mustahiq) ? "-" : calonMustahiq.status_tempat_tinggal_calon_mustahiq));
+       statusPekerjaanCalonMustahiq.setText("Status Pekerjaan : " + (TextUtils.isNullOrEmpty(calonMustahiq.status_pekerjaan_calon_mustahiq) ? "-" : calonMustahiq.status_pekerjaan_calon_mustahiq));
         namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(calonMustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : calonMustahiq.nama_perekomendasi_calon_mustahiq));
 
         layoutRating.setVisibility(View.VISIBLE);
@@ -408,6 +414,8 @@ public class CalonMustahiqDetailFragment extends Fragment
                 String longitude_calon_mustahiq = jsDetail.getString(Zakat.longitude_calon_mustahiq);
                 String no_identitas_calon_mustahiq = jsDetail.getString(Zakat.no_identitas_calon_mustahiq);
                 String no_telp_calon_mustahiq = jsDetail.getString(Zakat.no_telp_calon_mustahiq);
+                String status_tempat_tinggal_calon_mustahiq = jsDetail.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
+                String status_pekerjaan_calon_mustahiq = jsDetail.getString(Zakat.status_pekerjaan_calon_mustahiq);
                 String id_user_perekomendasi = jsDetail.getString(Zakat.id_user_perekomendasi);
                 String nama_perekomendasi_calon_mustahiq = jsDetail
                         .getString(Zakat.nama_perekomendasi_calon_mustahiq);
@@ -428,7 +436,9 @@ public class CalonMustahiqDetailFragment extends Fragment
                 String status_calon_mustahiq = jsDetail.getString(Zakat.status_calon_mustahiq);
                 String jumlah_rating = jsDetail.getString(Zakat.jumlah_rating);
 
-                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq, id_user_perekomendasi, nama_perekomendasi_calon_mustahiq, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, status_calon_mustahiq, jumlah_rating);
+                calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq,
+                        status_tempat_tinggal_calon_mustahiq,
+                        status_pekerjaan_calon_mustahiq, id_user_perekomendasi, nama_perekomendasi_calon_mustahiq, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, status_calon_mustahiq, jumlah_rating);
 
                 if (Boolean.parseBoolean(isSuccess))
                     onDownloadSuccessful();

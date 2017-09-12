@@ -31,6 +31,8 @@ public class LaporanDonasi implements Parcelable {
     public String alamat_calon_mustahiq;
     public String no_identitas_calon_mustahiq;
     public String no_telp_calon_mustahiq;
+    public String status_tempat_tinggal_calon_mustahiq;
+    public String status_pekerjaan_calon_mustahiq;
     public String status_calon_mustahiq;
     public String id_amil_zakat;
     public String nama_validasi_amil_zakat;
@@ -49,7 +51,7 @@ public class LaporanDonasi implements Parcelable {
                          String nama_calon_mustahiq,
                          String alamat_calon_mustahiq,
                          String no_identitas_calon_mustahiq,
-                         String no_telp_calon_mustahiq,
+                         String no_telp_calon_mustahiq, String status_tempat_tinggal_calon_mustahiq, String status_pekerjaan_calon_mustahiq,
                          String status_calon_mustahiq,
                          String id_amil_zakat,
                          String nama_validasi_amil_zakat) {
@@ -61,6 +63,8 @@ public class LaporanDonasi implements Parcelable {
         this.alamat_muzaki = alamat_muzaki;
         this.no_identitas_muzaki = no_identitas_muzaki;
         this.no_telp_muzaki = no_telp_muzaki;
+        this.status_tempat_tinggal_calon_mustahiq = status_tempat_tinggal_calon_mustahiq;
+        this.status_pekerjaan_calon_mustahiq = status_pekerjaan_calon_mustahiq;
         this.status_muzaki = status_muzaki;
 
         this.id_mustahiq = id_mustahiq;
@@ -89,6 +93,8 @@ public class LaporanDonasi implements Parcelable {
         alamat_calon_mustahiq = in.readString();
         no_identitas_calon_mustahiq = in.readString();
         no_telp_calon_mustahiq = in.readString();
+        status_tempat_tinggal_calon_mustahiq = in.readString();
+        status_pekerjaan_calon_mustahiq = in.readString();
         status_calon_mustahiq = in.readString();
         id_amil_zakat = in.readString();
         nama_validasi_amil_zakat = in.readString();
@@ -110,6 +116,8 @@ public class LaporanDonasi implements Parcelable {
         dest.writeString(alamat_calon_mustahiq);
         dest.writeString(no_identitas_calon_mustahiq);
         dest.writeString(no_telp_calon_mustahiq);
+        dest.writeString(status_tempat_tinggal_calon_mustahiq);
+        dest.writeString(status_pekerjaan_calon_mustahiq);
         dest.writeString(status_calon_mustahiq);
         dest.writeString(id_amil_zakat);
         dest.writeString(nama_validasi_amil_zakat);

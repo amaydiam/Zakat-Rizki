@@ -122,6 +122,8 @@ public class MustahiqAdapter extends RecyclerView.Adapter<MustahiqAdapter.ViewHo
                 mustahiq.alamat_calon_mustahiq.replaceAll("(?i)" + keyword_alamat, "<font color='" + ContextCompat.getColor(activity, R.color.accent) + "'>" + keyword_alamat + "</font>") : mustahiq.alamat_calon_mustahiq)));
         holder.noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(mustahiq.no_identitas_calon_mustahiq) ? "-" : mustahiq.no_identitas_calon_mustahiq));
         holder.noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(mustahiq.no_telp_calon_mustahiq) ? "-" : mustahiq.no_telp_calon_mustahiq));
+        holder.statusTempatTinggalCalonMustahiq.setText("Status Tempat Tinggal : " + (TextUtils.isNullOrEmpty(mustahiq.status_tempat_tinggal_calon_mustahiq) ? "-" : mustahiq.status_tempat_tinggal_calon_mustahiq));
+        holder.statusPekerjaanCalonMustahiq.setText("Status Pekerjaan : " + (TextUtils.isNullOrEmpty(mustahiq.status_pekerjaan_calon_mustahiq) ? "-" : mustahiq.status_pekerjaan_calon_mustahiq));
         holder.namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi: " + (TextUtils.isNullOrEmpty(mustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : mustahiq.nama_perekomendasi_calon_mustahiq));
         holder.alasanPerekomendasiCalonMustahiq.setText("Alasan Perekomendasian: " + (TextUtils.isNullOrEmpty(mustahiq.alasan_perekomendasi_calon_mustahiq) ? "-" : mustahiq.alasan_perekomendasi_calon_mustahiq));
         holder.statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (mustahiq.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
@@ -214,6 +216,10 @@ public class MustahiqAdapter extends RecyclerView.Adapter<MustahiqAdapter.ViewHo
         RobotoLightTextView noIdentitasCalonMustahiq;
         @BindView(R.id.no_telp_calon_mustahiq)
         RobotoLightTextView noTelpCalonMustahiq;
+        @BindView(R.id.status_tempat_tinggal_calon_mustahiq)
+        RobotoLightTextView statusTempatTinggalCalonMustahiq;
+        @BindView(R.id.status_pekerjaan_calon_mustahiq)
+        RobotoLightTextView statusPekerjaanCalonMustahiq;
         @BindView(R.id.nama_perekomendasi_calon_mustahiq)
         RobotoLightTextView namaPerekomendasiCalonMustahiq;
         @BindView(R.id.alasan_perekomendasi_calon_mustahiq)

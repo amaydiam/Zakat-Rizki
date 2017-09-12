@@ -25,6 +25,8 @@ public class Mustahiq implements Parcelable {
     public String longitude_calon_mustahiq;
     public String no_identitas_calon_mustahiq;
     public String no_telp_calon_mustahiq;
+    public String status_tempat_tinggal_calon_mustahiq;
+    public String status_pekerjaan_calon_mustahiq;
     public String nama_perekomendasi_calon_mustahiq;
     public String alasan_perekomendasi_calon_mustahiq;
     public String photo_1;
@@ -45,6 +47,8 @@ public class Mustahiq implements Parcelable {
                     String longitude_calon_mustahiq,
                     String no_identitas_calon_mustahiq,
                     String no_telp_calon_mustahiq,
+                    String status_tempat_tinggal_calon_mustahiq,
+                    String status_pekerjaan_calon_mustahiq,
                     String nama_perekomendasi_calon_mustahiq,
                     String alasan_perekomendasi_calon_mustahiq,
                     String photo_1, String photo_2, String photo_3, String caption_photo_1, String caption_photo_2, String caption_photo_3,
@@ -60,6 +64,8 @@ public class Mustahiq implements Parcelable {
         this.longitude_calon_mustahiq = longitude_calon_mustahiq;
         this.no_identitas_calon_mustahiq = no_identitas_calon_mustahiq;
         this.no_telp_calon_mustahiq = no_telp_calon_mustahiq;
+        this.status_tempat_tinggal_calon_mustahiq = status_tempat_tinggal_calon_mustahiq;
+        this.status_pekerjaan_calon_mustahiq = status_pekerjaan_calon_mustahiq;
         this.nama_perekomendasi_calon_mustahiq = nama_perekomendasi_calon_mustahiq;
         this.alasan_perekomendasi_calon_mustahiq = alasan_perekomendasi_calon_mustahiq;
         this.photo_1 = photo_1;
@@ -84,6 +90,8 @@ public class Mustahiq implements Parcelable {
         longitude_calon_mustahiq = in.readString();
         no_identitas_calon_mustahiq = in.readString();
         no_telp_calon_mustahiq = in.readString();
+        status_tempat_tinggal_calon_mustahiq = in.readString();
+        status_pekerjaan_calon_mustahiq = in.readString();
         nama_perekomendasi_calon_mustahiq = in.readString();
         alasan_perekomendasi_calon_mustahiq = in.readString();
         photo_1 = in.readString();
@@ -109,6 +117,8 @@ public class Mustahiq implements Parcelable {
         dest.writeString(longitude_calon_mustahiq);
         dest.writeString(no_identitas_calon_mustahiq);
         dest.writeString(no_telp_calon_mustahiq);
+        dest.writeString(status_tempat_tinggal_calon_mustahiq);
+        dest.writeString(status_pekerjaan_calon_mustahiq);
         dest.writeString(nama_perekomendasi_calon_mustahiq);
         dest.writeString(alasan_perekomendasi_calon_mustahiq);
         dest.writeString(photo_1);

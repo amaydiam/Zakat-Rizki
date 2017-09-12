@@ -67,6 +67,10 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
     RobotoLightTextView noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoLightTextView noTelpCalonMustahiq;
+    @BindView(R.id.status_tempat_tinggal_calon_mustahiq)
+    RobotoLightTextView statusTempatTinggalCalonMustahiq;
+    @BindView(R.id.status_pekerjaan_calon_mustahiq)
+    RobotoLightTextView statusPekerjaanCalonMustahiq;
     @BindView(R.id.nama_perekomendasi_calon_mustahiq)
     RobotoLightTextView namaPerekomendasiCalonMustahiq;
     @BindView(R.id.nama_validasi_amil_zakat)
@@ -160,6 +164,8 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
             alamatCalonMustahiq.setText("Alamat : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.alamat_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.alamat_calon_mustahiq));
             noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.no_identitas_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.no_identitas_calon_mustahiq));
             noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.no_telp_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.no_telp_calon_mustahiq));
+            statusTempatTinggalCalonMustahiq.setText("Status Tempat Tinggal : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.status_tempat_tinggal_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.status_tempat_tinggal_calon_mustahiq));
+            statusPekerjaanCalonMustahiq.setText("Status Pekerjaan : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.status_pekerjaan_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.status_pekerjaan_calon_mustahiq));
             namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.nama_perekomendasi_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.nama_perekomendasi_calon_mustahiq));
             statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (activity.mustahiqPrepareDonasi.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
             namaAmilZakat.setText("Validasi Amil Zakat Zakat : " + activity.mustahiqPrepareDonasi.nama_validasi_amil_zakat);

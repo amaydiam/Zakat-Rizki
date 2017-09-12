@@ -464,6 +464,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
         String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+        String status_tempat_tinggal_calon_mustahiq = obj.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
+        String status_pekerjaan_calon_mustahiq = obj.getString(Zakat.status_pekerjaan_calon_mustahiq);
         String id_user_perekomendasi = obj.getString(Zakat.id_user_perekomendasi);
         String nama_perekomendasi_calon_mustahiq = obj
                 .getString(Zakat.nama_perekomendasi_calon_mustahiq);
@@ -495,6 +497,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                status_tempat_tinggal_calon_mustahiq,
+                status_pekerjaan_calon_mustahiq,
                 id_user_perekomendasi,
                 nama_perekomendasi_calon_mustahiq,
                 alasan_perekomendasi_calon_mustahiq,
@@ -518,7 +522,7 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
             String latitude_calon_mustahiq,
             String longitude_calon_mustahiq,
             String no_identitas_calon_mustahiq,
-            String no_telp_calon_mustahiq,
+            String no_telp_calon_mustahiq, String status_tempat_tinggal_calon_mustahiq, String status_pekerjaan_calon_mustahiq,
             String id_user_perekomendasi,
             String nama_perekomendasi_calon_mustahiq,
             String alasan_perekomendasi_calon_mustahiq,
@@ -537,6 +541,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                status_tempat_tinggal_calon_mustahiq,
+                status_pekerjaan_calon_mustahiq,
                 id_user_perekomendasi,
                 nama_perekomendasi_calon_mustahiq,
                 alasan_perekomendasi_calon_mustahiq,

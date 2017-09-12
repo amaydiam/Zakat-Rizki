@@ -276,6 +276,8 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
                     String alamat_calon_mustahiq = jsDetail.getString(Zakat.alamat_calon_mustahiq);
                     String no_identitas_calon_mustahiq = jsDetail.getString(Zakat.no_identitas_calon_mustahiq);
                     String no_telp_calon_mustahiq = jsDetail.getString(Zakat.no_telp_calon_mustahiq);
+                    String status_tempat_tinggal_calon_mustahiq = jsDetail.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
+                    String status_pekerjaan_calon_mustahiq = jsDetail.getString(Zakat.status_pekerjaan_calon_mustahiq);
                     String status_calon_mustahiq = jsDetail.getString(Zakat.status_calon_mustahiq);
                     String id_amil_zakat = jsDetail.getString(Zakat.id_amil_zakat);
                     String nama_validasi_amil_zakat = jsDetail.getString(Zakat.nama_validasi_amil_zakat);
@@ -295,6 +297,8 @@ public class ActionDonasiBaruActivity extends AppCompatActivity implements Custo
                             alamat_calon_mustahiq,
                             no_identitas_calon_mustahiq,
                             no_telp_calon_mustahiq,
+                            status_tempat_tinggal_calon_mustahiq,
+                            status_pekerjaan_calon_mustahiq,
                             status_calon_mustahiq,
                             id_amil_zakat,
                             nama_validasi_amil_zakat);

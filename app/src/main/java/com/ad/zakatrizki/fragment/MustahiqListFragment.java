@@ -461,6 +461,8 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
         String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+        String status_tempat_tinggal_calon_mustahiq = obj.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
+        String status_pekerjaan_calon_mustahiq = obj.getString(Zakat.status_pekerjaan_calon_mustahiq);
         String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
         String alasan_perekomendasi_calon_mustahiq = obj.getString(Zakat.alasan_perekomendasi_calon_mustahiq);
 
@@ -490,6 +492,8 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                status_tempat_tinggal_calon_mustahiq,
+                status_pekerjaan_calon_mustahiq,
                 nama_perekomendasi_calon_mustahiq,
                 alasan_perekomendasi_calon_mustahiq,
                 photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3,
@@ -508,7 +512,7 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
             String latitude_calon_mustahiq,
             String longitude_calon_mustahiq,
             String no_identitas_calon_mustahiq,
-            String no_telp_calon_mustahiq,
+            String no_telp_calon_mustahiq, String status_tempat_tinggal_calon_mustahiq, String status_pekerjaan_calon_mustahiq,
             String nama_perekomendasi_calon_mustahiq,
             String alasan_perekomendasi_calon_mustahiq,
             String photo_1, String photo_2, String photo_3, String caption_photo_1, String caption_photo_2, String caption_photo_3,
@@ -523,6 +527,8 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                status_tempat_tinggal_calon_mustahiq,
+                status_pekerjaan_calon_mustahiq,
                 nama_perekomendasi_calon_mustahiq,
                 alasan_perekomendasi_calon_mustahiq,
                 photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3,

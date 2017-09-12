@@ -51,6 +51,8 @@ public class Zakat extends Application {
     public static final String longitude_calon_mustahiq = "longitude_calon_mustahiq";
     public static final String no_identitas_calon_mustahiq = "no_identitas_calon_mustahiq";
     public static final String no_telp_calon_mustahiq = "no_telp_calon_mustahiq";
+    public static final String status_tempat_tinggal_calon_mustahiq="status_tempat_tinggal_calon_mustahiq";
+    public static final String status_pekerjaan_calon_mustahiq="status_pekerjaan_calon_mustahiq";
     public static final String nama_perekomendasi_calon_mustahiq = "nama_perekomendasi_calon_mustahiq";
     public static final String status_calon_mustahiq = "status_calon_mustahiq";
 
