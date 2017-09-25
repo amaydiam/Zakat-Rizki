@@ -49,14 +49,13 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:inputType="textPersonName|textNoSuggestions"
-                             />
+                            android:inputType="textPersonName|textNoSuggestions" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Alamat Calon Mustahiq"
+                            android:text="Alamat"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
                         <RelativeLayout
@@ -67,26 +66,26 @@
                                 android:id="@+id/alamat_calon_mustahiq"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_toLeftOf="@+id/pick_location"
                                 android:ems="10"
                                 android:gravity="top"
                                 android:inputType="textMultiLine|textNoSuggestions"
-                                android:minHeight="150dp"
-                                android:layout_toLeftOf="@+id/pick_location"/>
+                                android:minHeight="150dp" />
 
                             <com.joanzapata.iconify.widget.IconButton
-                                android:layout_alignParentRight="true"
                                 android:id="@+id/pick_location"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
                                 android:text="{mdi-map-marker}"
-                                android:textColor="@color/primary"/>
+                                android:textColor="@color/primary" />
                         </RelativeLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Nomor Identitas Calon Mustahiq"
+                            android:text="Nomor Identitas (KTP/SIM)"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
                         <com.ad.zakatrizki.widget.RobotoRegularEditText
@@ -95,14 +94,13 @@
                             android:layout_height="wrap_content"
                             android:digits="0123456789"
                             android:ems="10"
-                            android:inputType="number|textNoSuggestions"
-                             />
+                            android:inputType="number|textNoSuggestions" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Nomor Telp Calon Mustahiq"
+                            android:text="Nomor Telp"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
                         <com.ad.zakatrizki.widget.RobotoRegularEditText
@@ -111,8 +109,35 @@
                             android:layout_height="wrap_content"
                             android:digits="0123456789"
                             android:ems="10"
-                            android:inputType="number|textNoSuggestions"
-                             />
+                            android:inputType="number|textNoSuggestions" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Jumlah Anak Calon Mustahiq"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <com.ad.zakatrizki.widget.RobotoRegularEditText
+                            android:id="@+id/jumlah_anak_calon_mustahiq"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="0123456789"
+                            android:ems="10"
+                            android:inputType="number|textNoSuggestions" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Status Pernikahan"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <Spinner
+                            android:id="@+id/status_pernikahan_calon_mustahiq"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -123,8 +148,8 @@
                         <Spinner
                             android:id="@+id/status_tempat_tinggal_calon_mustahiq"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            />
+                            android:layout_height="wrap_content" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -135,8 +160,8 @@
                         <Spinner
                             android:id="@+id/status_pekerjaan_calon_mustahiq"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            />
+                            android:layout_height="wrap_content" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -148,8 +173,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:inputType="text|textNoSuggestions"
-                             />
+                            android:inputType="text|textNoSuggestions" />
 
 
                         <TextView
@@ -180,15 +204,15 @@
                                 android:textColor="@color/accent" />
 
                         </RelativeLayout>
+
                         <com.ad.zakatrizki.widget.RobotoRegularEditText
                             android:id="@+id/caption_img_foto_1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:inputType="text|textNoSuggestions"
-                            android:minLines="1"
                             android:hint="keterangan foto 1"
-                            />
+                            android:inputType="text|textNoSuggestions"
+                            android:minLines="1" />
 
 
                         <RelativeLayout
@@ -213,15 +237,16 @@
                                 android:textColor="@color/accent" />
 
                         </RelativeLayout>
+
                         <com.ad.zakatrizki.widget.RobotoRegularEditText
                             android:id="@+id/caption_img_foto_2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:inputType="text|textNoSuggestions"
-                            android:minLines="1"
                             android:hint="keterangan foto 2"
-                            />
+                            android:inputType="text|textNoSuggestions"
+                            android:minLines="1" />
+
                         <RelativeLayout
                             android:id="@+id/foto_3"
                             android:layout_width="match_parent"
@@ -247,15 +272,15 @@
                                 android:textColor="@color/accent" />
 
                         </RelativeLayout>
+
                         <com.ad.zakatrizki.widget.RobotoRegularEditText
                             android:id="@+id/caption_img_foto_3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:inputType="text|textNoSuggestions"
-                            android:minLines="1"
                             android:hint="keterangan foto 3"
-                            />
+                            android:inputType="text|textNoSuggestions"
+                            android:minLines="1" />
 
                     </LinearLayout>
 

@@ -89,6 +89,8 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
     RobotoRegularEditText noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoRegularEditText noTelpCalonMustahiq;
+    @BindView(R.id.jumlah_anak_calon_mustahiq)
+    RobotoRegularEditText jumlahAnakCalonMustahiq;
     @BindView(R.id.alasan_perekomendasi_calon_mustahiq)
     RobotoRegularEditText alasanPerekomendasiCalonMustahiq;
 
@@ -110,6 +112,8 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
     @BindView(R.id.img_foto_3)
     ImageView imgFoto3;
 
+    @BindView(R.id.status_pernikahan_calon_mustahiq)
+    Spinner statusPernikahanCalonMustahiq;
     @BindView(R.id.status_tempat_tinggal_calon_mustahiq)
     Spinner statusTempatTinggalCalonMustahiq;
     @BindView(R.id.status_pekerjaan_calon_mustahiq)
@@ -123,6 +127,7 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
     private String val_server_photo_2;
     private String val_server_photo_3;
 
+    String[] statusPernikahan = { "Belum Menikah",  "Menikah"};
     String[] statusTempatTinggal = { "Rumah Pribadi",  "Sewa"};
     String[] statusPekerjaan = { "Tetap",  "Tidak Tetap",  "Tidak Memiliki Pekerjaan"};
 
@@ -233,6 +238,8 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
     private String val_nama_calon_mustahiq = "";
     private String val_alamat_calon_mustahiq = "";
     private String val_no_identitas_calon_mustahiq = "";
+    private String val_jumlah_anak_calon_mustahiq= "";
+    private String val_status_pernikahan_calon_mustahiq = "";
     private String val_status_tempat_tinggal_calon_mustahiq = "";
     private String val_status_pekerjaan_calon_mustahiq = "";
     private String val_no_telp_calon_mustahiq = "";
@@ -271,6 +278,8 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                 if (val_nama_calon_mustahiq.length() == 0
                         || val_alamat_calon_mustahiq.length() == 0
                         || val_no_identitas_calon_mustahiq.length() == 0
+                        || val_jumlah_anak_calon_mustahiq.length() == 0
+                        || val_status_pernikahan_calon_mustahiq.length() == 0
                         || val_status_tempat_tinggal_calon_mustahiq.length() == 0
                         || val_status_pekerjaan_calon_mustahiq.length() == 0
                         || val_no_telp_calon_mustahiq.length() == 0
@@ -321,6 +330,10 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                         String.valueOf(val_longitude_calon_mustahiq));
                 jsonParams.put(Zakat.no_identitas_calon_mustahiq,
                         val_no_identitas_calon_mustahiq);
+                jsonParams.put(Zakat.jumlah_anak_calon_mustahiq,
+                        val_jumlah_anak_calon_mustahiq);
+                jsonParams.put(Zakat.status_pernikahan_calon_mustahiq,
+                        val_status_pernikahan_calon_mustahiq);
                 jsonParams.put(Zakat.status_tempat_tinggal_calon_mustahiq,
                         val_status_tempat_tinggal_calon_mustahiq);
                 jsonParams.put(Zakat.status_pekerjaan_calon_mustahiq ,
@@ -406,7 +419,11 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
         val_nama_calon_mustahiq = namaCalonMustahiq.getText().toString().trim();
         val_alamat_calon_mustahiq = alamatCalonMustahiq.getText().toString().trim();
         val_no_identitas_calon_mustahiq = noIdentitasCalonMustahiq.getText().toString().trim();
-
+        val_jumlah_anak_calon_mustahiq = jumlahAnakCalonMustahiq.getText().toString().trim();
+        try {
+            val_status_pernikahan_calon_mustahiq = statusPernikahan[statusPernikahanCalonMustahiq.getSelectedItemPosition()];
+        }
+        catch (Exception ignored){}
         try {
             val_status_tempat_tinggal_calon_mustahiq = statusTempatTinggal[statusTempatTinggalCalonMustahiq.getSelectedItemPosition()];
         }
@@ -490,6 +507,8 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                     String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
                     String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
                     String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                    String jumlah_anak_calon_mustahiq = obj.getString(Zakat.jumlah_anak_calon_mustahiq);
+                    String status_pernikahan_calon_mustahiq = obj.getString(Zakat.status_pernikahan_calon_mustahiq);
                     String status_tempat_tinggal_calon_mustahiq = obj.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
                     String status_pekerjaan_calon_mustahiq = obj.getString(Zakat.status_pekerjaan_calon_mustahiq);
                     String id_user_perekomendasi = obj
@@ -512,10 +531,14 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                             .getString(Zakat.caption_photo_3);
                     String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+                    String jumlah_rating_amil_zakat = obj.getString(Zakat.jumlah_rating_amil_zakat);
 
-                    calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq,
+                    calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq,jumlah_anak_calon_mustahiq,status_pernikahan_calon_mustahiq,
                             status_tempat_tinggal_calon_mustahiq,
-                            status_pekerjaan_calon_mustahiq, id_user_perekomendasi, nama_perekomendasi_calon_mustahiq, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, status_calon_mustahiq, jumlah_rating);
+                            status_pekerjaan_calon_mustahiq, id_user_perekomendasi,
+                            nama_perekomendasi_calon_mustahiq, alasan_perekomendasi_calon_mustahiq,
+                            photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2,
+                            caption_photo_3, status_calon_mustahiq, jumlah_rating,jumlah_rating_amil_zakat);
                     if (TAG.equals(TAG_ADD)) {
                         callback.onFinishAddCalonMustahiq(calonMustahiq);
                     } else if (TAG.equals(TAG_EDIT)) {
@@ -609,7 +632,10 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
                         .actionBarSize());
 
         // Spinner on item click listener
-
+        ArrayAdapter<String> adapterStatusPernikahan = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item, statusPernikahan);
+        adapterStatusPernikahan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        statusPernikahanCalonMustahiq.setAdapter(adapterStatusPernikahan);
 
         ArrayAdapter<String> adapterStatusTempatTinggal = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item, statusTempatTinggal);
@@ -632,6 +658,8 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
             val_nama_calon_mustahiq = calonMustahiq.nama_calon_mustahiq;
             val_alamat_calon_mustahiq = calonMustahiq.alamat_calon_mustahiq;
             val_no_identitas_calon_mustahiq = calonMustahiq.no_identitas_calon_mustahiq;
+            val_jumlah_anak_calon_mustahiq = calonMustahiq.jumlah_anak_calon_mustahiq ;
+            val_status_pernikahan_calon_mustahiq = calonMustahiq.status_pernikahan_calon_mustahiq;
             val_status_tempat_tinggal_calon_mustahiq = calonMustahiq.status_tempat_tinggal_calon_mustahiq;
             val_status_pekerjaan_calon_mustahiq = calonMustahiq.status_pekerjaan_calon_mustahiq;
             val_no_telp_calon_mustahiq = calonMustahiq.no_telp_calon_mustahiq;
@@ -651,8 +679,10 @@ public class ManageCalonMustahiqFragment extends DialogFragment implements Custo
             namaCalonMustahiq.setText(val_nama_calon_mustahiq);
             alamatCalonMustahiq.setText(val_alamat_calon_mustahiq);
 
+            jumlahAnakCalonMustahiq.setText(val_jumlah_anak_calon_mustahiq);
             noIdentitasCalonMustahiq.setText(val_no_identitas_calon_mustahiq);
 
+            statusPernikahanCalonMustahiq.setSelection(Arrays.asList(statusPernikahan).indexOf(val_status_pernikahan_calon_mustahiq));
             statusTempatTinggalCalonMustahiq.setSelection(Arrays.asList(statusTempatTinggal).indexOf(val_status_tempat_tinggal_calon_mustahiq));
             statusPekerjaanCalonMustahiq.setSelection(Arrays.asList(statusPekerjaan).indexOf(val_status_pekerjaan_calon_mustahiq));
 

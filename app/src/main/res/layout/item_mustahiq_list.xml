@@ -91,6 +91,25 @@
                     android:textColor="@color/text_primary"
                     android:textSize="@dimen/text_large"
                     tools:text="status_tempat_tinggal_calon_mustahiq" />
+
+                <com.ad.zakatrizki.widget.RobotoLightTextView
+                    android:id="@+id/jumlah_anak_calon_mustahiq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_large"
+                    tools:text="jumlah_anak_calon_mustahiq" />
+                <com.ad.zakatrizki.widget.RobotoLightTextView
+                    android:id="@+id/status_pernikahan_calon_mustahiq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_large"
+                    tools:text="status_pernikahan_calon_mustahiq" />
                 <com.ad.zakatrizki.widget.RobotoLightTextView
                     android:id="@+id/status_pekerjaan_calon_mustahiq"
                     android:layout_width="wrap_content"
@@ -127,6 +146,16 @@
                 android:textColor="@color/text_primary"
                 android:textSize="@dimen/text_large"
                 tools:text="nama_validasi_amil_zakat" />
+
+                <com.ad.zakatrizki.widget.RobotoLightTextView
+                    android:id="@+id/nama_type_validasi_mustahiq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_large"
+                    tools:text="nama_type_validasi_mustahiq" />
                 <com.ad.zakatrizki.widget.RobotoLightTextView
                     android:id="@+id/status_calon_mustahiq"
                     android:layout_width="wrap_content"
@@ -159,17 +188,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="left|center"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:visibility="gone"
                     tools:visibility="visible">
-
-                    <com.ad.zakatrizki.widget.RobotoLightTextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:textColor="@color/text_primary"
-                        android:textSize="@dimen/text_large"
-                        android:text="Rating : " />
+                        android:gravity="left|center"
+                        android:orientation="horizontal">
+                    <com.ad.zakatrizki.widget.RobotoLightTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_large"
+                    android:text="Rating : " />
 
                     <android.support.v7.widget.AppCompatRatingBar
                         android:id="@+id/rating"
@@ -178,6 +211,28 @@
                         android:stepSize="1"
                         android:isIndicator="true"
                         style="?android:attr/ratingBarStyleSmall"/>
+                        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="left|center"
+                        android:orientation="horizontal">
+                    <com.ad.zakatrizki.widget.RobotoLightTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:textColor="@color/text_primary"
+                        android:textSize="@dimen/text_large"
+                        android:text="Rating Amil Zakat: " />
+
+                    <android.support.v7.widget.AppCompatRatingBar
+                        android:id="@+id/rating_amil_zakat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:stepSize="1"
+                        android:isIndicator="true"
+                        style="?android:attr/ratingBarStyleSmall"/>
+                        </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

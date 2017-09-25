@@ -97,6 +97,10 @@ public class MustahiqDetailFragment extends Fragment implements PhotoAdapter.OnP
     RobotoLightTextView noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoLightTextView noTelpCalonMustahiq;
+    @BindView(R.id.jumlah_anak_calon_mustahiq)
+    RobotoLightTextView jumlahAnakCalonMustahiq;
+    @BindView(R.id.status_pernikahan_calon_mustahiq)
+    RobotoLightTextView statusPernikahanCalonMustahiq;
     @BindView(R.id.status_tempat_tinggal_calon_mustahiq)
     RobotoLightTextView statusTempatTinggalCalonMustahiq;
     @BindView(R.id.status_pekerjaan_calon_mustahiq)
@@ -105,6 +109,8 @@ public class MustahiqDetailFragment extends Fragment implements PhotoAdapter.OnP
     RobotoLightTextView namaPerekomendasiCalonMustahiq;
     @BindView(R.id.nama_validasi_amil_zakat)
     RobotoLightTextView namaAmilZakat;
+    @BindView(R.id.nama_type_validasi_mustahiq)
+    RobotoLightTextView namaTypeValidasiMstahiq;
     @BindView(R.id.status_mustahiq)
     RobotoLightTextView statusMustahiq;
     @BindView(R.id.waktu_terakhir_donasi)
@@ -268,12 +274,16 @@ public class MustahiqDetailFragment extends Fragment implements PhotoAdapter.OnP
         alamatCalonMustahiq.setText("Alamat : " + (TextUtils.isNullOrEmpty(mustahiq.alamat_calon_mustahiq) ? "-" : mustahiq.alamat_calon_mustahiq));
         noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(mustahiq.no_identitas_calon_mustahiq) ? "-" : mustahiq.no_identitas_calon_mustahiq));
         noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(mustahiq.no_telp_calon_mustahiq) ? "-" : mustahiq.no_telp_calon_mustahiq));
+        jumlahAnakCalonMustahiq.setText("Jumlah Anak : " + (TextUtils.isNullOrEmpty(mustahiq.jumlah_anak_calon_mustahiq) ? "-" : mustahiq.jumlah_anak_calon_mustahiq));
+        statusPernikahanCalonMustahiq.setText("Status Pernikahan : " + (TextUtils.isNullOrEmpty(mustahiq.status_pernikahan_calon_mustahiq) ? "-" : mustahiq.status_pernikahan_calon_mustahiq));
+
         statusTempatTinggalCalonMustahiq.setText("Status Tempat Tinggal : " + (TextUtils.isNullOrEmpty(mustahiq.status_tempat_tinggal_calon_mustahiq) ? "-" : mustahiq.status_tempat_tinggal_calon_mustahiq));
         statusPekerjaanCalonMustahiq.setText("Status Pekerjaan : " + (TextUtils.isNullOrEmpty(mustahiq.status_pekerjaan_calon_mustahiq) ? "-" : mustahiq.status_pekerjaan_calon_mustahiq));
         namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(mustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : mustahiq.nama_perekomendasi_calon_mustahiq));
 
         statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (mustahiq.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
         namaAmilZakat.setText("Validasi Amil Zakat Zakat : " + mustahiq.nama_validasi_amil_zakat);
+        namaTypeValidasiMstahiq.setText("Type Validasi : " + mustahiq.nama_type_validasi_mustahiq);
         waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(mustahiq.waktu_terakhir_donasi) ? "-" : mustahiq.waktu_terakhir_donasi));
 
 
@@ -359,6 +369,9 @@ public class MustahiqDetailFragment extends Fragment implements PhotoAdapter.OnP
                 String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
                 String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
                 String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                String jumlah_anak_calon_mustahiq = obj.getString(Zakat.jumlah_anak_calon_mustahiq);
+                String status_pernikahan_calon_mustahiq = obj.getString(Zakat.status_pernikahan_calon_mustahiq);
+
                 String status_tempat_tinggal_calon_mustahiq = obj.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
                 String status_pekerjaan_calon_mustahiq = obj.getString(Zakat.status_pekerjaan_calon_mustahiq);
                 String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
@@ -378,8 +391,10 @@ public class MustahiqDetailFragment extends Fragment implements PhotoAdapter.OnP
                         .getString(Zakat.caption_photo_3);
                 String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                 String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+                String jumlah_rating_amil_zakat = obj.getString(Zakat.jumlah_rating_amil_zakat);
                 String id_nama_validasi_amil_zakat = obj.getString(Zakat.id_nama_validasi_amil_zakat);
                 String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
+                String nama_type_validasi_mustahiq = obj.getString(Zakat.nama_type_validasi_mustahiq);
                 String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
                 mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
@@ -387,6 +402,8 @@ public class MustahiqDetailFragment extends Fragment implements PhotoAdapter.OnP
                         longitude_calon_mustahiq,
                         no_identitas_calon_mustahiq,
                         no_telp_calon_mustahiq,
+                        jumlah_anak_calon_mustahiq,
+                        status_pernikahan_calon_mustahiq,
                         status_tempat_tinggal_calon_mustahiq,
                         status_pekerjaan_calon_mustahiq,
                         nama_perekomendasi_calon_mustahiq,
@@ -398,7 +415,8 @@ public class MustahiqDetailFragment extends Fragment implements PhotoAdapter.OnP
                         caption_photo_2,
                         caption_photo_3,
                         status_mustahiq,
-                        jumlah_rating, id_nama_validasi_amil_zakat, nama_validasi_amil_zakat, waktu_terakhir_donasi);
+                        jumlah_rating, jumlah_rating_amil_zakat,id_nama_validasi_amil_zakat,
+                        nama_validasi_amil_zakat,nama_type_validasi_mustahiq, waktu_terakhir_donasi);
 
                 if (Boolean.parseBoolean(isSuccess))
                     onDownloadSuccessful();
