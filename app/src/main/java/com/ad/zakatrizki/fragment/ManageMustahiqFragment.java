@@ -67,6 +67,10 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
     RobotoRegularTextView noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoRegularTextView noTelpCalonMustahiq;
+    @BindView(R.id.jumlah_anak_calon_mustahiq)
+    RobotoRegularTextView jumlahAnakCalonMustahiq;
+    @BindView(R.id.status_pernikahan_calon_mustahiq)
+    RobotoRegularTextView statusPernikahanCalonMustahiq;
     @BindView(R.id.aktif)
     RadioButton aktif;
     @BindView(R.id.tidak_aktif)
@@ -86,6 +90,8 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
     private String val_alamat_calon_mustahiq = "";
     private String val_no_identitas_calon_mustahiq = "";
     private String val_no_telp_calon_mustahiq = "";
+    private String val_jumlah_anak_calon_mustahiq = "";
+    private String val_status_pernikahan_calon_mustahiq = "";
     private String val_status_mustahiq = "";
     private Mustahiq mustahiq;
     private Dialog alertDialog;
@@ -118,6 +124,8 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                         || val_alamat_calon_mustahiq.length() == 0
                         || val_no_identitas_calon_mustahiq.length() == 0
                         || val_no_telp_calon_mustahiq.length() == 0
+                        || val_jumlah_anak_calon_mustahiq.length() == 0
+                        || val_status_pernikahan_calon_mustahiq.length() == 0
                         || val_status_mustahiq.length() == 0) {
                     snackbar.show("Harap isi semua form...");
                     return;
@@ -224,6 +232,9 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                     String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
                     String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
                     String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                    String jumlah_anak_calon_mustahiq = obj.getString(Zakat.jumlah_anak_calon_mustahiq);
+                    String status_pernikahan_calon_mustahiq = obj.getString(Zakat.status_pernikahan_calon_mustahiq);
+
                     String status_tempat_tinggal_calon_mustahiq = obj.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
                     String status_pekerjaan_calon_mustahiq = obj.getString(Zakat.status_pekerjaan_calon_mustahiq);
                     String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
@@ -243,8 +254,10 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                             .getString(Zakat.caption_photo_3);
                     String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+                    String jumlah_rating_amil_zakat = obj.getString(Zakat.jumlah_rating_amil_zakat);
                     String id_nama_validasi_amil_zakat = obj.getString(Zakat.id_nama_validasi_amil_zakat);
                     String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
+                    String nama_type_validasi_mustahiq = obj.getString(Zakat.nama_type_validasi_mustahiq);
                     String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
                     mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
@@ -252,6 +265,8 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                             longitude_calon_mustahiq,
                             no_identitas_calon_mustahiq,
                             no_telp_calon_mustahiq,
+                            jumlah_anak_calon_mustahiq,
+                            status_pernikahan_calon_mustahiq,
                             status_tempat_tinggal_calon_mustahiq,
                             status_pekerjaan_calon_mustahiq,
                             nama_perekomendasi_calon_mustahiq,
@@ -263,7 +278,7 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
                             caption_photo_2,
                             caption_photo_3,
                             status_mustahiq,
-                            jumlah_rating, id_nama_validasi_amil_zakat, nama_validasi_amil_zakat, waktu_terakhir_donasi);
+                            jumlah_rating,jumlah_rating_amil_zakat, id_nama_validasi_amil_zakat, nama_validasi_amil_zakat,nama_type_validasi_mustahiq, waktu_terakhir_donasi);
                     if (TAG.equals(TAG_ADD)) {
                         callback.onFinishAddMustahiq(mustahiq);
                     } else if (TAG.equals(TAG_EDIT)) {
@@ -297,6 +312,8 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
         val_alamat_calon_mustahiq = calon_Mustahiq.alamat_calon_mustahiq;
         val_no_identitas_calon_mustahiq = calon_Mustahiq.no_identitas_calon_mustahiq;
         val_no_telp_calon_mustahiq = calon_Mustahiq.no_telp_calon_mustahiq;
+        val_jumlah_anak_calon_mustahiq = calon_Mustahiq.jumlah_anak_calon_mustahiq;
+        val_status_pernikahan_calon_mustahiq = calon_Mustahiq.status_pernikahan_calon_mustahiq;
 
         LayoutInflater inflaterView = LayoutInflater.from(getActivity());
         LinearLayout IF = (LinearLayout) inflaterView.inflate(R.layout.item_add_mustahiq, null, false);
@@ -313,6 +330,8 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
         alamatCalonMustahiq.setText(val_alamat_calon_mustahiq);
         noIdentitasCalonMustahiq.setText(val_no_identitas_calon_mustahiq);
         noTelpCalonMustahiq.setText(val_no_telp_calon_mustahiq);
+        jumlahAnakCalonMustahiq.setText(val_jumlah_anak_calon_mustahiq);
+        statusPernikahanCalonMustahiq.setText(val_status_pernikahan_calon_mustahiq);
 
     }
 
@@ -392,6 +411,8 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
             val_alamat_calon_mustahiq = mustahiq.alamat_calon_mustahiq;
             val_no_identitas_calon_mustahiq = mustahiq.no_identitas_calon_mustahiq;
             val_no_telp_calon_mustahiq = mustahiq.no_telp_calon_mustahiq;
+            val_jumlah_anak_calon_mustahiq = mustahiq.jumlah_anak_calon_mustahiq;
+            val_status_pernikahan_calon_mustahiq = mustahiq.status_pernikahan_calon_mustahiq;
             val_status_mustahiq = mustahiq.status_mustahiq;
 
             LayoutInflater inflaterView = LayoutInflater.from(getActivity());
@@ -408,6 +429,9 @@ public class ManageMustahiqFragment extends DialogFragment implements CustomVoll
             alamatCalonMustahiq.setText(val_alamat_calon_mustahiq);
             noIdentitasCalonMustahiq.setText(val_no_identitas_calon_mustahiq);
             noTelpCalonMustahiq.setText(val_no_telp_calon_mustahiq);
+            jumlahAnakCalonMustahiq.setText(val_jumlah_anak_calon_mustahiq);
+            statusPernikahanCalonMustahiq.setText(val_status_pernikahan_calon_mustahiq);
+
 
             btnPilihCalonMustahiq.setVisibility(View.GONE);
 

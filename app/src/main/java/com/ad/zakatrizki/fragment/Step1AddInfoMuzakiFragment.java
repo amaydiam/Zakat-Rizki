@@ -67,6 +67,10 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
     RobotoLightTextView noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoLightTextView noTelpCalonMustahiq;
+    @BindView(R.id.jumlah_anak_calon_mustahiq)
+    RobotoLightTextView jumlahAnakCalonMustahiq;
+    @BindView(R.id.status_pernikahan_calon_mustahiq)
+    RobotoLightTextView statusPernikahanCalonMustahiq;
     @BindView(R.id.status_tempat_tinggal_calon_mustahiq)
     RobotoLightTextView statusTempatTinggalCalonMustahiq;
     @BindView(R.id.status_pekerjaan_calon_mustahiq)
@@ -75,6 +79,8 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
     RobotoLightTextView namaPerekomendasiCalonMustahiq;
     @BindView(R.id.nama_validasi_amil_zakat)
     RobotoLightTextView namaAmilZakat;
+    @BindView(R.id.nama_type_validasi_mustahiq)
+    RobotoLightTextView namaTypeValidasiMstahiq;
     @BindView(R.id.status_mustahiq)
     RobotoLightTextView statusMustahiq;
     @BindView(R.id.waktu_terakhir_donasi)
@@ -164,11 +170,15 @@ public class Step1AddInfoMuzakiFragment extends Fragment {
             alamatCalonMustahiq.setText("Alamat : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.alamat_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.alamat_calon_mustahiq));
             noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.no_identitas_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.no_identitas_calon_mustahiq));
             noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.no_telp_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.no_telp_calon_mustahiq));
+            jumlahAnakCalonMustahiq.setText("Jumlah Anak : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.jumlah_anak_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.jumlah_anak_calon_mustahiq));
+            statusPernikahanCalonMustahiq.setText("Status Pernikahan : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.status_pernikahan_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.status_pernikahan_calon_mustahiq));
+
             statusTempatTinggalCalonMustahiq.setText("Status Tempat Tinggal : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.status_tempat_tinggal_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.status_tempat_tinggal_calon_mustahiq));
             statusPekerjaanCalonMustahiq.setText("Status Pekerjaan : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.status_pekerjaan_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.status_pekerjaan_calon_mustahiq));
             namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.nama_perekomendasi_calon_mustahiq) ? "-" : activity.mustahiqPrepareDonasi.nama_perekomendasi_calon_mustahiq));
             statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (activity.mustahiqPrepareDonasi.status_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
             namaAmilZakat.setText("Validasi Amil Zakat Zakat : " + activity.mustahiqPrepareDonasi.nama_validasi_amil_zakat);
+            namaTypeValidasiMstahiq.setText("Type Validasi : " + activity.mustahiqPrepareDonasi.nama_type_validasi_mustahiq);
             waktuTerakhirDonasi.setText("Waktu Terakhir Menerima Donasi : " + (TextUtils.isNullOrEmpty(activity.mustahiqPrepareDonasi.waktu_terakhir_donasi) ? "-" : activity.mustahiqPrepareDonasi.waktu_terakhir_donasi));
             waktuTerakhirDonasi.setVisibility(View.GONE);
             statusMustahiq.setVisibility(View.GONE);

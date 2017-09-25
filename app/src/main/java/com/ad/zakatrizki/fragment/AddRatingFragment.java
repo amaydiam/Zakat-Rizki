@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -148,13 +147,16 @@ public class AddRatingFragment extends DialogFragment implements CustomVolley.On
 
                 JSONObject obj = new JSONObject(json.getString(Zakat.calon_mustahiq));
                 String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+                String jumlah_rating_amil_zakat = obj.getString(Zakat.jumlah_rating_amil_zakat);
                 if(mustahiq!=null) {
                     mustahiq.jumlah_rating = jumlah_rating;
+                    mustahiq.jumlah_rating_amil_zakat = jumlah_rating_amil_zakat;
                     callback.onFinishRating(mustahiq);
                 }
                 else
                 if(calonMustahiq!=null) {
                     calonMustahiq.jumlah_rating = jumlah_rating;
+                    calonMustahiq.jumlah_rating_amil_zakat = jumlah_rating_amil_zakat;
                     callback.onFinishRating(calonMustahiq);
                 }
 
@@ -186,7 +188,7 @@ public class AddRatingFragment extends DialogFragment implements CustomVolley.On
         try {
             callback = (RatingListener) getTargetFragment();
         } catch (Exception e) {
-            throw new ClassCastException("Calling Fragment must implement KonfirmasiPendaftaranPesertaListener");
+            throw new ClassCastException("Calling Fragment must implement AddRatingFragment");
         }
     }
 

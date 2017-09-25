@@ -35,6 +35,7 @@ import com.ad.zakatrizki.activity.CariCalonMustahiqActivity;
 import com.ad.zakatrizki.activity.DrawerActivity;
 import com.ad.zakatrizki.adapter.CalonMustahiqAdapter;
 import com.ad.zakatrizki.model.CalonMustahiq;
+import com.ad.zakatrizki.model.Mustahiq;
 import com.ad.zakatrizki.model.Refresh;
 import com.ad.zakatrizki.utils.ApiHelper;
 import com.ad.zakatrizki.utils.CustomVolley;
@@ -69,7 +70,7 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 public class CalonMustahiqListFragment extends Fragment implements CalonMustahiqAdapter.OnCalonMustahiqItemClickListener,
-        SwipeRefreshLayout.OnRefreshListener, CustomVolley.OnCallbackResponse, ManageCalonMustahiqFragment.AddEditCalonMustahiqListener {
+        SwipeRefreshLayout.OnRefreshListener, AddRatingFragment.RatingListener, CustomVolley.OnCallbackResponse, ManageCalonMustahiqFragment.AddEditCalonMustahiqListener {
 
     private static final String TAG_MORE = "TAG_MORE";
     private static final String TAG_AWAL = "TAG_AWAL";
@@ -464,6 +465,9 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
         String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+        String jumlah_anak_calon_mustahiq = obj.getString(Zakat.jumlah_anak_calon_mustahiq);
+        String status_pernikahan_calon_mustahiq = obj.getString(Zakat.status_pernikahan_calon_mustahiq);
+
         String status_tempat_tinggal_calon_mustahiq = obj.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
         String status_pekerjaan_calon_mustahiq = obj.getString(Zakat.status_pekerjaan_calon_mustahiq);
         String id_user_perekomendasi = obj.getString(Zakat.id_user_perekomendasi);
@@ -486,6 +490,7 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
         String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
 
         String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+        String jumlah_rating_amil_zakat = obj.getString(Zakat.jumlah_rating_amil_zakat);
 
         Log.v("jumlah_rating", jumlah_rating + "");
 
@@ -497,6 +502,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                jumlah_anak_calon_mustahiq,
+                status_pernikahan_calon_mustahiq,
                 status_tempat_tinggal_calon_mustahiq,
                 status_pekerjaan_calon_mustahiq,
                 id_user_perekomendasi,
@@ -509,7 +516,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 caption_photo_2,
                 caption_photo_3,
                 status_calon_mustahiq,
-                jumlah_rating
+                jumlah_rating,
+                jumlah_rating_amil_zakat
         );
 
     }
@@ -522,7 +530,10 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
             String latitude_calon_mustahiq,
             String longitude_calon_mustahiq,
             String no_identitas_calon_mustahiq,
-            String no_telp_calon_mustahiq, String status_tempat_tinggal_calon_mustahiq, String status_pekerjaan_calon_mustahiq,
+            String no_telp_calon_mustahiq,
+           String jumlah_anak_calon_mustahiq,
+            String status_pernikahan_calon_mustahiq,
+            String status_tempat_tinggal_calon_mustahiq, String status_pekerjaan_calon_mustahiq,
             String id_user_perekomendasi,
             String nama_perekomendasi_calon_mustahiq,
             String alasan_perekomendasi_calon_mustahiq,
@@ -533,7 +544,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
             String caption_photo_2,
             String caption_photo_3,
             String status_calon_mustahiq,
-            String jumlah_rating) {
+            String jumlah_rating,
+            String jumlah_rating_amil_zakat) {
 
         CalonMustahiq calon_mustahiq = new CalonMustahiq(
                 id_calon_mustahiq,
@@ -541,6 +553,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                jumlah_anak_calon_mustahiq,
+                status_pernikahan_calon_mustahiq,
                 status_tempat_tinggal_calon_mustahiq,
                 status_pekerjaan_calon_mustahiq,
                 id_user_perekomendasi,
@@ -553,7 +567,8 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
                 caption_photo_2,
                 caption_photo_3,
                 status_calon_mustahiq,
-                jumlah_rating
+                jumlah_rating,
+                jumlah_rating_amil_zakat
         );
 
 
@@ -795,6 +810,12 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
             adapterCalonMustahiq.setSelected(0);
             ((DrawerActivity) getActivity()).loadDetailCalonMustahiqFragmentWith(adapterCalonMustahiq.data.get(0).id_calon_mustahiq);
         }
+
+        FragmentManager fragmentManager = getChildFragmentManager();
+        AddRatingFragment add = new AddRatingFragment();
+        add.setTargetFragment(this, 0);
+        add.setData(calon_mustahiq);
+        add.show(fragmentManager, "Add Rating");
     }
 
     @Override
@@ -842,4 +863,13 @@ public class CalonMustahiqListFragment extends Fragment implements CalonMustahiq
         super.onStop();
     }
 
+    @Override
+    public void onFinishRating(Mustahiq mustahiq) {
+
+    }
+
+    @Override
+    public void onFinishRating(CalonMustahiq calonMustahiq) {
+adapterCalonMustahiq.notifyDataSetChanged();
+    }
 }

@@ -63,8 +63,6 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
 
 
 public class MustahiqListFragment extends Fragment implements MustahiqAdapter.OnMustahiqItemClickListener,
@@ -461,6 +459,9 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
         String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+        String jumlah_anak_calon_mustahiq = obj.getString(Zakat.jumlah_anak_calon_mustahiq);
+        String status_pernikahan_calon_mustahiq = obj.getString(Zakat.status_pernikahan_calon_mustahiq);
+
         String status_tempat_tinggal_calon_mustahiq = obj.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
         String status_pekerjaan_calon_mustahiq = obj.getString(Zakat.status_pekerjaan_calon_mustahiq);
         String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
@@ -480,7 +481,9 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 .getString(Zakat.caption_photo_3);
         String status_mustahiq = obj.getString(Zakat.status_mustahiq);
         String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+        String jumlah_rating_amil_zakat = obj.getString(Zakat.jumlah_rating_amil_zakat);
         String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
+        String nama_type_validasi_mustahiq = obj.getString(Zakat.nama_type_validasi_mustahiq);
         String id_nama_validasi_amil_zakat = obj.getString(Zakat.id_nama_validasi_amil_zakat);
         String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
         //set map object
@@ -492,6 +495,8 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                jumlah_anak_calon_mustahiq,
+                status_pernikahan_calon_mustahiq,
                 status_tempat_tinggal_calon_mustahiq,
                 status_pekerjaan_calon_mustahiq,
                 nama_perekomendasi_calon_mustahiq,
@@ -499,8 +504,9 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3,
                 status_mustahiq,
                 jumlah_rating,
+                jumlah_rating_amil_zakat,
                 id_nama_validasi_amil_zakat,
-                nama_validasi_amil_zakat, waktu_terakhir_donasi
+                nama_validasi_amil_zakat, nama_type_validasi_mustahiq,waktu_terakhir_donasi
         );
 
     }
@@ -512,14 +518,19 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
             String latitude_calon_mustahiq,
             String longitude_calon_mustahiq,
             String no_identitas_calon_mustahiq,
-            String no_telp_calon_mustahiq, String status_tempat_tinggal_calon_mustahiq, String status_pekerjaan_calon_mustahiq,
+            String no_telp_calon_mustahiq,
+            String jumlah_anak_calon_mustahiq,
+           String status_pernikahan_calon_mustahiq, String status_tempat_tinggal_calon_mustahiq, String status_pekerjaan_calon_mustahiq,
             String nama_perekomendasi_calon_mustahiq,
             String alasan_perekomendasi_calon_mustahiq,
             String photo_1, String photo_2, String photo_3, String caption_photo_1, String caption_photo_2, String caption_photo_3,
             String status_mustahiq,
             String jumlah_rating,
+            String jumlah_rating_amil_zakat,
             String id_nama_validasi_amil_zakat,
-            String nama_validasi_amil_zakat, String waktu_terakhir_donasi) {
+            String nama_validasi_amil_zakat,
+            String nama_type_validasi_mustahiq,
+            String waktu_terakhir_donasi) {
 
         Mustahiq mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq,
                 alamat_calon_mustahiq,
@@ -527,6 +538,8 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 longitude_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                jumlah_anak_calon_mustahiq,
+                status_pernikahan_calon_mustahiq,
                 status_tempat_tinggal_calon_mustahiq,
                 status_pekerjaan_calon_mustahiq,
                 nama_perekomendasi_calon_mustahiq,
@@ -534,8 +547,9 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                 photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3,
                 status_mustahiq,
                 jumlah_rating,
+                jumlah_rating_amil_zakat,
                 id_nama_validasi_amil_zakat,
-                nama_validasi_amil_zakat, waktu_terakhir_donasi);
+                nama_validasi_amil_zakat,nama_type_validasi_mustahiq, waktu_terakhir_donasi);
 
         if (position.equals(TAG_BAWAH)) {
             dataMustahiqs.add(mustahiq);
@@ -666,8 +680,9 @@ public class MustahiqListFragment extends Fragment implements MustahiqAdapter.On
                         JSONObject obj = items_obj.getJSONObject(i);
                         String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
                         String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
+                        String nama_type_validasi_mustahiq = obj.getString(Zakat.nama_type_validasi_mustahiq);
 
-                        dataAmilZakat.add(new AmilZakat(id_amil_zakat, nama_validasi_amil_zakat));
+                        dataAmilZakat.add(new AmilZakat(id_amil_zakat, nama_validasi_amil_zakat,nama_type_validasi_mustahiq));
                     }
 
                     FragmentManager fragmentManager = getChildFragmentManager();

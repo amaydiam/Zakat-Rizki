@@ -1,0 +1,494 @@
+[
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_subheader.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_navigation_item_subheader.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_add_jadwal.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\activity_add_jadwal.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\confusing_toast_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\6b39e07d038d5da03a0d7953bfbc0663143c0908\\output\\res\\layout\\confusing_toast_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_drawer.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\activity_drawer.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\place_autocomplete_item_powered_by_google.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\b6398495e9f2688eb46c1ecef0c63a33ef36f29c\\output\\res\\layout\\place_autocomplete_item_powered_by_google.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\toolbar.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\toolbar.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_navigation_item.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_bottom_navigation_item.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\notification_action.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_login.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_login.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_view_list_nav_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_menu_item_action_area.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_menu_item_action_area.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_detail_donasi.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\layout_detail_donasi.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\cast_tracks_chooser_dialog_row_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\b306a75bf9e499c843d9e2359d27a73c5d355445\\output\\res\\layout\\cast_tracks_chooser_dialog_row_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_fab_action.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\layout_fab_action.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_pick_calon_mustahiq.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_pick_calon_mustahiq.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_text_input_password_icon.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_text_input_password_icon.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_drawer.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\fragment_drawer.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_popup_menu_header_item_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_layout_snackbar.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_list_donasi.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_list_donasi.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\support_simple_spinner_dropdown_item.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_drawer_header.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\layout_drawer_header.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_cari_twopane.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\activity_cari_twopane.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_detail_mustahiq.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\layout_detail_mustahiq.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_dropdown_item_icons_2line.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_sheet_dialog.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_bottom_sheet_dialog.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_laporan_donasi_detail.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\fragment_laporan_donasi_detail.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mr_controller_volume_item.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\fd15d937daaab65d269a7d0840e180f2c4b33f67\\output\\res\\layout\\mr_controller_volume_item.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\cast_tracks_chooser_dialog_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\b306a75bf9e499c843d9e2359d27a73c5d355445\\output\\res\\layout\\cast_tracks_chooser_dialog_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_list.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\fragment_list.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mr_playback_control.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\fd15d937daaab65d269a7d0840e180f2c4b33f67\\output\\res\\layout\\mr_playback_control.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu_item.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_dialog_detail_donasi.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_dialog_detail_donasi.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_material.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_icon.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_content_include.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_screen_content_include.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\cast_intro_overlay.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\b306a75bf9e499c843d9e2359d27a73c5d355445\\output\\res\\layout\\cast_intro_overlay.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\error_toast_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\6b39e07d038d5da03a0d7953bfbc0663143c0908\\output\\res\\layout\\error_toast_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_bar.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_title_item.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_splash.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\activity_splash.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_navigation_item.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_icon.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_layout_tab_icon.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\select_dialog_item_material.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_donasi_detail.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_donasi_detail.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_item_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_search_view.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_rekomendasi.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_rekomendasi.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_calon_mustahiq_detail.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\fragment_calon_mustahiq_detail.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_lines_media.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\notification_template_lines_media.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\cast_mini_controller.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\b306a75bf9e499c843d9e2359d27a73c5d355445\\output\\res\\layout\\cast_mini_controller.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\cast_help_text.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\b306a75bf9e499c843d9e2359d27a73c5d355445\\output\\res\\layout\\cast_help_text.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\notification_template_media.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_calon_mustahiq_detail.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_calon_mustahiq_detail.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_photo_list.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\item_photo_list.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_radio.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_navigation_menu.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_error_message.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\layout_error_message.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\cast_expanded_controller_activity.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\b306a75bf9e499c843d9e2359d27a73c5d355445\\output\\res\\layout\\cast_expanded_controller_activity.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_header.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_navigation_item_header.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_time.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\notification_template_part_time.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_image_slider.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\fragment_image_slider.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_main.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\fragment_main.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_screen_simple.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_singlechoice_material.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mr_chooser_dialog.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\fd15d937daaab65d269a7d0840e180f2c4b33f67\\output\\res\\layout\\mr_chooser_dialog.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_cari.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\activity_cari.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_title_material.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_alert_dialog_title_material.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mr_controller_material_dialog_b.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\fd15d937daaab65d269a7d0840e180f2c4b33f67\\output\\res\\layout\\mr_controller_material_dialog_b.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mr_volume_control.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\fd15d937daaab65d269a7d0840e180f2c4b33f67\\output\\res\\layout\\mr_volume_control.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\default_toast_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\6b39e07d038d5da03a0d7953bfbc0663143c0908\\output\\res\\layout\\default_toast_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view_list_item.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_filter_laporan_donasi.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_filter_laporan_donasi.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_movie_drawer.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_movie_drawer.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_manage_calon_mustahiq.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_manage_calon_mustahiq.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_text.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_layout_tab_text.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_menu_item_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\place_autocomplete_item_prediction.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\b6398495e9f2688eb46c1ecef0c63a33ef36f29c\\output\\res\\layout\\place_autocomplete_item_prediction.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_detail_calon_mustahiq.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\layout_detail_calon_mustahiq.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\fragment_mustahiq_detail.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\fragment_mustahiq_detail.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_select_dialog_material.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_set_url.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_set_url.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_validasi.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_validasi.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\form_step_1_donasi.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\form_step_1_donasi.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\success_toast_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\6b39e07d038d5da03a0d7953bfbc0663143c0908\\output\\res\\layout\\success_toast_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_media_custom.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\notification_template_media_custom.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_mustahiq_detail.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_mustahiq_detail.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\form_step_2_donasi.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\form_step_2_donasi.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_snackbar_include.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_layout_snackbar_include.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_add_mustahiq.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\item_add_mustahiq.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_dialog_title_material.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\info_toast_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\6b39e07d038d5da03a0d7953bfbc0663143c0908\\output\\res\\layout\\info_toast_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_mustahiq_list.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\item_mustahiq_list.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\item_donasi_list.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\item_donasi_list.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_rating.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_rating.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_item_separator.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\ca422a205e48e7ff349e2a964fb4918cc3a21a1d\\output\\res\\layout\\design_navigation_item_separator.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\text_bubble.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\792140f5c04f93fb10a88a251e15fd0501b88bad\\output\\res\\layout\\text_bubble.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\layout_progress_circle.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\layout_progress_circle.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_template_part_chronometer.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_manage_mustahiq.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_manage_mustahiq.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_list_menu_item_checkbox.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_movie_twopane.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\activity_movie_twopane.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_list.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_list.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_content_detail.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\activity_content_detail.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\mr_chooser_list_item.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\fd15d937daaab65d269a7d0840e180f2c4b33f67\\output\\res\\layout\\mr_chooser_list_item.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\place_autocomplete_fragment.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\b6398495e9f2688eb46c1ecef0c63a33ef36f29c\\output\\res\\layout\\place_autocomplete_fragment.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\warning_toast_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\6b39e07d038d5da03a0d7953bfbc0663143c0908\\output\\res\\layout\\warning_toast_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\content_register.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\content_register.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\place_autocomplete_progress.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\b6398495e9f2688eb46c1ecef0c63a33ef36f29c\\output\\res\\layout\\place_autocomplete_progress.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_expanded_menu_layout.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\toolbar_twoline.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\layout\\toolbar_twoline.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_multichoice_material.xml",
+        "source": "C:\\Users\\User\\.android\\build-cache\\e455a87aac9dd7b448a8b0dee50f7b0d62898955\\output\\res\\layout\\select_dialog_multichoice_material.xml"
+    }
+]

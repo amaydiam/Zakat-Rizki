@@ -8,15 +8,18 @@ public class AmilZakat implements Parcelable {
     // Attributes
     public String id_amil_zakat;
     public String nama_validasi_amil_zakat;
+    public String nama_type_validasi_mustahiq;
 
     // Constructor
-    public AmilZakat(String id_amil_zakat, String nama_validasi_amil_zakat) {
+    public AmilZakat(String id_amil_zakat, String nama_validasi_amil_zakat, String nama_type_validasi_mustahiq) {
         this.id_amil_zakat = id_amil_zakat;
         this.nama_validasi_amil_zakat = nama_validasi_amil_zakat;
+        this.nama_type_validasi_mustahiq = nama_type_validasi_mustahiq;
     }
     public AmilZakat(Parcel in) {
         this.id_amil_zakat = in.readString();
         this.nama_validasi_amil_zakat = in.readString();
+        this.nama_type_validasi_mustahiq = in.readString();
     }
 
     // Parcelable Creator
@@ -34,6 +37,7 @@ public class AmilZakat implements Parcelable {
     public void writeToParcel(Parcel out, int i) {
         out.writeString(id_amil_zakat);
         out.writeString(nama_validasi_amil_zakat);
+        out.writeString(nama_type_validasi_mustahiq);
     }
     @Override
     public int describeContents() {

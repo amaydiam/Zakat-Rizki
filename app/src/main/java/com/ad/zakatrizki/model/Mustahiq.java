@@ -25,6 +25,8 @@ public class Mustahiq implements Parcelable {
     public String longitude_calon_mustahiq;
     public String no_identitas_calon_mustahiq;
     public String no_telp_calon_mustahiq;
+    public String jumlah_anak_calon_mustahiq ;
+    public String status_pernikahan_calon_mustahiq ;
     public String status_tempat_tinggal_calon_mustahiq;
     public String status_pekerjaan_calon_mustahiq;
     public String nama_perekomendasi_calon_mustahiq;
@@ -37,8 +39,10 @@ public class Mustahiq implements Parcelable {
     public String caption_photo_3;
     public String status_mustahiq;
     public String jumlah_rating;
+    public String jumlah_rating_amil_zakat;
     public String id_nama_validasi_amil_zakat;
     public String nama_validasi_amil_zakat;
+    public String nama_type_validasi_mustahiq;
     public String waktu_terakhir_donasi;
 
     public Mustahiq(String id_mustahiq, String id_calon_mustahiq, String nama_calon_mustahiq,
@@ -47,6 +51,8 @@ public class Mustahiq implements Parcelable {
                     String longitude_calon_mustahiq,
                     String no_identitas_calon_mustahiq,
                     String no_telp_calon_mustahiq,
+                     String jumlah_anak_calon_mustahiq ,
+                             String status_pernikahan_calon_mustahiq,
                     String status_tempat_tinggal_calon_mustahiq,
                     String status_pekerjaan_calon_mustahiq,
                     String nama_perekomendasi_calon_mustahiq,
@@ -54,8 +60,9 @@ public class Mustahiq implements Parcelable {
                     String photo_1, String photo_2, String photo_3, String caption_photo_1, String caption_photo_2, String caption_photo_3,
                     String status_mustahiq,
                     String jumlah_rating,
+                    String jumlah_rating_amil_zakat,
                      String id_nama_validasi_amil_zakat,
-                    String nama_validasi_amil_zakat, String waktu_terakhir_donasi) {
+                    String nama_validasi_amil_zakat, String nama_type_validasi_mustahiq, String waktu_terakhir_donasi) {
         this.id_mustahiq = id_mustahiq;
         this.id_calon_mustahiq = id_calon_mustahiq;
         this.nama_calon_mustahiq = nama_calon_mustahiq;
@@ -64,6 +71,8 @@ public class Mustahiq implements Parcelable {
         this.longitude_calon_mustahiq = longitude_calon_mustahiq;
         this.no_identitas_calon_mustahiq = no_identitas_calon_mustahiq;
         this.no_telp_calon_mustahiq = no_telp_calon_mustahiq;
+        this.jumlah_anak_calon_mustahiq = jumlah_anak_calon_mustahiq;
+        this.status_pernikahan_calon_mustahiq = status_pernikahan_calon_mustahiq;
         this.status_tempat_tinggal_calon_mustahiq = status_tempat_tinggal_calon_mustahiq;
         this.status_pekerjaan_calon_mustahiq = status_pekerjaan_calon_mustahiq;
         this.nama_perekomendasi_calon_mustahiq = nama_perekomendasi_calon_mustahiq;
@@ -76,8 +85,10 @@ public class Mustahiq implements Parcelable {
         this.caption_photo_3 = caption_photo_3;
         this.status_mustahiq = status_mustahiq;
         this.jumlah_rating = jumlah_rating;
+        this.jumlah_rating_amil_zakat = jumlah_rating_amil_zakat;
         this.id_nama_validasi_amil_zakat = id_nama_validasi_amil_zakat;
         this.nama_validasi_amil_zakat = nama_validasi_amil_zakat;
+        this.nama_type_validasi_mustahiq = nama_type_validasi_mustahiq;
         this.waktu_terakhir_donasi = waktu_terakhir_donasi;
     }
 
@@ -90,6 +101,8 @@ public class Mustahiq implements Parcelable {
         longitude_calon_mustahiq = in.readString();
         no_identitas_calon_mustahiq = in.readString();
         no_telp_calon_mustahiq = in.readString();
+        jumlah_anak_calon_mustahiq = in.readString();
+        status_pernikahan_calon_mustahiq = in.readString();
         status_tempat_tinggal_calon_mustahiq = in.readString();
         status_pekerjaan_calon_mustahiq = in.readString();
         nama_perekomendasi_calon_mustahiq = in.readString();
@@ -102,8 +115,10 @@ public class Mustahiq implements Parcelable {
         caption_photo_3 = in.readString();
         status_mustahiq = in.readString();
         jumlah_rating = in.readString();
+        jumlah_rating_amil_zakat = in.readString();
         id_nama_validasi_amil_zakat = in.readString();
         nama_validasi_amil_zakat = in.readString();
+        nama_type_validasi_mustahiq = in.readString();
         waktu_terakhir_donasi = in.readString();
     }
 
@@ -117,6 +132,8 @@ public class Mustahiq implements Parcelable {
         dest.writeString(longitude_calon_mustahiq);
         dest.writeString(no_identitas_calon_mustahiq);
         dest.writeString(no_telp_calon_mustahiq);
+        dest.writeString(jumlah_anak_calon_mustahiq);
+        dest.writeString(status_pernikahan_calon_mustahiq);
         dest.writeString(status_tempat_tinggal_calon_mustahiq);
         dest.writeString(status_pekerjaan_calon_mustahiq);
         dest.writeString(nama_perekomendasi_calon_mustahiq);
@@ -129,8 +146,10 @@ public class Mustahiq implements Parcelable {
         dest.writeString(caption_photo_3);
         dest.writeString(status_mustahiq);
         dest.writeString(jumlah_rating);
+        dest.writeString(jumlah_rating_amil_zakat);
         dest.writeString(id_nama_validasi_amil_zakat);
         dest.writeString(nama_validasi_amil_zakat);
+        dest.writeString(nama_type_validasi_mustahiq);
         dest.writeString(waktu_terakhir_donasi);
     }
 

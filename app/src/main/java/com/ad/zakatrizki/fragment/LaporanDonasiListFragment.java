@@ -487,11 +487,14 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
         String alamat_calon_mustahiq = obj.getString(Zakat.alamat_calon_mustahiq);
         String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
         String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+        String jumlah_anak_calon_mustahiq = obj.getString(Zakat.jumlah_anak_calon_mustahiq);
+        String status_pernikahan_calon_mustahiq = obj.getString(Zakat.status_pernikahan_calon_mustahiq);
         String status_tempat_tinggal_calon_mustahiq = obj.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
         String status_pekerjaan_calon_mustahiq = obj.getString(Zakat.status_pekerjaan_calon_mustahiq);
         String status_calon_mustahiq = obj.getString(Zakat.status_calon_mustahiq);
         String id_amil_zakat = obj.getString(Zakat.id_amil_zakat);
         String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
+        String nama_type_validasi_mustahiq = obj.getString(Zakat.nama_type_validasi_mustahiq);
         //set map object
         AddAndSetMapData(
                 position,
@@ -509,16 +512,25 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
                 alamat_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                jumlah_anak_calon_mustahiq,
+                status_pernikahan_calon_mustahiq,
                 status_tempat_tinggal_calon_mustahiq,
                 status_pekerjaan_calon_mustahiq,
                 status_calon_mustahiq,
                 id_amil_zakat,
-                nama_validasi_amil_zakat
+                nama_validasi_amil_zakat,
+                nama_type_validasi_mustahiq
         );
 
     }
 
-    private void AddAndSetMapData(String position, String id_donasi, String jumlah_donasi, String id_muzaki, String nama_muzaki, String alamat_muzaki, String no_identitas_muzaki, String no_telp_muzaki, String status_muzaki, String id_mustahiq, String id_calon_mustahiq, String nama_calon_mustahiq, String alamat_calon_mustahiq, String no_identitas_calon_mustahiq, String no_telp_calon_mustahiq, String status_tempat_tinggal_calon_mustahiq, String status_pekerjaan_calon_mustahiq, String status_calon_mustahiq, String id_amil_zakat, String nama_validasi_amil_zakat) {
+    private void AddAndSetMapData(String position, String id_donasi, String jumlah_donasi, String id_muzaki, String nama_muzaki, String alamat_muzaki, String no_identitas_muzaki, String no_telp_muzaki, String status_muzaki, String id_mustahiq, String id_calon_mustahiq, String nama_calon_mustahiq, String alamat_calon_mustahiq, String no_identitas_calon_mustahiq,
+                                String  jumlah_anak_calon_mustahiq,
+                                String  status_pernikahan_calon_mustahiq,
+                                  String no_telp_calon_mustahiq, String status_tempat_tinggal_calon_mustahiq, String status_pekerjaan_calon_mustahiq, String status_calon_mustahiq, String id_amil_zakat,
+                                  String nama_validasi_amil_zakat,
+                                  String nama_type_validasi_mustahiq
+    ) {
 
         LaporanDonasi donasi = new LaporanDonasi(
                 id_donasi,
@@ -535,11 +547,14 @@ public class LaporanDonasiListFragment extends Fragment implements LaporanDonasi
                 alamat_calon_mustahiq,
                 no_identitas_calon_mustahiq,
                 no_telp_calon_mustahiq,
+                jumlah_anak_calon_mustahiq,
+                status_pernikahan_calon_mustahiq,
                 status_tempat_tinggal_calon_mustahiq,
                 status_pekerjaan_calon_mustahiq,
                 status_calon_mustahiq,
                 id_amil_zakat,
-                nama_validasi_amil_zakat
+                nama_validasi_amil_zakat,
+                nama_type_validasi_mustahiq
 
         );
 

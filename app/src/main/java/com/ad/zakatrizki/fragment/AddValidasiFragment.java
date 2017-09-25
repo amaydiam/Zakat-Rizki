@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager.LayoutParams;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ad.zakatrizki.R;
@@ -43,6 +45,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnItemSelected;
 import butterknife.Unbinder;
 
 public class AddValidasiFragment extends DialogFragment implements CustomVolley.OnCallbackResponse {
@@ -53,7 +56,8 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
     Button validasi;
     @BindView(R.id.coordinatorLayout)
     CoordinatorLayout coordinatorLayout;
-
+    @BindView(R.id.type_validasi_mustahiq)
+    Spinner typeValidasi;
     private SnackBar snackbar;
     private CustomVolley customVolley;
     private RequestQueue queue;
@@ -65,6 +69,7 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
     private Mustahiq mustahiq;
     private Dialog alertDialog;
     private CalonMustahiq calonMustahiq;
+    private String s_typeValidasi="";
 
     public AddValidasiFragment() {
 
@@ -74,7 +79,11 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
         this.mustahiq = mustahiq;
     }
 
+    @OnItemSelected(R.id.type_validasi_mustahiq)
+    public void spinnerItemSelected(Spinner spinner, int position) {
 
+        s_typeValidasi = typeValidasi.getSelectedItem().toString();
+    }
     @OnClick(R.id.validasi)
     void Validasi() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
@@ -87,6 +96,7 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
                 jsonParams.put(Zakat.id_calon_mustahiq,
                         String.valueOf(mustahiq != null ? mustahiq.id_calon_mustahiq : calonMustahiq.id_calon_mustahiq));
                 jsonParams.put(Zakat.id_amil_zakat, Prefs.getIdAmilZakat(getActivity()));
+                jsonParams.put(Zakat.type_validasi_mustahiq, s_typeValidasi);
 
                 queue = customVolley.Rest(Request.Method.POST, ApiHelper.getAddValidasiLink(getActivity()), jsonParams, TAG_RATING);
 
@@ -146,6 +156,9 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
                     String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
                     String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
                     String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                    String jumlah_anak_calon_mustahiq = obj.getString(Zakat.jumlah_anak_calon_mustahiq);
+                    String status_pernikahan_calon_mustahiq = obj.getString(Zakat.status_pernikahan_calon_mustahiq);
+
                     String status_tempat_tinggal_calon_mustahiq = obj.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
                     String status_pekerjaan_calon_mustahiq = obj.getString(Zakat.status_pekerjaan_calon_mustahiq);
                     String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
@@ -165,8 +178,10 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
                             .getString(Zakat.caption_photo_3);
                     String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+                    String jumlah_rating_amil_zakat = obj.getString(Zakat.jumlah_rating_amil_zakat);
                     String id_nama_validasi_amil_zakat = obj.getString(Zakat.id_nama_validasi_amil_zakat);
                     String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
+                    String nama_type_validasi_mustahiq = obj.getString(Zakat.nama_type_validasi_mustahiq);
                     String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
                     mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
@@ -174,6 +189,8 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
                             longitude_calon_mustahiq,
                             no_identitas_calon_mustahiq,
                             no_telp_calon_mustahiq,
+                            jumlah_anak_calon_mustahiq,
+                            status_pernikahan_calon_mustahiq,
                             status_tempat_tinggal_calon_mustahiq,
                             status_pekerjaan_calon_mustahiq,
                             nama_perekomendasi_calon_mustahiq,
@@ -185,7 +202,8 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
                             caption_photo_2,
                             caption_photo_3,
                             status_mustahiq,
-                            jumlah_rating,id_nama_validasi_amil_zakat, nama_validasi_amil_zakat, waktu_terakhir_donasi);
+                            jumlah_rating,jumlah_rating_amil_zakat, id_nama_validasi_amil_zakat,
+                            nama_validasi_amil_zakat,nama_type_validasi_mustahiq, waktu_terakhir_donasi);
                     callback.onFinishValidasi(mustahiq);
                 } else {
                     callback.onFinishValidasi(calonMustahiq);
@@ -243,6 +261,18 @@ public class AddValidasiFragment extends DialogFragment implements CustomVolley.
                 dismiss();
             }
         });
+
+        String arrTypeValidasi[] = {
+                "Donasi Bulanan",
+                "Donasi Veteran",
+                "Donasi Kecelakaan"};
+
+        ArrayAdapter<String> adapterBulan = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, arrTypeValidasi);
+        adapterBulan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
+        typeValidasi.setAdapter(adapterBulan);
+
+
+        s_typeValidasi=arrTypeValidasi[0];
 
         getDialog().getWindow().setSoftInputMode(
                 LayoutParams.SOFT_INPUT_STATE_HIDDEN);

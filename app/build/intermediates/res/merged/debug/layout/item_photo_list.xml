@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/recycler_view_padding"
+    android:clickable="true"
+    cardview:cardBackgroundColor="@color/white"
+    cardview:cardPreventCornerOverlap="false"
+    cardview:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp"
+        android:gravity="center">
+
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="@dimen/foto_profil_size"
+            android:layout_height="@dimen/foto_profil_size" />
+
+        <com.ad.zakatrizki.widget.RobotoBoldTextView
+            android:id="@+id/caption_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textColor="@color/text_primary"
+            tools:text="caption_photo" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

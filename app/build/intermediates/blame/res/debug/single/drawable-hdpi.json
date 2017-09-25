@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_mustahiq.png",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\drawable-hdpi\\ic_mustahiq.png"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\action_home.png",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\drawable-hdpi\\action_home.png"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\drawer_header.png",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\drawable-hdpi\\drawer_header.png"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\server_unreachable.png",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\drawable-hdpi\\server_unreachable.png"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\default_placeholder.png",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\drawable-hdpi\\default_placeholder.png"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\pick_location.png",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\drawable-hdpi\\pick_location.png"
+    }
+]

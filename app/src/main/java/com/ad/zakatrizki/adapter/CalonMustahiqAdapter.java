@@ -9,7 +9,6 @@ import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -123,6 +122,9 @@ public class CalonMustahiqAdapter extends RecyclerView.Adapter<CalonMustahiqAdap
                 calon_mustahiq.alamat_calon_mustahiq.replaceAll("(?i)" + keyword_alamat, "<font color='" + ContextCompat.getColor(activity, R.color.accent) + "'>" + keyword_alamat + "</font>") : calon_mustahiq.alamat_calon_mustahiq)));
         holder.noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(calon_mustahiq.no_identitas_calon_mustahiq) ? "-" : calon_mustahiq.no_identitas_calon_mustahiq));
         holder.noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(calon_mustahiq.no_telp_calon_mustahiq) ? "-" : calon_mustahiq.no_telp_calon_mustahiq));
+        holder.jumlahAnakCalonMustahiq.setText("Jumlah Anak : " + (TextUtils.isNullOrEmpty(calon_mustahiq.jumlah_anak_calon_mustahiq) ? "-" : calon_mustahiq.jumlah_anak_calon_mustahiq));
+        holder.statusPernikahanCalonMustahiq.setText("Status Pernikahan : " + (TextUtils.isNullOrEmpty(calon_mustahiq.status_pernikahan_calon_mustahiq) ? "-" : calon_mustahiq.status_pernikahan_calon_mustahiq));
+
         holder.statusTempatTinggalCalonMustahiq.setText("Status Tempat Tinggal : " + (TextUtils.isNullOrEmpty(calon_mustahiq.status_tempat_tinggal_calon_mustahiq) ? "-" : calon_mustahiq.status_tempat_tinggal_calon_mustahiq));
         holder.statusPekerjaanCalonMustahiq.setText("Status Pekerjaan : " + (TextUtils.isNullOrEmpty(calon_mustahiq.status_pekerjaan_calon_mustahiq) ? "-" : calon_mustahiq.status_pekerjaan_calon_mustahiq));
         holder.namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi: " + (TextUtils.isNullOrEmpty(calon_mustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : calon_mustahiq.nama_perekomendasi_calon_mustahiq));
@@ -131,6 +133,7 @@ public class CalonMustahiqAdapter extends RecyclerView.Adapter<CalonMustahiqAdap
         holder.statusCalonMustahiq.setText(Html.fromHtml("Status Aktif : " + (calon_mustahiq.status_calon_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
         holder.statusMustahiq.setVisibility(View.GONE);
         holder.namaAmilZakat.setVisibility(View.GONE);
+        holder.namaTypeValidasiMstahiq.setVisibility(View.GONE);
         holder.waktuTerakhirDonasi.setVisibility(View.GONE);
         holder.statusCalonMustahiq.setVisibility(View.GONE);
 
@@ -144,6 +147,13 @@ public class CalonMustahiqAdapter extends RecyclerView.Adapter<CalonMustahiqAdap
         }
         holder.rating.setRating(rt);
 
+        float rtam = 0;
+        try {
+
+            rtam = Float.parseFloat(calon_mustahiq.jumlah_rating_amil_zakat);
+        } catch (Exception ignored) {
+        }
+        holder.ratingAmilZakat.setRating(rtam);
 
         if (isTablet) {
             if (selected == position)
@@ -221,6 +231,10 @@ public class CalonMustahiqAdapter extends RecyclerView.Adapter<CalonMustahiqAdap
         RobotoLightTextView noIdentitasCalonMustahiq;
         @BindView(R.id.no_telp_calon_mustahiq)
         RobotoLightTextView noTelpCalonMustahiq;
+        @BindView(R.id.jumlah_anak_calon_mustahiq)
+        RobotoLightTextView jumlahAnakCalonMustahiq;
+        @BindView(R.id.status_pernikahan_calon_mustahiq)
+        RobotoLightTextView statusPernikahanCalonMustahiq;
         @BindView(R.id.status_tempat_tinggal_calon_mustahiq)
         RobotoLightTextView statusTempatTinggalCalonMustahiq;
         @BindView(R.id.status_pekerjaan_calon_mustahiq)
@@ -235,6 +249,8 @@ public class CalonMustahiqAdapter extends RecyclerView.Adapter<CalonMustahiqAdap
         RobotoLightTextView statusMustahiq;
         @BindView(R.id.nama_validasi_amil_zakat)
         RobotoLightTextView namaAmilZakat;
+        @BindView(R.id.nama_type_validasi_mustahiq)
+        RobotoLightTextView namaTypeValidasiMstahiq;
         @BindView(R.id.waktu_terakhir_donasi)
         RobotoLightTextView waktuTerakhirDonasi;
         @BindView(R.id.btn_action)
@@ -246,6 +262,11 @@ public class CalonMustahiqAdapter extends RecyclerView.Adapter<CalonMustahiqAdap
 
         @BindView(R.id.rating)
         AppCompatRatingBar rating;
+
+
+
+        @BindView(R.id.rating_amil_zakat)
+        AppCompatRatingBar ratingAmilZakat;
 
         public ViewHolder(View vi) {
             super(vi);

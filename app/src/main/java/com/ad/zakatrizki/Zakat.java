@@ -51,6 +51,8 @@ public class Zakat extends Application {
     public static final String longitude_calon_mustahiq = "longitude_calon_mustahiq";
     public static final String no_identitas_calon_mustahiq = "no_identitas_calon_mustahiq";
     public static final String no_telp_calon_mustahiq = "no_telp_calon_mustahiq";
+    public static final String jumlah_anak_calon_mustahiq = "jumlah_anak_calon_mustahiq";
+    public static final String status_pernikahan_calon_mustahiq = "status_pernikahan_calon_mustahiq";
     public static final String status_tempat_tinggal_calon_mustahiq="status_tempat_tinggal_calon_mustahiq";
     public static final String status_pekerjaan_calon_mustahiq="status_pekerjaan_calon_mustahiq";
     public static final String nama_perekomendasi_calon_mustahiq = "nama_perekomendasi_calon_mustahiq";
@@ -85,6 +87,8 @@ public class Zakat extends Application {
     public static final String NAMA_BADAN_AMIL_ZAKAT = "nama_badan_amil_zakat";
     public static final String id_nama_validasi_amil_zakat = "id_nama_validasi_amil_zakat";
     public static final String nama_validasi_amil_zakat = "nama_validasi_amil_zakat";
+    public static final String nama_type_validasi_mustahiq = "nama_type_validasi_mustahiq";
+    public static final String type_validasi_mustahiq = "type_validasi_mustahiq";
     public static final String CAPTION_PHOTO = "caption_photo";
     public static final String TYPE = "type";
 
@@ -92,6 +96,7 @@ public class Zakat extends Application {
     public static String id_mustahiq = "id_mustahiq";
     public static String status_mustahiq = "status_mustahiq";
     public static String jumlah_rating = "jumlah_rating";
+    public static String jumlah_rating_amil_zakat = "jumlah_rating_amil_zakat";
     public static int PLACE_PICKER_REQUEST=22;
     public static String username="username";
     public static String password="password";

@@ -132,8 +132,12 @@ public class LaporanDonasiAdapter extends RecyclerView.Adapter<LaporanDonasiAdap
         holder.alamatMustahiq.setText("Alamat : " + (TextUtils.isNullOrEmpty(laporanDonasi.alamat_calon_mustahiq) ? "-" : laporanDonasi.alamat_calon_mustahiq));
         holder.noIdentitasMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(laporanDonasi.no_identitas_calon_mustahiq) ? "-" : laporanDonasi.no_identitas_calon_mustahiq));
         holder.noTelpMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(laporanDonasi.no_telp_calon_mustahiq) ? "-" : laporanDonasi.no_telp_calon_mustahiq));
+
+        holder.jumlahAnakCalonMustahiq.setText("Jumlah Anak : " + (TextUtils.isNullOrEmpty(laporanDonasi.jumlah_anak_calon_mustahiq) ? "-" : laporanDonasi.jumlah_anak_calon_mustahiq));
+        holder.statusPernikahanCalonMustahiq.setText("Status Pernikahan : " + (TextUtils.isNullOrEmpty(laporanDonasi.status_pernikahan_calon_mustahiq) ? "-" : laporanDonasi.status_pernikahan_calon_mustahiq));
         holder.statusMustahiq.setText(Html.fromHtml("Status Aktif : " + (laporanDonasi.status_calon_mustahiq.equalsIgnoreCase("aktif") ? "<font color='#002800'>Aktif</font>" : "<font color='red'>Tidak Aktif</font>")));
         holder.namaAmilZakat.setText("Validasi Amil Zakat Zakat : " + laporanDonasi.nama_validasi_amil_zakat);
+        holder.namaTypeValidasiMstahiq.setText("Type Validasi : " + laporanDonasi.nama_type_validasi_mustahiq);
 
         if (isTablet) {
             if (selected == position)
@@ -223,10 +227,16 @@ public class LaporanDonasiAdapter extends RecyclerView.Adapter<LaporanDonasiAdap
         RobotoLightTextView noIdentitasMustahiq;
         @BindView(R.id.no_telp_calon_mustahiq)
         RobotoLightTextView noTelpMustahiq;
+        @BindView(R.id.jumlah_anak_calon_mustahiq)
+        RobotoLightTextView jumlahAnakCalonMustahiq;
+        @BindView(R.id.status_pernikahan_calon_mustahiq)
+        RobotoLightTextView statusPernikahanCalonMustahiq;
         @BindView(R.id.status_calon_mustahiq)
         RobotoLightTextView statusMustahiq;
         @BindView(R.id.nama_validasi_amil_zakat)
         RobotoLightTextView namaAmilZakat;
+        @BindView(R.id.nama_type_validasi_mustahiq)
+        RobotoLightTextView namaTypeValidasiMstahiq;
         @BindView(R.id.jumlah_donasi)
         RobotoLightTextView jumlahDonasi;
         @BindView(R.id.btn_action)

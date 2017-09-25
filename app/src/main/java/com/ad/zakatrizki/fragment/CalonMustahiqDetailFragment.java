@@ -109,6 +109,10 @@ public class CalonMustahiqDetailFragment extends Fragment
     AppCompatRatingBar rating;
 
 
+
+    @BindView(R.id.rating_amil_zakat)
+    AppCompatRatingBar ratingAmilZakat;
+
     @BindView(R.id.recyclerview_foto)
     RecyclerView recyclerView;
 
@@ -154,6 +158,10 @@ public class CalonMustahiqDetailFragment extends Fragment
     RobotoLightTextView noIdentitasCalonMustahiq;
     @BindView(R.id.no_telp_calon_mustahiq)
     RobotoLightTextView noTelpCalonMustahiq;
+    @BindView(R.id.jumlah_anak_calon_mustahiq)
+    RobotoLightTextView jumlahAnakCalonMustahiq;
+    @BindView(R.id.status_pernikahan_calon_mustahiq)
+    RobotoLightTextView statusPernikahanCalonMustahiq;
     @BindView(R.id.status_tempat_tinggal_calon_mustahiq)
     RobotoLightTextView statusTempatTinggalCalonMustahiq;
     @BindView(R.id.status_pekerjaan_calon_mustahiq)
@@ -306,7 +314,7 @@ public class CalonMustahiqDetailFragment extends Fragment
             fabAction.setVisibility(View.VISIBLE);
         }
 
-        if (Prefs.getLogin(getActivity()) ) {
+        if (Prefs.getLogin(getActivity())) {
             fabRekomendasi.setVisibility(View.VISIBLE);
         } else
             fabRekomendasi.setVisibility(View.GONE);
@@ -321,8 +329,11 @@ public class CalonMustahiqDetailFragment extends Fragment
         alamatCalonMustahiq.setText("Alamat : " + (TextUtils.isNullOrEmpty(calonMustahiq.alamat_calon_mustahiq) ? "-" : calonMustahiq.alamat_calon_mustahiq));
         noIdentitasCalonMustahiq.setText("No Identitas : " + (TextUtils.isNullOrEmpty(calonMustahiq.no_identitas_calon_mustahiq) ? "-" : calonMustahiq.no_identitas_calon_mustahiq));
         noTelpCalonMustahiq.setText("No Telp : " + (TextUtils.isNullOrEmpty(calonMustahiq.no_telp_calon_mustahiq) ? "-" : calonMustahiq.no_telp_calon_mustahiq));
-       statusTempatTinggalCalonMustahiq.setText("Status Tempat Tinggal : " + (TextUtils.isNullOrEmpty(calonMustahiq.status_tempat_tinggal_calon_mustahiq) ? "-" : calonMustahiq.status_tempat_tinggal_calon_mustahiq));
-       statusPekerjaanCalonMustahiq.setText("Status Pekerjaan : " + (TextUtils.isNullOrEmpty(calonMustahiq.status_pekerjaan_calon_mustahiq) ? "-" : calonMustahiq.status_pekerjaan_calon_mustahiq));
+        jumlahAnakCalonMustahiq.setText("Jumlah Anak : " + (TextUtils.isNullOrEmpty(calonMustahiq.jumlah_anak_calon_mustahiq) ? "-" : calonMustahiq.jumlah_anak_calon_mustahiq));
+        statusPernikahanCalonMustahiq.setText("Status Pernikahan : " + (TextUtils.isNullOrEmpty(calonMustahiq.status_pernikahan_calon_mustahiq) ? "-" : calonMustahiq.status_pernikahan_calon_mustahiq));
+
+        statusTempatTinggalCalonMustahiq.setText("Status Tempat Tinggal : " + (TextUtils.isNullOrEmpty(calonMustahiq.status_tempat_tinggal_calon_mustahiq) ? "-" : calonMustahiq.status_tempat_tinggal_calon_mustahiq));
+        statusPekerjaanCalonMustahiq.setText("Status Pekerjaan : " + (TextUtils.isNullOrEmpty(calonMustahiq.status_pekerjaan_calon_mustahiq) ? "-" : calonMustahiq.status_pekerjaan_calon_mustahiq));
         namaPerekomendasiCalonMustahiq.setText("Nama Perekomendasi : " + (TextUtils.isNullOrEmpty(calonMustahiq.nama_perekomendasi_calon_mustahiq) ? "-" : calonMustahiq.nama_perekomendasi_calon_mustahiq));
 
         layoutRating.setVisibility(View.VISIBLE);
@@ -335,6 +346,16 @@ public class CalonMustahiqDetailFragment extends Fragment
         }
         rating.setRating(rt);
 
+        float rtam = 0;
+        try {
+
+            rtam = Float.parseFloat(calonMustahiq.jumlah_rating_amil_zakat);
+        } catch (Exception ignored) {
+        }
+        ratingAmilZakat.setRating(rtam);
+
+        dataPhotos.clear();
+        adapterPhoto.delete_all();
 
         dataPhotos.add(new Photo(calonMustahiq.photo_1, calonMustahiq.caption_photo_1));
         dataPhotos.add(new Photo(calonMustahiq.photo_2, calonMustahiq.caption_photo_2));
@@ -414,6 +435,9 @@ public class CalonMustahiqDetailFragment extends Fragment
                 String longitude_calon_mustahiq = jsDetail.getString(Zakat.longitude_calon_mustahiq);
                 String no_identitas_calon_mustahiq = jsDetail.getString(Zakat.no_identitas_calon_mustahiq);
                 String no_telp_calon_mustahiq = jsDetail.getString(Zakat.no_telp_calon_mustahiq);
+                String jumlah_anak_calon_mustahiq = jsDetail.getString(Zakat.jumlah_anak_calon_mustahiq);
+                String status_pernikahan_calon_mustahiq = jsDetail.getString(Zakat.status_pernikahan_calon_mustahiq);
+
                 String status_tempat_tinggal_calon_mustahiq = jsDetail.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
                 String status_pekerjaan_calon_mustahiq = jsDetail.getString(Zakat.status_pekerjaan_calon_mustahiq);
                 String id_user_perekomendasi = jsDetail.getString(Zakat.id_user_perekomendasi);
@@ -435,10 +459,17 @@ public class CalonMustahiqDetailFragment extends Fragment
                         .getString(Zakat.caption_photo_3);
                 String status_calon_mustahiq = jsDetail.getString(Zakat.status_calon_mustahiq);
                 String jumlah_rating = jsDetail.getString(Zakat.jumlah_rating);
+                String jumlah_rating_amil_zakat = jsDetail.getString(Zakat.jumlah_rating_amil_zakat);
 
                 calonMustahiq = new CalonMustahiq(id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq, latitude_calon_mustahiq, longitude_calon_mustahiq, no_identitas_calon_mustahiq, no_telp_calon_mustahiq,
+                        jumlah_anak_calon_mustahiq,
+                        status_pernikahan_calon_mustahiq,
                         status_tempat_tinggal_calon_mustahiq,
-                        status_pekerjaan_calon_mustahiq, id_user_perekomendasi, nama_perekomendasi_calon_mustahiq, alasan_perekomendasi_calon_mustahiq, photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2, caption_photo_3, status_calon_mustahiq, jumlah_rating);
+                        status_pekerjaan_calon_mustahiq, id_user_perekomendasi,
+                        nama_perekomendasi_calon_mustahiq,
+                        alasan_perekomendasi_calon_mustahiq,
+                        photo_1, photo_2, photo_3, caption_photo_1, caption_photo_2,
+                        caption_photo_3, status_calon_mustahiq, jumlah_rating,jumlah_rating_amil_zakat);
 
                 if (Boolean.parseBoolean(isSuccess))
                     onDownloadSuccessful();
@@ -526,7 +557,7 @@ public class CalonMustahiqDetailFragment extends Fragment
     @Override
     public void onRootClick(View v, int position) {
         FragmentManager ft = getChildFragmentManager();
-        DialogViewSinggleImageFragment newFragment = DialogViewSinggleImageFragment.newInstance(ApiHelper.getBaseUrl(getActivity())+adapterPhoto.data.get(position).getPhoto(), adapterPhoto.data.get(position).getCaption_photo());
+        DialogViewSinggleImageFragment newFragment = DialogViewSinggleImageFragment.newInstance(ApiHelper.getBaseUrl(getActivity()) + adapterPhoto.data.get(position).getPhoto(), adapterPhoto.data.get(position).getCaption_photo());
         newFragment.setTargetFragment(this, 0);
         newFragment.show(ft, "slideshow");
     }
@@ -540,7 +571,7 @@ public class CalonMustahiqDetailFragment extends Fragment
     public void onFinishRekomendasi(CalonMustahiq calonMustahiq) {
        /* EventBus.getDefault().postSticky(new Refresh(true));
         getActivity().finish();*/
-       this.calonMustahiq =calonMustahiq;
+        this.calonMustahiq = calonMustahiq;
 
     }
 }

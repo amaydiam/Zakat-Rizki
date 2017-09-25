@@ -146,6 +146,8 @@ public class AddRekomendasiFragment extends DialogFragment implements CustomVoll
                     String longitude_calon_mustahiq = obj.getString(Zakat.longitude_calon_mustahiq);
                     String no_identitas_calon_mustahiq = obj.getString(Zakat.no_identitas_calon_mustahiq);
                     String no_telp_calon_mustahiq = obj.getString(Zakat.no_telp_calon_mustahiq);
+                    String jumlah_anak_calon_mustahiq = obj.getString(Zakat.jumlah_anak_calon_mustahiq);
+                    String status_pernikahan_calon_mustahiq = obj.getString(Zakat.status_pernikahan_calon_mustahiq);
                     String status_tempat_tinggal_calon_mustahiq = obj.getString(Zakat.status_tempat_tinggal_calon_mustahiq);
                     String status_pekerjaan_calon_mustahiq = obj.getString(Zakat.status_pekerjaan_calon_mustahiq);
                     String nama_perekomendasi_calon_mustahiq = obj.getString(Zakat.nama_perekomendasi_calon_mustahiq);
@@ -165,8 +167,10 @@ public class AddRekomendasiFragment extends DialogFragment implements CustomVoll
                             .getString(Zakat.caption_photo_3);
                     String status_mustahiq = obj.getString(Zakat.status_mustahiq);
                     String jumlah_rating = obj.getString(Zakat.jumlah_rating);
+                    String jumlah_rating_amil_zakat = obj.getString(Zakat.jumlah_rating_amil_zakat);
                     String id_nama_validasi_amil_zakat = obj.getString(Zakat.id_nama_validasi_amil_zakat);
                     String nama_validasi_amil_zakat = obj.getString(Zakat.nama_validasi_amil_zakat);
+                    String nama_type_validasi_mustahiq = obj.getString(Zakat.nama_type_validasi_mustahiq);
                     String waktu_terakhir_donasi = obj.getString(Zakat.waktu_terakhir_donasi);
 
                     mustahiq = new Mustahiq(id_mustahiq, id_calon_mustahiq, nama_calon_mustahiq, alamat_calon_mustahiq,
@@ -174,6 +178,8 @@ public class AddRekomendasiFragment extends DialogFragment implements CustomVoll
                             longitude_calon_mustahiq,
                             no_identitas_calon_mustahiq,
                             no_telp_calon_mustahiq,
+                            jumlah_anak_calon_mustahiq,
+                            status_pernikahan_calon_mustahiq,
                             status_tempat_tinggal_calon_mustahiq,
                             status_pekerjaan_calon_mustahiq,
                             nama_perekomendasi_calon_mustahiq,
@@ -185,7 +191,8 @@ public class AddRekomendasiFragment extends DialogFragment implements CustomVoll
                             caption_photo_2,
                             caption_photo_3,
                             status_mustahiq,
-                            jumlah_rating,id_nama_validasi_amil_zakat, nama_validasi_amil_zakat, waktu_terakhir_donasi);
+                            jumlah_rating,jumlah_rating_amil_zakat,
+                            id_nama_validasi_amil_zakat, nama_validasi_amil_zakat,nama_type_validasi_mustahiq, waktu_terakhir_donasi);
                     callback.onFinishRekomendasi(mustahiq);
                 } else {
                     callback.onFinishRekomendasi(calonMustahiq);

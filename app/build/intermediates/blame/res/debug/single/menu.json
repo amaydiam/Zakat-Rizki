@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_drawer.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\menu\\menu_drawer.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_manage.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\menu\\menu_manage.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_main.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\menu\\menu_main.xml"
+    },
+    {
+        "merged": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\build\\intermediates\\res\\merged\\debug\\menu\\menu_zakat.xml",
+        "source": "D:\\Kuliah\\Skripsi\\Zakat-Rizki\\app\\src\\main\\res\\menu\\menu_zakat.xml"
+    }
+]
